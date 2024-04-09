@@ -9,10 +9,11 @@ let videoSent = ref(false);
 let videoEmoji = ref(true);
 let videoValid = ref(false);
 let durationInSeconds = ref(0);
+let length = ref(25);
 
 let datas = ref({
     url: 'https://yogocap.s3.eu-west-3.amazonaws.com/test.mp4',
-    videoLength: 60,
+    videoLength: 2000,
     canMusic: true,
     canEmoji: true,
 });
@@ -57,7 +58,7 @@ async function launchVideoProcessing() {
     await sendAMQP(task);
 }
 
-function handleFileChange(event: { target: any; }) {
+async function handleFileChange(event: { target: any; }) {
     loadingUpload.value = true;
 
     const fileInput = event.target;
@@ -69,13 +70,18 @@ function handleFileChange(event: { target: any; }) {
         video.onloadedmetadata = function () {
             durationInSeconds.value = video.duration;
             durationInSeconds.value = Math.round(durationInSeconds.value);
-            console.log('Video duration:', durationInSeconds, 'seconds');
             if (durationInSeconds.value > datas.value.videoLength) {
                 videoValid.value = false;
                 loadingUpload.value = false;
             } else {
                 videoValid.value = true;
-                uploadFile(datas.value.url, videoFile);
+                loadingUpload.value = true;
+                // await uploadFile(datas.value.url, videoFile);
+                //length.value = 50;
+                setTimeout(() => {
+                    length.value = 50;
+                    loadingUpload.value = false;
+                }, 2000);
             }
         };
     } else {
@@ -85,16 +91,19 @@ function handleFileChange(event: { target: any; }) {
 console.log(datas.value.url);
 
 onMounted(() => {
+    /*
     window.onbeforeunload = function (e) {
         return 'text not printed.';
     };
+    */
 });
 
 </script>
 
 <template>
-    <UiDashboard title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
-    <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
+
+  <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
                 <p
@@ -122,8 +131,12 @@ onMounted(() => {
                 Nothing is simplier than uploading a video and getting it subtitled !
             </p>
         </div>
-        <div class="grid gap-10 lg:grid-cols-4 sm:grid-cols-2">
-            <div>
+
+
+  <UMeter class="mx-10 mb-[50px]" :value="length" />
+
+        <div class="flex min-w-max">
+            <div v-if="length==25">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold">Step 1</p>
                     <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
@@ -138,11 +151,16 @@ onMounted(() => {
                 <div class="mb-3 mt-4">
                     <input
                         class="relative m-0 block w-4/5 min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-primary-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
-                        type="file" accept="video/*" on:change={handleFileChange} id="formFile" />
+                        type="file" accept="video/*" 
+                        @change="handleFileChange" 
+                        :disabled="loadingUpload"
+                        id="formFile"
+                         />
                     <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
+                        <UBadge>
                         <div>Uploading</div>
-                        <div class="ml-4">
-                            <svg class="animate-spin h-5 w-5 text-primary-500" xmlns="http://www.w3.org/2000/svg"
+                        <div class="ml-1">
+                            <svg class="animate-spin h-4 w-4 m-1" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                     stroke-width="4"></circle>
@@ -150,6 +168,7 @@ onMounted(() => {
                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                             </svg>
                         </div>
+                        </UBadge>
                     </div>
                     <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
                         <div>Uploaded</div>
@@ -166,7 +185,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <div>
+            <div v-if="length==50">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold">Step 2</p>
                     <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
@@ -208,7 +227,7 @@ onMounted(() => {
                 </div>
 
             </div>
-            <div :class="[videoUploaded ? 'opacity-1' : 'opacity-20' ]">
+            <div :class="[videoUploaded ? 'opacity-1' : 'opacity-20' ]" v-if="length==75" >
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold">Step 3</p>
                     <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
@@ -257,7 +276,7 @@ onMounted(() => {
                     </button>
                 </div>
             </div>
-            <div v-if="!videoSent || !videoUploaded" class="opacity-20">
+            <div v-if="length==100" class="opacity-20">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold">Progressing</p>
                     <svg class="w-8 h-8 text-gray-600" viewBox="0 0 16 16" fill="none"
@@ -275,7 +294,7 @@ onMounted(() => {
                     Complete all the previous steps to unlock this one !
                 </p>
             </div>
-            <div v-else>
+            <div v-if="length==100 && Success">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold text-green-500">Success</p>
                     <svg class="w-8 text-green-500" stroke="currentColor" viewBox="0 0 24 24">
