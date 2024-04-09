@@ -1,9 +1,16 @@
 <script setup lang="ts">
 definePageMeta({
     layout: 'false',
-  })
+})
 </script>
 
 <template>
-  <div>test</div>   
+    <LandingHeader />
+    <LandingAbout />
+    <LandingPricing />
+    <LandingFeatures />
+    <LandingHow />
+    <!--<LandingStats />-->
+    <LandingTeam />
+    <LandingFooter />
 </template>
