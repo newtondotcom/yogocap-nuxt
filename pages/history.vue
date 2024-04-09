@@ -50,17 +50,17 @@
       <tr>
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
           <div class="flex flex-row align-middle justify-center">
-              {item.date}
+              {{item.date}}
           </div>
       </td>
         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
           <div class="flex flex-row align-middle justify-center">
-              {item.plan}
+              {{item.plan}}
           </div>
       </td>
         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
           <div class="flex flex-row align-middle justify-center">
-              {item.value} €
+              {{item.value}} €
           </div>
       </td>
       </tr>
@@ -96,17 +96,17 @@
         <tr>
           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             <div class="flex flex-row align-middle justify-center">
-                {item.name}
+                {{item.name}}
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
-                {item.date}
+                {{item.date}}
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
-                {item.lenght}
+                {{item.lenght}}
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
