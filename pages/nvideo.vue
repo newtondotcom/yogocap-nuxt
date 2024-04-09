@@ -93,14 +93,12 @@ onMounted(() => {
 </script>
 
 <template>
-
-    <UiSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
-
+    <UiDashboard title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
     <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
                 <p
-                    class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-indigo-500 uppercase rounded-full bg-teal-accent-400">
+                    class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary-500 uppercase rounded-full bg-teal-accent-400">
                     Create a video
                 </p>
             </div>
@@ -116,7 +114,7 @@ onMounted(() => {
                         </defs>
                         <rect fill="url(#b902cd03-49cc-4166-a0ae-4ca1c31cedba)" width="52" height="24"></rect>
                     </svg>
-                    <span class="relative text-indigo-500">Let</span>
+                    <span class="relative text-primary-500">Let</span>
                 </span>
                 us guide you
             </h2>
@@ -139,12 +137,12 @@ onMounted(() => {
                 </p>
                 <div class="mb-3 mt-4">
                     <input
-                        class="relative m-0 block w-4/5 min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-indigo-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
+                        class="relative m-0 block w-4/5 min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-primary-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
                         type="file" accept="video/*" on:change={handleFileChange} id="formFile" />
                     <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
                         <div>Uploading</div>
                         <div class="ml-4">
-                            <svg class="animate-spin h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="animate-spin h-5 w-5 text-primary-500" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                     stroke-width="4"></circle>
@@ -185,26 +183,26 @@ onMounted(() => {
                 </div>
                 <div v-if="!datas.canMusic" class="text-gray-600 opacity-50 flex flex-row">
                     Do you want us to add a dynamic music to the video ?
-                    <div class="mt-2"><input disabled bind:value={videoMusic}
+                    <div class="mt-2"><input disabled v-model="videoMusic"
                             class="w-5 h-5 ease-soft text-base mr-2 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\2713'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                             type="checkbox" /></div>
                 </div>
                 <div v-else class="text-gray-600 flex flex-row">
                     Do you want us to add a dynamic music to the video ?
-                    <div class="mt-2"><input bind:value={videoMusic}
+                    <div class="mt-2"><input v-model="videoMusic"
                             class="w-5 h-5 ease-soft text-base mr-2 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\2713'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                             type="checkbox" /></div>
                 </div>
 
                 <div v-if="!datas.canEmoji" class="text-gray-600 opacity-50 flex flex-row">
                     Do you want us to add emojis to the video ?
-                    <div class="mt-2"><input disabled bind:value={videoEmoji}
+                    <div class="mt-2"><input disabled v-model="videoEmoji"
                             class="w-5 h-5 ease-soft text-base mr-2 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\2713'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                             type="checkbox" /></div>
                 </div>
                 <div v-else class="text-gray-600 flex flex-row">
                     Do you want us to add emojis music to the video ?
-                    <div class="mt-2"><input bind:value={videoEmoji} id="checkbox-1"
+                    <div class="mt-2"><input v-model="videoEmoji" id="checkbox-1"
                             class="w-5 h-5 ease-soft text-base mr-2 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\2713'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100"
                             type="checkbox" /></div>
                 </div>
@@ -221,7 +219,7 @@ onMounted(() => {
                 </div>
                 <div v-if="videoValid">
                     <span class="text-gray-600">
-                        Your video is <span class="text-indigo-500">{durationInSeconds} seconds</span>
+                        Your video is <span class="text-primary-500">{durationInSeconds} seconds</span>
                         long. Name it :
                     </span>
                     <div class="relative">
@@ -247,7 +245,7 @@ onMounted(() => {
 
                 <div v-if="!loadingUpload && !videoSent" class="mt-4 ml-28">
                     <button
-                        class="inline-flex items-center gap-2 rounded border border-indigo-600 bg-indigo-600 px-4 py-2 text-white hover:bg-transparent hover:text-indigo-600 focus:outline-none focus:ring active:text-indigo-500"
+                        class="inline-flex items-center gap-2 rounded border border-primary-600 bg-primary-600 px-4 py-2 text-white hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500"
                         on:click={launchAmpq}>
                         <span class="text-sm font-medium"> Process it </span>
 
