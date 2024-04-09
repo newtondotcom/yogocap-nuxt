@@ -11,28 +11,28 @@
         <nav aria-label="Global" class="hidden md:block">
           <ul class="flex items-center gap-6 text-sm">
             <li>
-              <button class="text-gray-500 transition hover:text-gray-500/75" >
+              <a href="#about" class="text-gray-500 transition hover:text-gray-500/75" >
                 About
-              </button>
+              </a>
             </li>
 
   
             <li>
-              <button class="text-gray-500 transition hover:text-gray-500/75" >
+              <a href="#pricing" class="text-gray-500 transition hover:text-gray-500/75" >
                 Pricing
-              </button>
+              </a>
             </li>
 
             <li>
-                <button class="text-gray-500 transition hover:text-gray-500/75" >
+                <a href="#features" class="text-gray-500 transition hover:text-gray-500/75" >
                   Features
-                </button>
+                </a>
               </li>
   
             <li>
-              <button class="text-gray-500 transition hover:text-gray-500/75" >
+              <a href="#team" class="text-gray-500 transition hover:text-gray-500/75" >
                 Team
-              </button>
+              </a>
             </li>
           </ul>
         </nav>
