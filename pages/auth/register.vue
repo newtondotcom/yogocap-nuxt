@@ -53,9 +53,9 @@ const signInWithGoogle = async () => {
 </script>
 
 <template>
-    <section class="bg-white " @submit={register}>
+    <section class="bg-white ">
         <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-            <form class="w-full max-w-md" on:submit|preventDefault={register}>
+            <form class="w-full max-w-md" @submit.prevent="register">
                 <div class="flex">
                     <img class="h-14 w-14 -mb-4" src="/logo.svg" alt="Yogocap" />
                 </div>
@@ -125,7 +125,7 @@ const signInWithGoogle = async () => {
 
                     <p class="mt-4 text-center text-gray-600 ">or register with</p>
 
-                    <button on:click={signInWithGoogle}
+                    <button type="button" @click="signInWithGoogle"
                         class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50  w-full">
                         <svg class="w-6 h-6 mx-2" viewBox="0 0 40 40">
                             <path
@@ -146,7 +146,7 @@ const signInWithGoogle = async () => {
                     </button>
 
                     <div class="mt-6 text-center ">
-                        <NuxtLink to="/auth/login"  class="text-sm text-blue-500 hover:underline ">
+                        <NuxtLink to="/auth/login" class="text-sm text-blue-500 hover:underline ">
                             Already have an account yet? Log in
                         </NuxtLink>
                     </div>
@@ -156,6 +156,6 @@ const signInWithGoogle = async () => {
                     Please try again.
                 </div>
             </form>
-        </div>
+    </div>
     </section>
 </template>
