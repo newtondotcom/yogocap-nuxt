@@ -96,7 +96,10 @@ console.log(datas.value.url);
 
 onMounted(() => {
     /*
-    window.onbeforeunload = function (e) {
+    window.onbeforeunload = async function (e) {
+        await setTimeout(() => {
+            console.log('text not printed.');
+        }, 2000);
         return 'text not printed.';
     };
     */
@@ -107,7 +110,7 @@ onMounted(() => {
 <template>
     <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
 
-    <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
                 <p
@@ -141,7 +144,7 @@ onMounted(() => {
     <UMeter class="px-10 mb-[50px]" :value="length" />
 
     <div class="flex flex-row items-center justify-center">
-        <div class="flex w-1/3 h-1/2">
+        <div class="flex w-1/3 h-1/2 flex-row items-center justify-center">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
                 <UBadge color="green" variant="solid">Uploaded</UBadge>
             </div>
@@ -178,36 +181,35 @@ onMounted(() => {
 
         <div class="flex flex-col w-1/3 h-1/2" v-if="true">
             <div class="flex flex-col pb-10">
-            More precisions :
-            <UCheckbox class="flex" v-model="videoCut" name="notifications"
-                label="Do you want us to cut silent parts of the video ?" />
-            <UCheckbox v-if="datas.canMusic" class="flex" v-model="videoMusic" name="notifications"
-                label="Do you want us to add a dynamic music to the video ?" />
-            <UCheckbox v-else class="flex" v-model="videoMusic" name="notifications"
-                label="Do you want us to add a dynamic music to the video ?" />
+                More precisions :
+                <UCheckbox class="flex mt-2" v-model="videoCut" name="notifications"
+                    label="Do you want us to cut silent parts of the video ?" />
+                <UCheckbox v-if="datas.canMusic" class="flex" v-model="videoMusic" name="notifications"
+                    label="Do you want us to add a dynamic music to the video ?" />
+                <UCheckbox v-else class="flex" v-model="videoMusic" name="notifications"
+                    label="Do you want us to add a dynamic music to the video ?" />
 
-            <UCheckbox v-if="datas.canEmoji" class="flex" v-model="videoEmoji" name="notifications"
-                label="Do you want us to add emojis to the video ?" />
-            <UCheckbox v-else class="flex" v-model="videoEmoji" name="notifications"
-                label="Do you want us to add emojis to the video ?" />
+                <UCheckbox v-if="datas.canEmoji" class="flex" v-model="videoEmoji" name="notifications"
+                    label="Do you want us to add emojis to the video ?" />
+                <UCheckbox v-else class="flex" v-model="videoEmoji" name="notifications"
+                    label="Do you want us to add emojis to the video ?" />
             </div>
 
-            <div :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']">
+            <div>
                 <div>
                     <span class="text-gray-600">
-                        FYI, your video is <span class="text-primary-500">{{ durationInSeconds }} seconds</span>
-                        long. <br> Name it :
+                        Your video is <span class="text-primary-500">{{ durationInSeconds }} seconds</span>
+                        long.
                     </span>
                     <UInput icon="i-heroicons-pencil-16-solid" size="sm" color="white" :trailing="false"
-                        placeholder="a simple name" />
+                        placeholder="name your video" />
                 </div>
                 <div class="text-gray-600">
                     Your video length is above the one included in your current plan.
                 </div>
 
                 <div v-if="!loadingUpload && !videoSent" class="mt-4 ml-28">
-                    <button
-                        class="inline-flex items-center gap-2 rounded border border-primary-600 bg-primary-600 px-4 py-2 text-white hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500"
+                    <UButton :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
                         @click="launchAmpq">
                         <span class="text-sm font-medium"> Process it </span>
 
@@ -216,7 +218,7 @@ onMounted(() => {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                    </button>
+                    </UButton>
                 </div>
             </div>
             <div v-if="length == 100 && Success">
