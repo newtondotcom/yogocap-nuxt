@@ -6,7 +6,7 @@ let loadingUpload = ref(false);
 let videoCut = ref(false);
 let videoMusic = ref(false);
 let videoSent = ref(false);
-let videoEmoji = ref(true);
+let videoEmoji = ref(false);
 let videoValid = ref(false);
 let Success = ref(false);
 let durationInSeconds = ref(0);
@@ -84,6 +84,7 @@ async function handleFileChange(event: { target: any; }) {
                 setTimeout(() => {
                     length.value = 50;
                     loadingUpload.value = false;
+                    videoUploaded.value = true;
                 }, 2000);
             }
         };
@@ -106,7 +107,7 @@ onMounted(() => {
 <template>
     <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
 
-  <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div class="px-4 py-16 mx-auto my-14 sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
                 <p
@@ -134,104 +135,73 @@ onMounted(() => {
                 Nothing is simplier than uploading a video and getting it subtitled !
             </p>
         </div>
+    </div>
 
 
-  <UMeter class="mx-10 mb-[50px]" :value="length" />
+    <UMeter class="px-10 mb-[50px]" :value="length" />
 
-        <div class="flex min-w-max">
-            <div v-if="length==25">
-                <div class="flex items-center justify-between mb-6">
-                    <p class="text-2xl font-bold">Step 1</p>
-                    <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <line fill="none" stroke-miterlimit="10" x1="2" y1="12" x2="22" y2="12"></line>
-                        <polyline fill="none" stroke-miterlimit="10" points="15,5 22,12 15,19 "></polyline>
-                    </svg>
-                </div>
+    <div class="flex flex-row items-center justify-center">
+        <div class="flex w-1/3 h-1/2">
+            <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
+                <UBadge color="green" variant="solid">Uploaded</UBadge>
+            </div>
+            <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
                     Upload your video here
                 </p>
                 <div class="mb-3 mt-4">
                     <input
-                        class="relative m-0 block w-4/5 min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-primary-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
-                        type="file" accept="video/*" 
-                        @change="handleFileChange" 
-                        :disabled="loadingUpload"
-                        id="formFile"
-                         />
-                    <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
-                        <UBadge>
+                        class="relative m-0 block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-primary-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
+                        type="file" accept="video/*" @change="handleFileChange" :disabled="loadingUpload"
+                        id="formFile" />
+                </div>
+                <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
+                    <UBadge>
                         <div>Uploading</div>
                         <div class="ml-1">
-                            <svg class="animate-spin h-4 w-4 m-1" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24">
+                            <svg class="animate-spin h-4 w-4 m-1" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
                                     stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor"
                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                             </svg>
                         </div>
-                        </UBadge>
-                    </div>
-                    <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                        <div>Uploaded</div>
-                        <div class="ml-4">
-                            <svg class="w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path d="M4 12.6111L8.92308 17.5L20 6.5" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round"></path>
-                                </g>
-                            </svg>
-                        </div>
-                    </div>
+                    </UBadge>
                 </div>
             </div>
-            <div v-if="length==50">
-                <div class="flex items-center justify-between mb-6">
-                    <p class="text-2xl font-bold">Step 2</p>
-                    <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <line fill="none" stroke-miterlimit="10" x1="2" y1="12" x2="22" y2="12"></line>
-                        <polyline fill="none" stroke-miterlimit="10" points="15,5 22,12 15,19 "></polyline>
-                    </svg>
-                </div>
-                <UCheckbox class="flex" v-model="videoCut" name="notifications" label="Do you want us to cut silent parts of the video ?" />
-                <UCheckbox v-if="datas.canMusic" class="flex" v-model="videoMusic" name="notifications" label="Do you want us to add a dynamic music to the video ?" />
-                <UCheckbox v-else class="flex" v-model="videoMusic" name="notifications" label="Do you want us to add a dynamic music to the video ?" />
+        </div>
 
-                <UCheckbox v-if="datas.canEmoji" class="flex" v-model="videoEmoji" name="notifications" label="Do you want us to add emojis to the video ?" />
-                <UCheckbox v-else class="flex" v-model="videoEmoji" name="notifications" label="Do you want us to add emojis to the video ?" />
+        <UDivider class="mx-8" orientation="vertical">
+            THEN
+        </UDivider>
 
-                <div class="mt-6 justify-end">
-                    <UButton @click="length = 75">Next</UButton>
-                </div>
+        <div class="flex flex-col w-1/3 h-1/2" v-if="true">
+            <div class="flex flex-col pb-10">
+            More precisions :
+            <UCheckbox class="flex" v-model="videoCut" name="notifications"
+                label="Do you want us to cut silent parts of the video ?" />
+            <UCheckbox v-if="datas.canMusic" class="flex" v-model="videoMusic" name="notifications"
+                label="Do you want us to add a dynamic music to the video ?" />
+            <UCheckbox v-else class="flex" v-model="videoMusic" name="notifications"
+                label="Do you want us to add a dynamic music to the video ?" />
+
+            <UCheckbox v-if="datas.canEmoji" class="flex" v-model="videoEmoji" name="notifications"
+                label="Do you want us to add emojis to the video ?" />
+            <UCheckbox v-else class="flex" v-model="videoEmoji" name="notifications"
+                label="Do you want us to add emojis to the video ?" />
             </div>
 
-            <div :class="[!videoUploaded ? 'opacity-1' : 'opacity-20' ]" v-if="length==75" >
-                <div class="flex items-center justify-between mb-6">
-                    <p class="text-2xl font-bold">Step 3</p>
-                    <svg class="w-6 text-gray-700 transform rotate-90 sm:rotate-0" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                        <line fill="none" stroke-miterlimit="10" x1="2" y1="12" x2="22" y2="12"></line>
-                        <polyline fill="none" stroke-miterlimit="10" points="15,5 22,12 15,19 "></polyline>
-                    </svg>
-                </div>
-                <div v-if="videoValid">
+            <div :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']">
+                <div>
                     <span class="text-gray-600">
-                        FYI, your video is <span class="text-primary-500">{{durationInSeconds}} seconds</span>
+                        FYI, your video is <span class="text-primary-500">{{ durationInSeconds }} seconds</span>
                         long. <br> Name it :
                     </span>
-                <UInput
-                    icon="i-heroicons-pencil-16-solid"
-                    size="sm"
-                    color="white"
-                    :trailing="false"
-                    placeholder="a simple name"
-                />
+                    <UInput icon="i-heroicons-pencil-16-solid" size="sm" color="white" :trailing="false"
+                        placeholder="a simple name" />
                 </div>
-                <div v-else class="text-gray-600">
+                <div class="text-gray-600">
                     Your video length is above the one included in your current plan.
                 </div>
 
@@ -249,7 +219,7 @@ onMounted(() => {
                     </button>
                 </div>
             </div>
-            <div v-if="length==100 && Success">
+            <div v-if="length == 100 && Success">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold text-green-500">Success</p>
                     <svg class="w-8 text-green-500" stroke="currentColor" viewBox="0 0 24 24">
