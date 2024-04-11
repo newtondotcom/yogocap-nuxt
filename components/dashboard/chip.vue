@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-const props = defineProps({
+defineProps({
   type: {
     type: String,
     required: true,
@@ -28,9 +28,7 @@ class="inline-flex m-4 items-center justify-center rounded-full bg-emerald-100 p
 
 <p class="whitespace-nowrap text-sm">Ready</p>
 </span>
-{/if}
-{#if type=="pending"}
-<span
+<span v-if='type=="pending"'
 class="inline-flex m-4 items-center justify-center rounded-full bg-amber-100 px-2.5 py-0.5 text-amber-700"
 >
 <svg
@@ -50,9 +48,9 @@ class="inline-flex m-4 items-center justify-center rounded-full bg-amber-100 px-
 
 <p class="whitespace-nowrap text-sm">Processing</p>
 </span>
-{/if}
-{#if type=="error"}
+
 <span
+v-if='type=="error"'
 class="inline-flex m-4 items-center justify-center rounded-full bg-red-100 px-2.5 py-0.5 text-red-700"
 >
 <svg
