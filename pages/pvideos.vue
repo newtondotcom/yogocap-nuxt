@@ -1,14 +1,15 @@
 <script setup lang="ts">
     import { videos } from "../components/dashboard/videos";
 
-    let currentpage = ref(0);
+    let currentpage = ref(1);
     let length = 8;
     let localvideos = ref([]);
     localvideos.value = videos.slice(0, length);
 
     watch(currentpage, (value) => {
-        localvideos = videos.slice((value-1) * 8, (value) * 8);
+        localvideos.value = videos.slice((value-1) * 8, (value) * 8);
     });
+
 
 </script>
 
@@ -32,13 +33,14 @@
         <button class="flex flex-row align-middle justify-center">
           <h3 class="ml-3 mt-0.5 text-lg text-gray-900">
             {{video.name}}
+            {{video.duration}}
           </h3>
         </button>
     
         <div class="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
           <div class="flex flex-row align-middle justify-center">
-            <Chip type="{video.type}" />
-            <Duration duration={video.duration} />
+            <DashboardChip :type="video.type" />
+            <DashboardDuration :duration="video.duration" />
           </div>
         </div>
         
