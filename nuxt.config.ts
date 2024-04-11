@@ -5,4 +5,8 @@ export default defineNuxtConfig({
     redirect : false,
   },
   ssr: false,
+  runtimeConfig: {
+    AUTH_HEADER: process.env.LEMON_SQUEEZY,
+    LS_SHOP: process.env.LS_SHOP,
+  },
 })
