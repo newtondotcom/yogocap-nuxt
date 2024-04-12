@@ -108,6 +108,7 @@ onMounted(() => {
 </script>
 
 <template>
+
     <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
 
     <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
@@ -115,7 +116,7 @@ onMounted(() => {
             <div>
                 <p
                     class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary-500 uppercase rounded-full bg-teal-accent-400">
-                    Create a video
+                    Subtitle a video
                 </p>
             </div>
             <h2
@@ -140,13 +141,12 @@ onMounted(() => {
         </div>
     </div>
 
-
-    <UMeter class="px-10 mb-[50px]" :value="length" />
+    <Progress v-model="length" class="px-14 mb-[50px] w-full rounded-md self-center" />
 
     <div class="flex flex-row items-center justify-center">
         <div class="flex w-1/3 h-1/2 flex-row items-center justify-center">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                <Badge color="green" variant="solid">Uploaded</Badge>
+                <Badge color="green" variant="outline">Uploaded</Badge>
             </div>
             <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
@@ -154,7 +154,8 @@ onMounted(() => {
                 </p>
                 <div class="mb-3 mt-4 grid items-center gap-1.5">
                     <Label for="picture">Picture</Label>
-                    <Input id="picture" accept="video/*" @change="handleFileChange" :disabled="loadingUpload" type="file"/>
+                    <Input id="picture" accept="video/*" @change="handleFileChange" :disabled="loadingUpload"
+                        type="file" />
                 </div>
                 <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
                     <Badge>
@@ -175,49 +176,43 @@ onMounted(() => {
 
         <Separator class="mx-4 bg-black text-black" orientation="vertical" />
 
-        <div class="flex flex-col w-1/3 h-1/2" v-if="true">
+        <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="true">
 
-            <div class="flex flex-col pb-10">
-    More precisions :
+            <div class="flex flex-col">
 
-    <div class="items-top flex gap-x-2">
-        <Checkbox class="flex mt-2" v-model="videoCut" id="notifications" />
-        <div class="grid gap-1.5 leading-none">
-            <label
-                for="terms1"
-                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-                Do you want us to cut silent parts of the video ?
-            </label>
-        </div>
-    </div>
+                More precisions :
+                <div class="items-top flex gap-x-2">
+                    <Checkbox class="flex mt-2" v-model="videoCut" id="silence" />
+                    <div class="grid gap-1.5 leading-none">
+                        <label for="silence"
+                            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Do you want us to cut silent parts of the video ?
+                        </label>
+                    </div>
+                </div>
 
-    <div class="items-top flex gap-x-2">
-        <Checkbox class="flex mt-2" v-model="videoMusic" id="notifications" v-if="datas.canMusic" />
-        <Checkbox class="flex mt-2" v-model="videoMusic" id="notifications" v-else disabled />
-        <div class="grid gap-1.5 leading-none">
-            <label
-                for="terms2"
-                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-                Do you want us to add a dynamic music to the video ?
-            </label>
-        </div>
-    </div>
+                <div class="items-top flex gap-x-2">
+                    <Checkbox class="flex mt-2" v-model="videoMusic" id="music" v-if="datas.canMusic" />
+                    <Checkbox class="flex mt-2" v-model="videoMusic" id="music" v-else disabled />
+                    <div class="grid gap-1.5 leading-none">
+                        <label for="music"
+                            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Do you want us to add a dynamic music to the video ?
+                        </label>
+                    </div>
+                </div>
 
-    <div class="items-top flex gap-x-2">
-        <Checkbox class="flex mt-2" v-model="videoEmoji" id="notifications" v-if="datas.canEmoji" />
-        <Checkbox class="flex mt-2" v-model="videoEmoji" id="notifications" v-else disabled />
-        <div class="grid gap-1.5 leading-none">
-            <label
-                for="terms4"
-                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            >
-                Do you want us to add emojis to the video ?
-            </label>
-        </div>
-    </div>
-</div>
+                <div class="items-top flex gap-x-2">
+                    <Checkbox class="flex mt-2" v-model="videoEmoji" id="emoji" v-if="datas.canEmoji" />
+                    <Checkbox class="flex mt-2" v-model="videoEmoji" id="emoji" v-else disabled />
+                    <div class="grid gap-1.5 leading-none">
+                        <label for="emoji"
+                            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+                            Do you want us to add emojis to the video ?
+                        </label>
+                    </div>
+                </div>
+            </div>
 
 
             <div>
@@ -229,7 +224,7 @@ onMounted(() => {
 
                     <Input id="search" type="text" placeholder="Name your video" class="pl-10" />
                     <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
-                    <PenLine class="size-6 text-muted-foreground" />
+                        <PenLine class="size-6 text-muted-foreground" />
                     </span>
                 </div>
                 <div class="text-gray-600">
