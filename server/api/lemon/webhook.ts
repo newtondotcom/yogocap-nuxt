@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 
 const config = useRuntimeConfig()
+const secret = config.LS_SECRET
 
 export const verifySignature = (rawBody: Buffer, signature: string, secret: string): boolean => {
   const hmac = crypto.createHmac('sha256', secret);
