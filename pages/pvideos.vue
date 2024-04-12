@@ -2,16 +2,19 @@
     import { videos } from "../components/dashboard/videos";
 
     let currentpage = ref(1);
-    let length = 8;
+    let length = 4;
     let localvideos = ref([]);
+
     localvideos.value = videos.slice(0, length);
 
     watch(currentpage, (value) => {
-        localvideos.value = videos.slice((value-1) * 8, (value) * 8);
+      const start = (value - 1) * length;
+      const end = start + length;
+      localvideos.value = videos.slice(start, end);
     });
 
-
-</script>
+    console.log(Math.ceil(videos.length / length));
+    </script>
 
 <template>
 
@@ -66,8 +69,38 @@
 
       </div>
     </div>
-</div>
+</div>    
 <div class="flex flex-row justify-center mt-4">
-<UPagination v-model="currentpage" :page-count="length" :total="videos.length" />
-</div>
+      <Pagination
+        v-model:page="currentpage"
+        :total="videos.length"
+        :default-page="1"
+      >
+        <template #default="{ page }">
+          <PaginationList v-slot="{ items }">
+            <PaginationPrev v-if="items.length > 0" />
+
+            <template v-for="(item, index) in items" :key="index">
+              
+              <PaginationListItem
+                v-if="item.type === 'page'"
+                :key="item.value"
+                :value="item.value"
+                as-child
+              >
+                <Button
+                  class="w-10 h-10 p-0"
+                  :variant="item.value === page ? 'default' : 'outline'"
+                >
+                  {{ item.value }}
+                </Button>
+              </PaginationListItem>
+              <PaginationEllipsis v-else :key="item.type" :index="index" />
+            </template>
+
+            <PaginationNext v-if="items.length > 0" />
+          </PaginationList>
+        </template>
+      </Pagination>
+    </div>
 </template>
