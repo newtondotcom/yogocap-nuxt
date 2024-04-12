@@ -8,5 +8,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     AUTH_HEADER: process.env.LEMON_SQUEEZY,
     LS_SHOP: process.env.LS_SHOP,
+    LS_SECRET: process.env.LS_SECRET,
   },
 })
