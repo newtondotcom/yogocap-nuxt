@@ -113,7 +113,7 @@ const signInWithGoogle = async () => {
                     </button>
 
                     <div class="mt-6 text-center ">
-                        <NuxtLink to="/register" class="text-sm text-blue-500 hover:underline ">
+                        <NuxtLink to="/auth/register" class="text-sm text-blue-500 hover:underline ">
                             Don’t have an account yet? Register
                         </NuxtLink>
                     </div>

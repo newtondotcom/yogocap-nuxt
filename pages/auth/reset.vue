@@ -69,7 +69,7 @@ const login = async () => {
                     </button>
 
                     <div class="mt-6 text-center ">
-                        <NuxtLink to="/register" class="text-sm text-blue-500 hover:underline ">
+                        <NuxtLink to="/auth/register" class="text-sm text-blue-500 hover:underline ">
                             Don’t have an account yet? Register
                         </NuxtLink>
                     </div>
@@ -78,7 +78,7 @@ const login = async () => {
                     <p class="text-sm text-gray-500 ">
                         We have sent you an email with a link to reset your password.
                     </p>
-                    <NuxtLink to="/login" class="text-sm text-blue-500 hover:underline ">
+                    <NuxtLink to="/auth/login" class="text-sm text-blue-500 hover:underline ">
                         Login now
                     </NuxtLink>
                 </div>

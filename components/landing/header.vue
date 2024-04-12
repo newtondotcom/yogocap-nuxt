@@ -54,7 +54,7 @@
             </NuxtLink>
   
             <NuxtLink
-            to='/register'
+            to='/auth/register'
             class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-primary-600 transition hover:text-primary-600/75 sm:block"
             >
               Register

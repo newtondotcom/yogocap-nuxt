@@ -11,6 +11,6 @@ definePageMeta({
     <LandingFeatures />
     <LandingHow />
     <!--<LandingStats />-->
-    <LandingTeam />
+    <!--<LandingTeam />-->
     <LandingFooter />
 </template>
