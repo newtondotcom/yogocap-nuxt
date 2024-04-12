@@ -146,20 +146,18 @@ onMounted(() => {
     <div class="flex flex-row items-center justify-center">
         <div class="flex w-1/3 h-1/2 flex-row items-center justify-center">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                <UBadge color="green" variant="solid">Uploaded</UBadge>
+                <Badge color="green" variant="solid">Uploaded</Badge>
             </div>
             <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
                     Upload your video here
                 </p>
-                <div class="mb-3 mt-4">
-                    <input
-                        class="relative m-0 block min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-primary-500 file:px-3 file:py-[0.32rem] file:text-neutral-200 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
-                        type="file" accept="video/*" @change="handleFileChange" :disabled="loadingUpload"
-                        id="formFile" />
+                <div class="mb-3 mt-4 grid items-center gap-1.5">
+                    <Label for="picture">Picture</Label>
+                    <Input id="picture" accept="video/*" @change="handleFileChange" :disabled="loadingUpload" type="file"/>
                 </div>
                 <div v-if="loadingUpload" class="flex flex-row items-center justify-center mt-2">
-                    <UBadge>
+                    <Badge>
                         <div>Uploading</div>
                         <div class="ml-1">
                             <svg class="animate-spin h-4 w-4 m-1" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -170,30 +168,57 @@ onMounted(() => {
                                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
                             </svg>
                         </div>
-                    </UBadge>
+                    </Badge>
                 </div>
             </div>
         </div>
 
-        <UDivider class="mx-8" orientation="vertical">
-            THEN
-        </UDivider>
+        <Separator class="mx-4 bg-black text-black" orientation="vertical" />
 
         <div class="flex flex-col w-1/3 h-1/2" v-if="true">
-            <div class="flex flex-col pb-10">
-                More precisions :
-                <UCheckbox class="flex mt-2" v-model="videoCut" name="notifications"
-                    label="Do you want us to cut silent parts of the video ?" />
-                <UCheckbox v-if="datas.canMusic" class="flex" v-model="videoMusic" name="notifications"
-                    label="Do you want us to add a dynamic music to the video ?" />
-                <UCheckbox v-else class="flex" v-model="videoMusic" name="notifications"
-                    label="Do you want us to add a dynamic music to the video ?" />
 
-                <UCheckbox v-if="datas.canEmoji" class="flex" v-model="videoEmoji" name="notifications"
-                    label="Do you want us to add emojis to the video ?" />
-                <UCheckbox v-else class="flex" v-model="videoEmoji" name="notifications"
-                    label="Do you want us to add emojis to the video ?" />
-            </div>
+            <div class="flex flex-col pb-10">
+    More precisions :
+
+    <div class="items-top flex gap-x-2">
+        <Checkbox class="flex mt-2" v-model="videoCut" id="notifications" />
+        <div class="grid gap-1.5 leading-none">
+            <label
+                for="terms1"
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+                Do you want us to cut silent parts of the video ?
+            </label>
+        </div>
+    </div>
+
+    <div class="items-top flex gap-x-2">
+        <Checkbox class="flex mt-2" v-model="videoMusic" id="notifications" v-if="datas.canMusic" />
+        <Checkbox class="flex mt-2" v-model="videoMusic" id="notifications" v-else disabled />
+        <div class="grid gap-1.5 leading-none">
+            <label
+                for="terms2"
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+                Do you want us to add a dynamic music to the video ?
+            </label>
+        </div>
+    </div>
+
+    <div class="items-top flex gap-x-2">
+        <Checkbox class="flex mt-2" v-model="videoEmoji" id="notifications" v-if="datas.canEmoji" />
+        <Checkbox class="flex mt-2" v-model="videoEmoji" id="notifications" v-else disabled />
+        <div class="grid gap-1.5 leading-none">
+            <label
+                for="terms4"
+                class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+                Do you want us to add emojis to the video ?
+            </label>
+        </div>
+    </div>
+</div>
+
 
             <div>
                 <div>
@@ -201,15 +226,18 @@ onMounted(() => {
                         Your video is <span class="text-primary-500">{{ durationInSeconds }} seconds</span>
                         long.
                     </span>
-                    <UInput icon="i-heroicons-pencil-16-solid" size="sm" color="white" :trailing="false"
-                        placeholder="name your video" />
+
+                    <Input id="search" type="text" placeholder="Name your video" class="pl-10" />
+                    <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
+                    <PenLine class="size-6 text-muted-foreground" />
+                    </span>
                 </div>
                 <div class="text-gray-600">
                     Your video length is above the one included in your current plan.
                 </div>
 
                 <div v-if="!loadingUpload && !videoSent" class="mt-4 ml-28">
-                    <UButton :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
+                    <Button :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
                         @click="launchAmpq">
                         <span class="text-sm font-medium"> Process it </span>
 
@@ -218,7 +246,7 @@ onMounted(() => {
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 8l4 4m0 0l-4 4m4-4H3" />
                         </svg>
-                    </UButton>
+                    </Button>
                 </div>
             </div>
             <div v-if="length == 100 && Success">
