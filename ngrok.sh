@@ -1,1 +1,1 @@
-ssh -R 8082:localhost:3000 root@144.91.123.186 -p 2296
+ ssh -R 80:localhost:3000 serveo.net
