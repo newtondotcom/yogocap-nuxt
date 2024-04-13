@@ -19,7 +19,7 @@
     }
 
   onMounted(async () => {
-    const { data } = await useFetch(`/api/product/all`)
+    const { data } = await useFetch(`/api/lemon/products`)
     array.starter = data.value.starter
     array.pro = data.value.pro
     array.business = data.value.business
