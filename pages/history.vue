@@ -1,30 +1,19 @@
 <script setup lang="ts">
-    const list = [
-        {
-            name : "squeezie.mp4",
-            date : "14/11/2023",
-            lenght : "187",
-            silent : "yes"
-        },
-        {
-            name : "squeezie2.mp4",
-            date : "14/11/2023",
-            lenght : "187",
-            silent : "yes"
-        }
-    ]
-    const transactions = [
-      {
-        date : "14/11/2023",
-        plan : "Premium",
-        value : "187",
-      },
-      {
-        date : "14/11/2023",
-        plan : "Premium",
-        value : "187",
-      },
-    ]
+
+  const transactions = ref([])
+  const videos = ref([])
+  const dataFetched = ref(false)
+
+  async function getHistory(){
+    const { data } = await useFetch('/api/history')
+    transactions.value = data.value.transactions;
+    videos.value = data.value.videos;
+    dataFetched.value = true
+  }
+
+  onMounted(() => {
+    getHistory()
+  })
 </script>
 
 <template>
@@ -64,8 +53,8 @@
           </div>
       </td>
       </tr>
-      <SkeletonsHistoryTransactions />
-      <tr>
+      <SkeletonsHistoryTransactions v-if="!dataFetched" />
+      <tr v-if="dataFetched && transactions.length==0">
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
           <div class="flex flex-row align-middle justify-center">
           </div>
@@ -109,7 +98,7 @@
       </thead>
   
       <tbody class="divide-y divide-gray-200">
-        <tr v-for="item in list">
+        <tr v-for="item in videos">
           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             <div class="flex flex-row align-middle justify-center">
                 {{item.name}}
@@ -134,8 +123,8 @@
             <Button>View</Button>
           </td>
         </tr>
-        <SkeletonsHistoryVideos />
-        <tr>
+        <SkeletonsHistoryVideos v-if="!dataFetched"/>
+        <tr v-if="videos.length==0 && dataFetched">
           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             <div class="flex flex-row align-middle justify-center">
             </div>
