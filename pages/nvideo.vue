@@ -147,7 +147,7 @@ onMounted(() => {
     <div class="flex flex-row items-center justify-center">
         <div class="flex w-1/3 h-1/2 flex-row items-center justify-center" v-if="!Success">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                <Badge variant="secondary">Uploaded !</Badge>
+                <Badge class="bg-green-500 px-4 py-2" variant="secondary">Uploaded !</Badge>
             </div>
             <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
@@ -198,7 +198,7 @@ onMounted(() => {
         <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="((length == 50)||(length==25))&&(loadingUpload||videoUploaded)">
             <div class="flex flex-col"x>
                 More precisions :
-                <div class="items-top flex gap-x-2">
+                <div class="items-top flex gap-x-2 mt-1">
                     <Checkbox class="flex mt-2" v-model="videoCut" id="silence" />
                     <div class="grid gap-1.5 leading-none">
                         <label for="silence"
@@ -232,16 +232,11 @@ onMounted(() => {
             </div>
 
 
-            <div>
-                <div>
-                    <span class="text-gray-600">
-                        Your video is <span class="text-primary">{{ durationInSeconds }} seconds</span>
-                        long.
-                    </span>
-
+            <div class="pt-6">
+                <div class="relative w-full max-w-sm items-center">
                     <Input id="search" type="text" placeholder="Name your video" class="pl-10" />
                     <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
-                        <PenLine class="size-6 text-muted-foreground" />
+                    <PenLine class="size-6 text-muted-foreground" />
                     </span>
                 </div>
 
