@@ -1,10 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-    layout: 'false',
+    layout: false,
 })
 
 const supabase = useSupabaseClient();
-const router = useRouter();
 
 let email = ref('');
 let password = ref('');
@@ -13,117 +12,99 @@ let loading = ref(false);
 let redirect = "/dashboard";
 
 const login = async () => {
-  loading.value = true;
-  const { data, error } = await supabase.auth.signInWithPassword({ email: email.value, password: password.value })
-  if (!error) {
-    router.push(redirect);
-  } else {
-    success.value = false;
-    loading.value = false;
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode, errorMessage);
-  }
+    loading.value = true;
+    const { data, error } = await supabase.auth.signInWithPassword({ email: email.value, password: password.value })
+    if (!error) {
+        navigateTo(redirect);
+    } else {
+        success.value = false;
+        loading.value = false;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+    }
 };
 
 const signInWithGoogle = async () => {
-  try {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google'
-    })
-    console.log('Google Sign-In Success:', data.user);
-    router.push(redirect);
-  } catch (error) {
-    console.error('Google Sign-In Error:', error);
-  }
+    try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+            provider: 'google'
+        })
+        console.log('Google Sign-In Success:', data.user);
+        navigateTo(redirect);
+    } catch (error) {
+        console.error('Google Sign-In Error:', error);
+    }
 };
 </script>
 
-
-
 <template>
-<section class="bg-white ">
-        <div class="container flex items-center justify-center min-h-screen px-6 mx-auto">
-            <form class="w-full max-w-md" 
-            @submit.prevent="login">      
-                <div class="flex">
-                    <img class="h-14 w-14 -mb-4" src="/logo.svg" alt="Yogocap" />
-                </div>
-
-                <h1 class="mt-3 text-2xl font-semibold text-gray-800 capitalize sm:text-3xl ">sign In</h1>
-
-                <div class="relative flex items-center mt-8">
-                    <span class="absolute">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                    </span>
-
-                    <input 
-                    type="email" 
-                    class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11    focus:border-blue-400  focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" 
-                    placeholder="Email address" 
-                    required
-                    v-model="email"
-                    >
-                </div>
-
-                <div class="relative flex items-center mt-4">
-                    <span class="absolute">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mx-3 text-gray-300 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                        </svg>
-                    </span>
-
-                    <input 
-                    type="password" 
-                    class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg    focus:border-blue-400  focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" 
-                    placeholder="Password"
-                    required
-                    v-model="password"
-                    >
-                </div>
-
-                <div class="mt-6">
-                    <button type="submit" class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                        <div v-if="loading" aria-label="Loading..." role="status" class="align-middle justify-center flex">
-                            <svg class="animate-spin w-6 h-6 fill-slate-800" viewBox="3 3 18 18">
-                              <path class="opacity-20" d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z">
-                              </path>
-                              <path d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
-                              </path>
-                            </svg>
-                          </div>
-                        <div v-else>
-                            {{!loading && "Sign in"}}
+    <div class="flex items-center justify-center h-screen ">
+        <Card class="mx-auto max-w-sm">
+            <CardHeader>
+                <CardTitle class="text-2xl">
+                    Login
+                </CardTitle>
+                <CardDescription>
+                    Enter your email below to login to your account
+                </CardDescription>
+            </CardHeader>
+            <CardContent>
+                <div class="grid gap-4">
+                    <div class="grid gap-2">
+                        <Label for="email">Email</Label>
+                        <Input id="email" type="email" placeholder="m@example.com" required v-model="email" />
+                    </div>
+                    <div class="grid gap-2">
+                        <div class="flex items-center">
+                            <Label for="password">Password</Label>
+                            <NuxtLink to="/auth/reset" class="ml-auto inline-block text-sm underline">
+                                Forgot your password?
+                            </NuxtLink>
                         </div>
-                    </button>
-
-                    <p class="mt-4 text-center text-gray-600 ">or sign in with</p>
-
-                    <button type="button" @click="signInWithGoogle" class="flex items-center justify-center px-6 py-3 mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50  w-full">
+                        <Input id="password" type="password" required v-model="password" />
+                    </div>
+                    <Button type="submit" class="w-full" @click="login">
+                        <div v-if="loading" aria-label="Loading..." role="status"
+                            class="align-middle justify-center flex">
+                            <svg class="animate-spin w-6 h-6 fill-slate-800" viewBox="3 3 18 18">
+                                <path class="opacity-20"
+                                    d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z">
+                                </path>
+                                <path
+                                    d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div v-else>
+                            Login
+                        </div>
+                    </Button>
+                    <Button variant="outline" class="w-full" @click-="signInWithGoogle">
                         <svg class="w-6 h-6 mx-2" viewBox="0 0 40 40">
-                            <path d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z" fill="#FFC107" />
-                            <path d="M5.25497 12.2425L10.7308 16.2583C12.2125 12.59 15.8008 9.99999 20 9.99999C22.5491 9.99999 24.8683 10.9617 26.6341 12.5325L31.3483 7.81833C28.3716 5.04416 24.39 3.33333 20 3.33333C13.5983 3.33333 8.04663 6.94749 5.25497 12.2425Z" fill="#FF3D00" />
-                            <path d="M20 36.6667C24.305 36.6667 28.2167 35.0192 31.1742 32.34L26.0159 27.975C24.3425 29.2425 22.2625 30 20 30C15.665 30 11.9842 27.2359 10.5975 23.3784L5.16254 27.5659C7.92087 32.9634 13.5225 36.6667 20 36.6667Z" fill="#4CAF50" />
-                            <path d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z" fill="#1976D2" />
+                            <path
+                                d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
+                                fill="#FFC107" />
+                            <path
+                                d="M5.25497 12.2425L10.7308 16.2583C12.2125 12.59 15.8008 9.99999 20 9.99999C22.5491 9.99999 24.8683 10.9617 26.6341 12.5325L31.3483 7.81833C28.3716 5.04416 24.39 3.33333 20 3.33333C13.5983 3.33333 8.04663 6.94749 5.25497 12.2425Z"
+                                fill="#FF3D00" />
+                            <path
+                                d="M20 36.6667C24.305 36.6667 28.2167 35.0192 31.1742 32.34L26.0159 27.975C24.3425 29.2425 22.2625 30 20 30C15.665 30 11.9842 27.2359 10.5975 23.3784L5.16254 27.5659C7.92087 32.9634 13.5225 36.6667 20 36.6667Z"
+                                fill="#4CAF50" />
+                            <path
+                                d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.7592 25.1975 27.56 26.805 26.0133 27.9758C26.0142 27.975 26.015 27.975 26.0158 27.9742L31.1742 32.3392C30.8092 32.6708 36.6667 28.3333 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z"
+                                fill="#1976D2" />
                         </svg>
-
-                        <span class="mx-2">Google</span>
-                    </button>
-
-                    <div class="mt-6 text-center ">
-                        <NuxtLink to="/auth/register" class="text-sm text-blue-500 hover:underline ">
-                            Don’t have an account yet? Register
-                        </NuxtLink>
-                    </div>
-                    <div class="mt-6 text-center ">
-                        <NuxtLink to="/reset" class="text-sm text-blue-500 hover:underline ">
-                            Forgot your password? Change it
-                        </NuxtLink>
-                    </div>
+                        Login with Google
+                    </Button>
                 </div>
-            </form>
-        </div>
-    </section>
+                <div class="mt-4 text-center text-sm">
+                    Don't have an account?
+                    <NuxtLink to="/auth/register" class="underline">
+                        Sign up
+                    </NuxtLink>
+                </div>
+            </CardContent>
+        </Card>
+    </div>
 </template>
