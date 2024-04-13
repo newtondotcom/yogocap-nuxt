@@ -130,11 +130,7 @@
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2">
-            <button
-              class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
-            >
-              View
-            </button>
+            <Button>View</Button>
           </td>
         </tr>
         <tr>
