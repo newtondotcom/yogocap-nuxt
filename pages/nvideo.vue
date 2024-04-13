@@ -11,7 +11,7 @@ let videoEmoji = ref(false);
 let videoValid = ref(true);
 let Success = ref(false);
 let durationInSeconds = ref(0);
-let length = ref(25);
+let length = ref(33);
 
 let datas = ref({
     url: 'https://yogocap.s3.eu-west-3.amazonaws.com/test.mp4',
@@ -81,9 +81,9 @@ async function handleFileChange(event: { target: any; }) {
                 videoValid.value = true;
                 loadingUpload.value = true;
                 // await uploadFile(datas.value.url, videoFile);
-                //length.value = 50;
+                //length.value = 66;
                 setTimeout(() => {
-                    length.value = 50;
+                    length.value = 66;
                     loadingUpload.value = false;
                     videoUploaded.value = true;
                 }, 2000);
@@ -147,7 +147,7 @@ onMounted(() => {
     <div class="flex flex-row items-center justify-center">
         <div class="flex w-1/3 h-1/2 flex-row items-center justify-center" v-if="!Success">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                <Badge class="bg-green-500 px-4 py-2" variant="secondary">Uploaded !</Badge>
+                <Badge class="bg-green-500 px-4 py-2 text-primary-foreground">Uploaded !</Badge>
             </div>
             <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
@@ -195,7 +195,7 @@ onMounted(() => {
                     Thanks, you video is now being processed, you will receive an email when it's done !
                 </p>
             </div>
-        <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="((length == 50)||(length==25))&&(loadingUpload||videoUploaded)">
+        <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="((length == 66)||(length==33))&&(loadingUpload||videoUploaded)">
             <div class="flex flex-col"x>
                 More precisions :
                 <div class="items-top flex gap-x-2 mt-1">
@@ -240,7 +240,7 @@ onMounted(() => {
                     </span>
                 </div>
 
-                <div v-if="!loadingUpload && !videoSent" class="mt-4 ml-28">
+                <div class="mt-4 ml-28">
                     <Button :class="[videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
                         @click="launchAmpq">
                         <span class="text-sm font-medium"> Process it </span>
