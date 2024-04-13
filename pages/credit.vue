@@ -34,37 +34,37 @@
 <div class="mt-8 sm:mt-12 flex-column flex align-middle justify-center">
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-      <div class="flex flex-col rounded-lg bg-primary-100 px-4 py-8 text-center">
-        <dt class="order-last text-lg font-medium text-gray-500">
+      <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-400">
           Current Plan
         </dt>
 
-        <dd class="text-3xl font-extrabold text-primary-600 md:text-5xl flex-row flex align-middle justify-center">
+        <dd class="text-3xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
           Premium
         </dd>
       </div>
 
-      <div class="flex flex-col rounded-lg bg-primary-100 px-4 py-8 text-center">
-        <dt class="order-last text-lg font-medium text-gray-500">
-          Videos remaining
+      <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-400">
+          videos remaining
         </dt>
 
-        <dd class="text-4xl font-extrabold text-primary-600 md:text-5xl flex-row flex align-middle justify-center">
+        <dd class="text-4xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
           24
-          <span class="text-gray-500 text-2xl"> /100</span> 
+          <span class="text-gray-400 text-2xl"> /100</span> 
         </dd>
       </div>
 
 
-      <div class="flex flex-col rounded-lg bg-primary-100 px-4 py-8 text-center">
-        <dt class="order-last text-lg font-medium text-gray-500">
+      <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
+        <dt class="order-last text-lg font-medium text-gray-400">
           Max video duration
         </dt>
 
-        <dd class="text-4xl font-extrabold text-primary-600 md:text-5xl flex-row flex align-middle justify-center">
+        <dd class="text-4xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
           1
-          <span class="text-gray-500 text-2xl">min</span> 
-          <span class="text-primary-600 text-2xl">30</span>
+          <span class="text-gray-400 text-2xl">min</span> 
+          <span class="text-primary-foreground text-2xl">30</span>
         </dd>
       </div>
     </dl>
@@ -72,7 +72,8 @@
 
   <div class="max-w-2xl mx-auto mt-20">
     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Select an option</label>
-    <select v-model="value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5">
+    <select v-model="value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+      <option selected disabled>Select an option</option>
       <option value="ST">Starter</option>
       <option value="PM">Premium</option>
       <option value="BS">Business</option>
@@ -80,12 +81,7 @@
   </div>
 
   <div class="flex flex-row align-middle justify-center mt-8">
-    <button
-      class="flex flex-row shrink-0 rounded-md border border-primary-600 bg-primary-600 mt-4 px-9 py-2 text-lg font-medium text-white transition hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500"
-      @click="submit"
-      >
-      Top up
-    </button>
+  <Button @click="submit">Top up</Button>
   </div>
   
   <LandingPricing />
