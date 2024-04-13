@@ -28,10 +28,11 @@ const login = async () => {
 const signInWithGoogle = async () => {
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google'
-        })
-        console.log('Google Sign-In Success:', data.user);
-        navigateTo(redirect);
+            provider: 'google',
+            options: { 
+                redirectTo: redirect,
+            },
+        });
     } catch (error) {
         console.error('Google Sign-In Error:', error);
     }
