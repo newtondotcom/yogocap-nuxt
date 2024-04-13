@@ -64,6 +64,7 @@
           </div>
       </td>
       </tr>
+      <SkeletonsHistoryTransactions />
       <tr>
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
           <div class="flex flex-row align-middle justify-center">
@@ -133,6 +134,7 @@
             <Button>View</Button>
           </td>
         </tr>
+        <SkeletonsHistoryVideos />
         <tr>
           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             <div class="flex flex-row align-middle justify-center">
