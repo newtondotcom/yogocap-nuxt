@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import sendAMQP from "../functions/s3/ampq";
+import { PenLine, AlertCircle } from "lucide-vue-next";
 
 let videoUploaded = ref(false);
 let loadingUpload = ref(false);
@@ -7,7 +8,7 @@ let videoCut = ref(false);
 let videoMusic = ref(false);
 let videoSent = ref(false);
 let videoEmoji = ref(false);
-let videoValid = ref(false);
+let videoValid = ref(true);
 let Success = ref(false);
 let durationInSeconds = ref(0);
 let length = ref(25);
@@ -111,11 +112,11 @@ onMounted(() => {
 
     <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
 
-    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+    <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
         <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
             <div>
                 <p
-                    class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary-500 uppercase rounded-full bg-teal-accent-400">
+                    class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary-foreground uppercase rounded-full bg-teal-accent-400">
                     Subtitle a video
                 </p>
             </div>
@@ -131,7 +132,7 @@ onMounted(() => {
                         </defs>
                         <rect fill="url(#b902cd03-49cc-4166-a0ae-4ca1c31cedba)" width="52" height="24"></rect>
                     </svg>
-                    <span class="relative text-primary-500">Let</span>
+                    <span class="relative text-primary">Let</span>
                 </span>
                 us guide you
             </h2>
@@ -141,19 +142,18 @@ onMounted(() => {
         </div>
     </div>
 
-    <Progress v-model="length" class="px-14 mb-[50px] w-full rounded-md self-center" />
+    <Progress v-model="length" class="mb-[50px] w-4/5 mx-auto rounded-md self-center" />
 
     <div class="flex flex-row items-center justify-center">
-        <div class="flex w-1/3 h-1/2 flex-row items-center justify-center">
+        <div class="flex w-1/3 h-1/2 flex-row items-center justify-center" v-if="!Success">
             <div v-if="videoUploaded" class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
-                <Badge color="green" variant="outline">Uploaded</Badge>
+                <Badge variant="secondary">Uploaded !</Badge>
             </div>
             <div class="flex flex-col" v-else>
                 <p class="text-gray-600">
                     Upload your video here
                 </p>
                 <div class="mb-3 mt-4 grid items-center gap-1.5">
-                    <Label for="picture">Picture</Label>
                     <Input id="picture" accept="video/*" @change="handleFileChange" :disabled="loadingUpload"
                         type="file" />
                 </div>
@@ -171,15 +171,32 @@ onMounted(() => {
                         </div>
                     </Badge>
                 </div>
+                <Alert class="my-2" variant="destructive" v-if="!videoValid">
+                    <AlertCircle class="w-4 h-4" />
+                    <AlertTitle>Error</AlertTitle>
+                    <AlertDescription>
+                        Your video length is above the one included in your current plan.
+                    </AlertDescription>
+                </Alert>
             </div>
         </div>
 
         <Separator class="mx-4 bg-black text-black" orientation="vertical" />
 
-        <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="true">
-
-            <div class="flex flex-col">
-
+        <div v-if="length == 100 && Success" class="flex flex-col w-1/2 h-1/2 pl-10">
+                <div class="flex items-center justify-between mb-6">
+                    <p class="text-2xl font-bold text-green-500">Success</p>
+                    <svg class="w-8 text-green-500" stroke="currentColor" viewBox="0 0 24 24">
+                        <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-miterlimit="10" points="6,12 10,16 18,8"></polyline>
+                    </svg>
+                </div>
+                <p class="text-gray-600">
+                    Thanks, you video is now being processed, you will receive an email when it's done !
+                </p>
+            </div>
+        <div class="flex flex-col w-1/2 h-1/2 pl-10" v-if="((length == 50)||(length==25))&&(loadingUpload||videoUploaded)">
+            <div class="flex flex-col"x>
                 More precisions :
                 <div class="items-top flex gap-x-2">
                     <Checkbox class="flex mt-2" v-model="videoCut" id="silence" />
@@ -218,7 +235,7 @@ onMounted(() => {
             <div>
                 <div>
                     <span class="text-gray-600">
-                        Your video is <span class="text-primary-500">{{ durationInSeconds }} seconds</span>
+                        Your video is <span class="text-primary">{{ durationInSeconds }} seconds</span>
                         long.
                     </span>
 
@@ -227,12 +244,9 @@ onMounted(() => {
                         <PenLine class="size-6 text-muted-foreground" />
                     </span>
                 </div>
-                <div class="text-gray-600">
-                    Your video length is above the one included in your current plan.
-                </div>
 
                 <div v-if="!loadingUpload && !videoSent" class="mt-4 ml-28">
-                    <Button :class="[!videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
+                    <Button :class="[videoUploaded ? 'opacity-1' : 'opacity-20']" :disabled="!videoUploaded"
                         @click="launchAmpq">
                         <span class="text-sm font-medium"> Process it </span>
 
@@ -243,18 +257,6 @@ onMounted(() => {
                         </svg>
                     </Button>
                 </div>
-            </div>
-            <div v-if="length == 100 && Success">
-                <div class="flex items-center justify-between mb-6">
-                    <p class="text-2xl font-bold text-green-500">Success</p>
-                    <svg class="w-8 text-green-500" stroke="currentColor" viewBox="0 0 24 24">
-                        <polyline fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            stroke-miterlimit="10" points="6,12 10,16 18,8"></polyline>
-                    </svg>
-                </div>
-                <p class="text-gray-600">
-                    Thanks, you video is now being processed, you will receive an email when it's done !
-                </p>
             </div>
         </div>
     </div>
