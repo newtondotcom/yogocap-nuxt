@@ -25,7 +25,7 @@
           </p>
   
           <button
-            class="mt-4 block rounded border border-primary-600 bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500 sm:mt-6"
+            class="mt-4 block rounded border border-primary bg-primary px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-foreground focus:outline-none focus:ring active:text-primary-foreground sm:mt-6"
             
           >
             Get Started
@@ -45,7 +45,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -64,7 +64,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -83,7 +83,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -102,7 +102,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -177,7 +177,7 @@
           </p>
   
           <button
-            class="mt-4 block rounded border border-primary-600 bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500 sm:mt-6"
+            class="mt-4 block rounded border border-primary bg-primary px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-foreground focus:outline-none focus:ring active:text-primary-foreground sm:mt-6"
             
           >
             Get Started
@@ -197,7 +197,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -216,7 +216,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -235,7 +235,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -254,7 +254,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -273,7 +273,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -329,7 +329,7 @@
           </p>
   
           <button
-            class="mt-4 block rounded border border-primary-600 bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-600 focus:outline-none focus:ring active:text-primary-500 sm:mt-6"
+            class="mt-4 block rounded border border-primary bg-primary px-12 py-3 text-center text-sm font-medium text-white hover:bg-transparent hover:text-primary-foreground focus:outline-none focus:ring active:text-primary-foreground sm:mt-6"
             
           >
             Get Started
@@ -349,7 +349,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -368,7 +368,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -387,7 +387,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -406,7 +406,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -425,7 +425,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"
@@ -444,7 +444,7 @@
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="h-5 w-5 text-primary-700"
+                class="h-5 w-5 text-primary"
               >
                 <path
                   stroke-linecap="round"

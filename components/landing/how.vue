@@ -31,7 +31,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Upload</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary-50">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
             1
           </p>
         </div>
@@ -42,7 +42,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Tune it</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary-50">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
             2
           </p>
         </div>
@@ -53,7 +53,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Confirm</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary-50">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
             3
           </p>
         </div>
@@ -64,7 +64,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Wait a bit</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary-50">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
             4
           </p>
         </div>
@@ -75,7 +75,7 @@
     </div>
     <div class="text-center">
       <button
-        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white bg-primary-600 transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white bg-primary transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
       >
         Get Started
       </button>

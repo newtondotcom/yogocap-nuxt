@@ -15,7 +15,7 @@
 <template>
 <div v-if="visible" class="fixed inset-x-0 bottom-0 p-4 transition:fade">
     <div
-      class="relative flex items-center justify-between gap-4 rounded-lg bg-primary-600 px-4 py-3 text-white shadow-lg"
+      class="relative flex items-center justify-between gap-4 rounded-lg bg-primary px-4 py-3 text-white shadow-lg"
     >
       <p class="text-sm font-medium">
         Love Alpine JS?

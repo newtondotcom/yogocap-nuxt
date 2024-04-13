@@ -15,12 +15,12 @@
   
       <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -44,12 +44,12 @@
           </p>
         </button>
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -75,12 +75,12 @@
         </button>
   
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -105,12 +105,12 @@
         </button>
   
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -135,12 +135,12 @@
         </button>
   
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -165,12 +165,12 @@
         </button>
   
         <button
-          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary-600/10 hover:shadow-primary-600/10"
+          class="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-primary/10 hover:shadow-primary/10"
           
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-10 w-10 text-primary-600"
+            class="h-10 w-10 text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -197,8 +197,7 @@
   
       <div class="mt-12 text-center">
         <button
-          
-          class="inline-block rounded bg-primary-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-primary-700 focus:outline-none focus:ring focus:ring-yellow-400"
+          class="inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary focus:outline-none focus:ring focus:ring-yellow-400"
         >
           Get Started Today
         </button>
