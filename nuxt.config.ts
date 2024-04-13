@@ -11,15 +11,16 @@ export default defineNuxtConfig({
     LS_SECRET: process.env.LS_SECRET,
   },
   shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
     prefix: '',
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
     componentDir: './components/ui'
   },
-  css : ['~/assets/css/tailwind.css']
+  css : ['~/assets/css/tailwind.css'],
+  tailwindcss: {
+    cssPath: ['~/assets/css/tailwind.css', { injectPosition: "first" }],
+    configPath: 'tailwind.config',
+    exposeConfig: {
+      level: 2
+    },
+    viewer: false,
+  }
 })
