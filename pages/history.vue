@@ -28,7 +28,7 @@
 </script>
 
 <template>
-<DashboardSubtitle title="Transactions history" subtitle="Here is the list of your previous transactions ! 🚀" />
+<DashboardSubtitle title="Transactions history" subtitle="Here is the list of your previous transactions ! 💲" />
 
 <div class="overflow-x-auto rounded-lg border border-gray-200 mt-8 mx-4">
   <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -46,8 +46,8 @@
       </tr>
     </thead>
 
-    <tbody v-for="item in transactions" class="divide-y divide-gray-200">
-      <tr>
+    <tbody class="divide-y divide-gray-200">
+      <tr v-for="item in transactions" >
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
           <div class="flex flex-row align-middle justify-center">
               {{item.date}}
@@ -64,11 +64,26 @@
           </div>
       </td>
       </tr>
+      <tr>
+        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+          <div class="flex flex-row align-middle justify-center">
+          </div>
+      </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+          <div class="flex flex-row align-middle justify-center">
+            No transactions yet
+          </div>
+      </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+          <div class="flex flex-row align-middle justify-center">
+          </div>
+      </td>
+      </tr>
     </tbody>
   </table>
 </div>
 
-<DashboardSubtitle title="Videos history" subtitle="Here is the list of your previous subtitles ! 🚀" />
+<DashboardSubtitle title="Videos history" subtitle="Here is the list of your previous subtitled videos ! 📺" />
 
 <div class="overflow-x-auto rounded-lg border border-gray-200 mt-8 mx-4">
     <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
@@ -92,8 +107,8 @@
         </tr>
       </thead>
   
-      <tbody v-for="item in list" class="divide-y divide-gray-200">
-        <tr>
+      <tbody class="divide-y divide-gray-200">
+        <tr v-for="item in list">
           <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             <div class="flex flex-row align-middle justify-center">
                 {{item.name}}
@@ -116,11 +131,31 @@
         </td>
           <td class="whitespace-nowrap px-4 py-2">
             <button
-              
               class="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
             >
               View
             </button>
+          </td>
+        </tr>
+        <tr>
+          <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+            <div class="flex flex-row align-middle justify-center">
+            </div>
+        </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            <div class="flex flex-row align-middle justify-center">
+            </div>
+        </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            <div class="flex flex-row align-middle justify-center">
+              No videos yet
+            </div>
+        </td>
+          <td class="whitespace-nowrap px-4 py-2 text-gray-700">
+            <div class="flex flex-row align-middle justify-center">
+            </div>
+        </td>
+          <td class="whitespace-nowrap px-4 py-2">
           </td>
         </tr>
       </tbody>
