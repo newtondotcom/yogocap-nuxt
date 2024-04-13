@@ -2,7 +2,7 @@
     import { videos } from "../components/dashboard/videos";
 
     let currentpage = ref(1);
-    let length = 4;
+    let length = 5;
     let localvideos = ref([]);
 
     localvideos.value = videos.slice(0, length);
@@ -12,8 +12,6 @@
       const end = start + length;
       localvideos.value = videos.slice(start, end);
     });
-
-    console.log(Math.ceil(videos.length / length));
     </script>
 
 <template>
