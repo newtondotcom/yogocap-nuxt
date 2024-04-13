@@ -5,7 +5,7 @@
   const dataFetched = ref(false)
 
   async function getHistory(){
-    const { data } = await useFetch('/api/history')
+    const { data } = await useFetch('/api/dashboard/history')
     transactions.value = data.value.transactions;
     videos.value = data.value.videos;
     dataFetched.value = true
