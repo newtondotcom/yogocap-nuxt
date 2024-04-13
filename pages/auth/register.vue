@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import {AlertCircle} from 'lucide-vue-next';
+
 definePageMeta({
     layout: false,
 })
@@ -42,10 +44,11 @@ const register = async () => {
 const signInWithGoogle = async () => {
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
-            provider: 'google'
+            provider: 'google',
+            options: { 
+                redirectTo: '/dashboard',
+            },
         });
-        console.log('Google Sign-In Success:', data.user);
-        navigateTo('/dashboard');
     } catch (error) {
         console.error('Google Sign-In Error:', error);
     }
