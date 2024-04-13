@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 defineProps({
   duration: {
-    type: String,
+    type: Number,
     required: true,
   },
 });
