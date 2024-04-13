@@ -1,4 +1,3 @@
-//const RABBITMQ_SPLLITER='144.91.123.186:9999';
 const RABBITMQ_SPLLITER='localhost:3000';
 
 export default async function sendAMQP(task:Record<string,any> ) {
