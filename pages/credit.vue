@@ -29,7 +29,7 @@
 </script>
 
 <template>
-<DashboardSubtitle title="Credit" subtitle="Here is your credit page ! 🚀" />
+<DashboardSubtitle title="Credit" subtitle="Here is your credit page ! ⏳" />
 
 <div class="mt-8 sm:mt-12 flex-column flex align-middle justify-center">
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
