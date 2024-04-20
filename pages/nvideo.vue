@@ -230,10 +230,9 @@ onMounted(() => {
             </div>
             <div class="flex flex-col w-1/2 h-[30vh] pl-10"
                 v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)">
-                <div class="flex flex-col" x>
-                    More precisions :
-                    <div class="items-top flex gap-x-2 mt-1" >
-                        <Checkbox class="flex mt-2" v-model="videoCut" id="silence" />
+                <div class="flex flex-col" >
+                    <div class="items-top flex gap-x-2 mt-2" >
+                        <Checkbox class="flex" v-model="videoCut" id="silence" />
                         <div class="grid gap-1.5 leading-none">
                             <label for="silence"
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -242,9 +241,9 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <div class="items-top flex gap-x-2">
-                        <Checkbox class="flex mt-2" v-model="videoMusic" id="music" v-if="datas.canMusic" />
-                        <Checkbox class="flex mt-2" v-model="videoMusic" id="music" v-else disabled />
+                    <div class="items-top flex gap-x-2 mt-4" :class="`${datas.canMusic ? 'opacity-1' : 'opacity-50'}`">
+                        <Checkbox class="flex" v-model="videoMusic" id="music" v-if="datas.canMusic" />
+                        <Checkbox class="flex" v-model="videoMusic" id="music" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label for="music"
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -253,9 +252,9 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <div class="items-top flex gap-x-2">
-                        <Checkbox class="flex mt-2" v-model="videoEmoji" id="emoji" v-if="datas.canEmoji" />
-                        <Checkbox class="flex mt-2" v-model="videoEmoji" id="emoji" v-else disabled />
+                    <div class="items-top flex gap-x-2 mt-4" :class="`${datas.canMusic ? 'opacity-1' : 'opacity-50'}`">
+                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-if="datas.canEmoji" />
+                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label for="emoji"
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
