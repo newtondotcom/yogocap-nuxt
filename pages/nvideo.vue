@@ -16,7 +16,7 @@ let length = ref(33);
 
 let datas = ref({
     url: 'https://yogocap.s3.eu-west-3.amazonaws.com/test.mp4',
-    videoLength: 20,
+    videoLength: 2000,
     videosBalance: 1,
     canMusic: true,
     canEmoji: true,
@@ -65,7 +65,6 @@ async function launchVideoProcessing() {
 }
 
 async function handleFileChange(event: { target: any; }) {
-    loadingUpload.value = true;
 
     const fileInput = event.target;
     const videoFile = fileInput.files[0];
@@ -137,7 +136,7 @@ onMounted(() => {
 
     <DashboardSubtitle title="Upload a video" subtitle="From here, you can upload a video to subtitle it ! 🚀" />
 
-    <div>
+    <div class="rounded-lg border border-dashed shadow-sm">
         <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
             <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                 <div>
@@ -172,7 +171,7 @@ onMounted(() => {
         <Progress v-model="length" class="mb-[50px] w-4/5 mx-auto rounded-md self-center" />
 
         <div class="flex flex-row items-center justify-center">
-            <div class="flex w-1/3 h-1/2 flex-row items-center justify-center" v-if="!Success">
+            <div class="flex w-1/3 h-[50vh] flex-row items-center justify-center" v-if="!Success">
                 <div v-if="videoUploaded"
                     class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
                     <Badge class="bg-green-500 px-4 py-2 text-primary-foreground">Uploaded !</Badge>
