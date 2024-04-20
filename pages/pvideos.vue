@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Terminal } from 'lucide-vue-next';
+import type { Video } from '~/types/types';
 
     let currentpage = ref(1);
     let length = 8;
@@ -9,7 +10,7 @@ import { Terminal } from 'lucide-vue-next';
 
     onMounted(async () => {
     const { data } = await useFetch('/api/dashboard/pvideos')
-      videos.value = data.value.pvideos;
+      videos.value = data.value?.pvideos;
       localvideos.value = videos.value.slice(0, length);
       dataFetched.value = true;
     });
