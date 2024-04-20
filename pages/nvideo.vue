@@ -171,7 +171,7 @@ onMounted(() => {
         <Progress v-model="length" class="mb-[50px] w-4/5 mx-auto rounded-md self-center" />
 
         <div class="flex flex-row items-center justify-center">
-            <div class="flex w-1/3 h-[50vh] flex-row items-center justify-center" v-if="!Success">
+            <div class="flex w-1/3 h-[30vh] flex-row items-center justify-center" v-if="!Success">
                 <div v-if="videoUploaded"
                     class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
                     <Badge class="bg-green-500 px-4 py-2 text-primary-foreground">Uploaded !</Badge>
@@ -210,9 +210,13 @@ onMounted(() => {
                 </div>
             </div>
 
-            <Separator class="mx-4 bg-black text-black" orientation="vertical" />
+            <Separator 
+            orientation="vertical" 
+            class="h-[20vh]" 
+            v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)"
+            />
 
-            <div v-if="length == 100 && Success" class="flex flex-col w-1/2 h-1/2 pl-10">
+            <div v-if="length == 100 && Success" class="flex flex-col w-1/2 h-[30vh] pl-10">
                 <div class="flex items-center justify-between mb-6">
                     <p class="text-2xl font-bold text-green-500">Success</p>
                     <svg class="w-8 text-green-500" stroke="currentColor" viewBox="0 0 24 24">
@@ -224,11 +228,11 @@ onMounted(() => {
                     Thanks, you video is now being processed, you will receive an email when it's done !
                 </p>
             </div>
-            <div class="flex flex-col w-1/2 h-1/2 pl-10"
+            <div class="flex flex-col w-1/2 h-[30vh] pl-10"
                 v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)">
                 <div class="flex flex-col" x>
                     More precisions :
-                    <div class="items-top flex gap-x-2 mt-1">
+                    <div class="items-top flex gap-x-2 mt-1" >
                         <Checkbox class="flex mt-2" v-model="videoCut" id="silence" />
                         <div class="grid gap-1.5 leading-none">
                             <label for="silence"
