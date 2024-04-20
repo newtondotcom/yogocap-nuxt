@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next';
+import { SquarePlus,Captions,CreditCard,FileClock, History, Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next';
+const route = useRoute()
+console.log(route.name)
+async function goToCredit() {
+  navigateTo('/credit');
+}
 </script>
 
 <template>
@@ -7,55 +12,67 @@ import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, Sho
     <div class="hidden border-r bg-muted/40 md:block">
       <div class="flex h-full max-h-screen flex-col gap-2">
         <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
-          <a href="/" class="flex items-center gap-2 font-semibold">
-            <Package2 class="h-6 w-6" />
-            <span class="">Acme Inc</span>
-          </a>
+          <NuxtLink to="/dashboard" class="flex items-center gap-2 font-semibold">
+            <Captions class="h-6 w-6" />
+            <span class="">Yogocap</span>
+          </NuxtLink>
+          <!--
           <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
             <Bell class="h-4 w-4" />
             <span class="sr-only">Toggle notifications</span>
           </Button>
+          -->
         </div>
         <div class="flex-1">
           <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
-            <a
-              href="/"
+            <NuxtLink
+              to="/nvideo"
+              :class="{
+                'text-primary bg-muted': $route.name === 'nvideo',
+                'text-muted-foreground': $route.name !== 'nvideo'
+              }"
               class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             >
-              <Home class="h-4 w-4" />
-              Dashboard
-            </a>
-            <a
-              href="#"
+              <SquarePlus class="h-4 w-4" />
+               New Video
+            </NuxtLink>
+            <NuxtLink
+                :to="{ name: 'pvideos' }"
+                :class="{
+                    'text-primary bg-muted': $route.name === 'pvideos',
+                    'text-muted-foreground': $route.name !== 'pvideos'
+                }"
+                class="flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary"
+                >
+                <History class="h-4 w-4" />
+                <span>Previous videos</span>
+                <Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
+                    12
+                </Badge>
+                </NuxtLink>
+
+            <NuxtLink
+              to="/credit"
+                :class="{
+                    'text-primary bg-muted': route.name === 'credit',
+                    'text-muted-foreground': route.name !== 'credit',
+                }"
               class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             >
-              <ShoppingCart class="h-4 w-4" />
-              Orders
-              <Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                6
-              </Badge>
-            </a>
-            <a
-              href="#"
-              class="flex items-center gap-3 rounded-lg bg-muted px-3 py-2 text-primary transition-all hover:text-primary"
-            >
-              <Package class="h-4 w-4" />
-              Products
-            </a>
-            <a
-              href="#"
+              <CreditCard class="h-4 w-4" />
+              Balance
+            </NuxtLink>
+            <NuxtLink
+              to="/history"
+                :class="{    
+                    'text-primary bg-muted': route.name === 'history',
+                    'text-muted-foreground': route.name !== 'history',
+                }"
               class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
             >
-              <Users class="h-4 w-4" />
-              Customers
-            </a>
-            <a
-              href="#"
-              class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-            >
-              <LineChart class="h-4 w-4" />
-              Analytics
-            </a>
+              <FileClock class="h-4 w-4" />
+              History
+            </NuxtLink>
           </nav>
         </div>
         <div class="mt-auto p-4">
@@ -91,22 +108,22 @@ import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, Sho
           </SheetTrigger>
           <SheetContent side="left" class="flex flex-col">
             <nav class="grid gap-2 text-lg font-medium">
-              <a
-                href="#"
+              <NuxtLink
+                to="#"
                 class="flex items-center gap-2 text-lg font-semibold"
               >
                 <Package2 class="h-6 w-6" />
-                <span class="sr-only">Acme Inc</span>
-              </a>
-              <a
-                href="#"
+                <span class="sr-only">Yogocap</span>
+              </NuxtLink>
+              <NuxtLink
+                to="#"
                 class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               >
                 <Home class="h-5 w-5" />
                 Dashboard
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="#"
                 class="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
               >
                 <ShoppingCart class="h-5 w-5" />
@@ -114,40 +131,40 @@ import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, Sho
                 <Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                   6
                 </Badge>
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="#"
                 class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               >
                 <Package class="h-5 w-5" />
                 Products
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="#"
                 class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               >
                 <Users class="h-5 w-5" />
                 Customers
-              </a>
-              <a
-                href="#"
+              </NuxtLink>
+              <NuxtLink
+                to="#"
                 class="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
               >
                 <LineChart class="h-5 w-5" />
                 Analytics
-              </a>
+              </NuxtLink>
             </nav>
             <div class="mt-auto">
               <Card>
                 <CardHeader>
-                  <CardTitle>Upgrade to Pro</CardTitle>
+                  <CardTitle>Upgrade your Plan</CardTitle>
                   <CardDescription>
                     Unlock all features and get unlimited access to our
                     support team.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button size="sm" class="w-full">
+                  <Button size="sm" class="w-full" @click="goToCredit">
                     Upgrade
                   </Button>
                 </CardContent>
@@ -192,7 +209,7 @@ import { Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, Sho
 
 <!--
 <div class="flex flex-col min-h-screen bg-slate-100">
-    <aside class="absolute top-0 left-0 flex w-64 flex-col h-full px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l"> 
+    <NuxtLinkside class="absolute top-0 left-0 flex w-64 flex-col h-full px-5 py-8 overflow-y-auto bg-white border-r rtl:border-r-0 rtl:border-l"> 
         <NuxtLink to="/dashboard">
             <img class="w-auto h-6" src="https://merakiui.com/images/logo.svg" alt="">
         </NuxtLink>
