@@ -93,14 +93,22 @@ async function handleFileChange(event: { target: any; }) {
         videoUploaded.value = false;
     }
 }
-console.log(datas.value.url);
+
+async function rmUploadedVideo() {
+    await $fetch("/api/s3/delete", {
+        method: "POST",
+        body: JSON.stringify({
+            file: "test.mp4"
+        }),
+    });
+}
 
 onMounted(() => {
     /*
     window.onbeforeunload = async function (e) {
-        await setTimeout(() => {
-            console.log('text not printed.');
-        }, 2000);
+        if (!Success.value) {
+            await rmUploadedVideo();
+        }
         return 'text not printed.';
     };
     */
