@@ -3,13 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
+    "build": "prisma generate && nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@prisma/client": "5.12.1",
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@nuxtjs/supabase": "^1.2.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "prisma": "^5.12.1",
     "shadcn-nuxt": "^0.10.2",
     "typescript": "^5.4.5"
   }

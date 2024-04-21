@@ -1,0 +1,38 @@
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  directUrl         = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the User model
+model User {
+  user_id      String      @id
+  access_token String?
+  username String?
+  repositories Repository[]
+  avatar_url String?
+}
+
+// Define the Repository model
+model Repository {
+  repository_id   Int       @id @default(autoincrement())
+  user_id         String
+  repository_name String
+  user            User      @relation(fields: [user_id], references: [user_id])
+  secrets         Secret[]
+  public_key      String?
+  key_id          String?
+}
+
+// Define the Secret model
+model Secret {
+  name         String
+  value         String
+  repository_id Int
+  repository    Repository @relation(fields: [repository_id], references: [repository_id])
+  @@id([name, repository_id])
+}
