@@ -11,19 +11,23 @@ generator client {
 model Video {
   id          String    @id @default(cuid())
   name        String
+  name_s3     String
   user_id     String
   length      Int
-  stored     Boolean
+  stored     String
   submission DateTime
   deleted    Boolean?
   emojis     Boolean
   music     Boolean
   silent   Boolean
+  done      Boolean @default(false)
+  task_id     String?
 }
 
 model Account {
   user_id String @id
   videos_remaining String
+  videos_stored String
   current_duration String
   can_emojis Boolean
   can_music Boolean
@@ -37,6 +41,7 @@ model Buyings {
 
 model Task {
   id          String    @id @default(cuid())
+  video_id    String
   time_transcription Float?
   aligned   Boolean
   time_alignment Float?
