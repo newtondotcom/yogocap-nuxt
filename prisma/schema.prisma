@@ -8,31 +8,42 @@ generator client {
   provider = "prisma-client-js"
 }
 
-// Define the User model
-model User {
-  user_id      String      @id
-  access_token String?
-  username String?
-  repositories Repository[]
-  avatar_url String?
+model Video {
+  id          String    @id @default(cuid())
+  name        String
+  user_id     String
+  length      Int
+  stored     Boolean
+  submission DateTime
+  deleted    Boolean?
+  emojis     Boolean
+  music     Boolean
+  silent   Boolean
 }
 
-// Define the Repository model
-model Repository {
-  repository_id   Int       @id @default(autoincrement())
-  user_id         String
-  repository_name String
-  user            User      @relation(fields: [user_id], references: [user_id])
-  secrets         Secret[]
-  public_key      String?
-  key_id          String?
+model Account {
+  user_id String @id
+  videos_remaining String
+  current_duration String
+  can_emojis Boolean
+  can_music Boolean
 }
 
-// Define the Secret model
-model Secret {
-  name         String
-  value         String
-  repository_id Int
-  repository    Repository @relation(fields: [repository_id], references: [repository_id])
-  @@id([name, repository_id])
+model Buyings {
+  id          String    @id @default(cuid())
+  user_id     String
+  plan        String
+}
+
+model Task {
+  id          String    @id @default(cuid())
+  time_transcription Float?
+  aligned   Boolean
+  time_alignment Float?
+  time_encoding Float?
+  emojis     Boolean
+  music     Boolean
+  silent   Boolean
+  done_at DateTime?
+  done   Boolean @default(false)
 }
