@@ -15,13 +15,14 @@ model Video {
   user_id     String
   length      Int
   stored     String
-  submission DateTime
+  submitted DateTime
   deleted    Boolean?
   emojis     Boolean
   music     Boolean
   silent   Boolean
   done      Boolean @default(false)
   task_id     String?
+  thumbnail   String?
 }
 
 model Account {
