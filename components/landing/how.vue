@@ -2,7 +2,7 @@
 <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
     <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
       <div>
-        <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+        <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary uppercase rounded-full bg-teal-accent-400">
           Brand new
         </p>
       </div>
@@ -31,7 +31,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Upload</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-primary-foreground bg-primary">
             1
           </p>
         </div>
@@ -42,7 +42,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Tune it</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-primary-foreground bg-primary">
             2
           </p>
         </div>
@@ -53,7 +53,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Confirm</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-primary-foreground bg-primary">
             3
           </p>
         </div>
@@ -64,7 +64,7 @@
       <div class="p-5 duration-300 transform bg-white border rounded shadow-sm hover:-translate-y-2">
         <div class="flex items-center justify-between mb-2">
           <p class="text-lg font-bold leading-5">Wait a bit</p>
-          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-deep-purple-accent-400 bg-primary">
+          <p class="flex items-center justify-center w-6 h-6 font-bold rounded text-primary-foreground bg-primary">
             4
           </p>
         </div>
@@ -74,11 +74,13 @@
       </div>
     </div>
     <div class="text-center">
-      <button
-        class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white bg-primary transition duration-200 rounded shadow-md md:w-auto bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+      <NuxtLink to="/pricing">
+      <Button
+        class="h-12 px-6 transition duration-200"
       >
         Get Started
-      </button>
+      </Button>
+      </NuxtLink>
     </div>
   </div>
 </template>
