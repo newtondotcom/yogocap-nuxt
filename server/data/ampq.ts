@@ -23,8 +23,6 @@ export default async function sendAMQP(message: string) {
       // Send a message to the queue
       channel.sendToQueue(queueName, Buffer.from(message));
   
-      console.log(`Message sent to queue '${queueName}': ${message}`);
-  
       // Close the connection and channel
       await channel.close();
       await connection.close();

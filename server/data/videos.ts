@@ -1,6 +1,6 @@
 import prisma from "./prisma";
 
-export async function createVideo(user_id: any, name: string, aligned : boolean, emojis : boolean, music : boolean, silent : boolean, task_id : string, length : number, name_s3 : string, s3name : string) {
+export async function createVideo(user_id: any, name: string, aligned : boolean, emojis : boolean, music : boolean, silent : boolean, length : number, name_s3 : string, s3name : string) {
     try {
         const newVideo = await prisma.video.create({
             data: {
@@ -10,11 +10,11 @@ export async function createVideo(user_id: any, name: string, aligned : boolean,
                 emojis,
                 music,
                 silent,
-                task_id,
                 length,
                 name_s3,
                 stored : s3name,
-                submitted : new Date()
+                submitted : new Date(),
+                deleted : false,
             },
             select : {
                 id : true
@@ -23,6 +23,23 @@ export async function createVideo(user_id: any, name: string, aligned : boolean,
         return newVideo.id;
     } catch (error : any) {
         throw new Error(`Error creating video: ${error.message}`);
+    }
+}
+
+export async function assignTasktoVideo(video_id: any, task_id : string) {
+    try {
+        const updatedVideo = await prisma.video.update({
+            where: { id: video_id },
+            data: {
+                task_id
+            },
+            select : {
+                user_id : true
+            }
+        });
+        return updatedVideo.user_id;
+    } catch (error : any) {
+        throw new Error(`Error updating video: ${error.message}`);
     }
 }
 
