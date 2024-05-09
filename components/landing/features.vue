@@ -196,11 +196,11 @@
       </div>
   
       <div class="mt-12 text-center">
-        <button
-          class="inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary focus:outline-none focus:ring focus:ring-yellow-400"
+        <Button
+          class="px-12 py-3"
         >
           Get Started Today
-        </button>
+      </Button>
       </div>
     </div>
   </section>
