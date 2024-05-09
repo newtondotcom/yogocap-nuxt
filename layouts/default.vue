@@ -2,7 +2,7 @@
 import { SquarePlus, Captions, CreditCard, FileClock, History, Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next';
 const route = useRoute()
 const supabase = useSupabaseClient()
-
+const previousVideosCount = useCookie('previousVideosCount')
 async function goToCredit() {
     navigateTo('/credit');
 }
@@ -48,7 +48,7 @@ async function logout() {
                             <History class="h-4 w-4" />
                             <span>Previous videos</span>
                             <Badge class="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                12
+                                {{previousVideosCount}}
                             </Badge>
                         </NuxtLink>
 
