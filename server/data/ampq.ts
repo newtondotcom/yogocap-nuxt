@@ -1,10 +1,16 @@
 import ampq from 'amqplib';
 
-const RABBITMQ_SPLLITER='localhost:3000';
-const queueName = 'test-queue';
+// MESSAGE EXAMPLE : {"file_name":"azdqdqz","emoji":false,"lsilence":false,"music":true,video_aligned":true,"key_db":"clvzoatjc0002wvxz2nvodjho"}
 
 export default async function sendAMQP(message: string) {
     try {
+      const config = useRuntimeConfig();
+      const RABBIT_HOST = config.RABBIT_HOST;
+      const RABBIT_PORT = config.RABBIT_PORT;
+
+      const queueName = "task_queue";
+      const RABBITMQ_SPLLITER = `${RABBIT_HOST}:${RABBIT_PORT}`;
+
       // Connect to the RabbitMQ server
       const connection = await ampq.connect(`amqp://${RABBITMQ_SPLLITER}`);
   
@@ -12,7 +18,7 @@ export default async function sendAMQP(message: string) {
       const channel = await connection.createChannel();
   
       // Declare a queue
-      await channel.assertQueue(queueName, { durable: false });
+      await channel.assertQueue(queueName, { durable: true });
   
       // Send a message to the queue
       channel.sendToQueue(queueName, Buffer.from(message));
