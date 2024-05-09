@@ -1,9 +1,10 @@
-import { serverSupabaseUser } from '#supabase/server'
+import { getTransactions } from '~/server/data/account'
+import { getVideos } from '~/server/data/videos'
 
 export default defineEventHandler(async (event) => {
-  const user = await serverSupabaseUser(event)
+  const user_id = event.context.user_id
 
-
+  /*
   const videos = [
     {
         name : "squeezie.mp4",
@@ -18,6 +19,9 @@ export default defineEventHandler(async (event) => {
         silent : "yes"
     }
 ]
+*/
+const videos = getVideos(user_id)
+/*
 const transactions = [
   {
     date : "14/11/2023",
@@ -30,6 +34,8 @@ const transactions = [
     value : "187",
   },
 ]
+*/
+const transactions = getTransactions(user_id)
 
   return {
       videos,
