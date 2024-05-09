@@ -56,6 +56,32 @@ export async function getCapacity(user_id: any) {
     }
 }
 
+export async function getCurrentCreditState(user_id: any) {
+    try {
+        const account = await prisma.account.findUnique({
+            where: { user_id },
+            select: {
+                videos_remaining: true,
+                current_duration: true,
+            }
+        });
+        const current_plan = await prisma.buyings.findFirst({
+            where: {
+                user_id
+            },
+            select: {
+                plan: true
+            },
+            orderBy: {
+                date: 'desc'
+            }
+        });
+        return {account,current_plan};
+    } catch (error : any) {
+        throw new Error(`Error getting account: ${error.message}`);
+    }
+}
+
 export async function setNewUser(user_id: any) {
     try {
         const test = await prisma.account.findUnique({
