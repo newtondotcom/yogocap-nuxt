@@ -15,6 +15,7 @@ model Video {
   user_id     String
   length      Int
   stored     String
+  aligned  Boolean
   submitted DateTime
   deleted    Boolean?
   emojis     Boolean
@@ -27,9 +28,9 @@ model Video {
 
 model Account {
   user_id String @id
-  videos_remaining String
-  videos_stored String
-  current_duration String
+  videos_remaining Int
+  videos_stored Int
+  current_duration Int
   can_emojis Boolean
   can_music Boolean
 }
@@ -38,6 +39,8 @@ model Buyings {
   id          String    @id @default(cuid())
   user_id     String
   plan        String
+  date       DateTime
+  onjoin     Boolean
 }
 
 model Task {
