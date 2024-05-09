@@ -13,7 +13,7 @@
           </h2>
   
           <p class="mt-2 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            A plan to begin with <span class="text-primary">Yogocap 🚀</span> which includes basic features
           </p>
   
           <p class="mt-2 sm:mt-4">
@@ -165,7 +165,7 @@
           </h2>
   
           <p class="mt-2 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            A plan to for intermediate <span class="text-primary">Yogocap</span> users to get more features and longer video processing 🌶️
           </p>
   
           <p class="mt-2 sm:mt-4">
@@ -317,7 +317,7 @@
           </h2>
   
           <p class="mt-2 text-gray-700">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Full access to <span class="text-primary">Yogocap</span> features for profesionnal users, including everything maxed 🔥
           </p>
   
           <p class="mt-2 sm:mt-4">
