@@ -17,7 +17,7 @@ export default function generateUniqueName() {
     return uniqueName;
 }
 
-async function removeVideo(videoId: string) {
+export async function removeVideo(videoId: string) {
     try {
         // get video object from database
         const video = await prisma.video.findUnique({
@@ -57,12 +57,20 @@ async function removeVideo(videoId: string) {
                 },
             },
         });
+
+        // mark the video as deleted
+        await prisma.video.update({
+            where: { id: videoId },
+            data: {
+                deleted: true,
+            },
+        });
     } catch (error) {
         console.error('Error removing video:', error);
     }
 }
 
-export async function createPresignedUrl(user_id:any){
+export async function createPresignedUrlUpload(user_id:any){
     const minioClient = new Client({
         endPoint: MINIO_ENDPOINT,
         port: parseInt(MINIO_PORT),
@@ -74,4 +82,26 @@ export async function createPresignedUrl(user_id:any){
     const expiryInSeconds = 3600;
     const url =  await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
     return {url, objectName};
+}
+
+export async function createPresignedUrlDownload(video_id: any) {
+    const minioClient = new Client({
+        endPoint: MINIO_ENDPOINT,
+        port: parseInt(MINIO_PORT),
+        useSSL: false,
+        accessKey: MINIO_ACCESS_KEY,
+        secretKey: MINIO_SECRET_KEY,
+    });
+    const video = await prisma.video.findUnique({
+        where: {
+            id: video_id,
+        },
+        select: {
+            name_s3: true,
+        }
+    });
+    const objectName = video.name_s3;
+    const expiryInSeconds = 3600;
+    const url = await minioClient.presignedGetObject(bucketName, objectName, expiryInSeconds);
+    return url;
 }
