@@ -19,11 +19,10 @@
     }
 
   onMounted(async () => {
-    const { data } = await useFetch(`/api/lemon/products`)
-    array.starter = data.value.starter
-    array.pro = data.value.pro
-    array.business = data.value.business
-    console.log(data.value)
+    const data = await $fetch(`/api/lemon/products`)
+    array.starter = data.starter
+    array.pro = data.pro
+    array.business = data.business
   });
 
 </script>
