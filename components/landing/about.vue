@@ -21,13 +21,11 @@
             Discover Yogocap, the most cost-effective AI-powered solution for subtitling your social media videos.
              In a digital world where clear communication is vital, Yogocap offers an affordable way to ensure your message reaches everyone.
           </p>
-  
-          <button
-            
-            class="mt-8 inline-block rounded bg-primary px-12 py-3 text-sm font-medium text-white transition hover:bg-primary focus:outline-none focus:ring focus:ring-yellow-400"
-          >
+          <NuxtLink to="/pricing">
+          <Button class="mt-8 px-12 py-3">
             Get Started Today
-          </button>
+          </Button>
+          </NuxtLink>
         </div>
       </div>
     </div>
