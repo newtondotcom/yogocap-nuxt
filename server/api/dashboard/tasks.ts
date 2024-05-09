@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     const time_transcription = body.time_transcription;
     const time_alignment = body.time_alignment;
     const time_encoding = body.time_encoding;
-    const done_at = body.done_at;
+    const done_at = new Date(body.done_at);
     const thumbnail = body.thumbnail;
 
     // Update the task data
