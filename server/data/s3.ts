@@ -1,10 +1,21 @@
 import { Client } from 'minio';
 import prisma from './prisma';
 
-const MINIO_ENDPOINT = process.env.MINIO_ENDPOINT || 'localhost';
-const MINIO_PORT = process.env.MINIO_PORT || '9000';
-const MINIO_ACCESS_KEY = process.env.MINIO_ACCESS || 'minioadmin';
-const MINIO_SECRET_KEY = process.env.MINIO_SECRET || 'minioadmin';
+const bucketName = 'videos';
+const config = useRuntimeConfig();
+const MINIO_ENDPOINT = config.MINIO_ENDPOINT;
+const MINIO_PORT = config.MINIO_PORT;
+const MINIO_ACCESS_KEY = config.MINIO_ACCESSKEY;
+const MINIO_SECRET_KEY = config.MINIO_SECRETKEY;
+
+
+export default function generateUniqueName() {
+    let date = new Date();
+    let timestamp = date.getTime();
+    let randomString = Math.random().toString(36).substring(2, 8); 
+    let uniqueName = `${timestamp}_${randomString}`;
+    return uniqueName;
+}
 
 async function removeVideo(videoId: string) {
     try {
@@ -49,4 +60,18 @@ async function removeVideo(videoId: string) {
     } catch (error) {
         console.error('Error removing video:', error);
     }
+}
+
+export async function createPresignedUrl(user_id:any){
+    const minioClient = new Client({
+        endPoint: MINIO_ENDPOINT,
+        port: parseInt(MINIO_PORT),
+        useSSL: false,
+        accessKey: MINIO_ACCESS_KEY,
+        secretKey: MINIO_SECRET_KEY,
+    });
+    const objectName = generateUniqueName()+'.mp4';
+    const expiryInSeconds = 3600;
+    const url =  await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
+    return {url, objectName};
 }
