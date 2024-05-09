@@ -48,7 +48,10 @@ const signInWithGoogle = async () => {
                     Login
                 </CardTitle>
                 <CardDescription>
-                    Enter your email below to login to your account
+                    Use one of the following methods to log in or sign up : <br />
+                    <span class="text-xs">
+                    (we won't collect any of your data, don't worry ! You can check, this is open source 😊)
+                </span>
                 </CardDescription>
             </CardHeader>
             <CardContent>
