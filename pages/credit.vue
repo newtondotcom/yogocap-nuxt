@@ -1,5 +1,10 @@
 <script setup lang="ts">
-    const value = ref('')
+    const select = ref('')
+    const current_plan = ref('')
+    const videos_remaining = ref(0)
+    const max_video_duration_min = ref(0)
+    const max_video_duration_sec = ref(0)
+
 
     let array = {
     starter: '',
@@ -8,17 +13,26 @@
     }
 
     function submit() {
-      console.log(value.value)
-      if (value.value === 'ST') {
+      if (select.value === 'ST') {
         window.location.href = array.starter
-      } else if (value.value === 'PM') {
+      } else if (select.value === 'PM') {
         window.location.href = array.pro
-      } else if (value.value === 'BS') {
+      } else if (select.value === 'BS') {
         window.location.href = array.business
       }
     }
 
+    async function getCredit() {
+      const data = await $fetch('/api/dashboard/credit')
+      current_plan.value = data.current_plan?.plan.split('-')[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
+      videos_remaining.value = data.account?.videos_remaining
+      let max_video_duration = data.account?.current_duration
+      max_video_duration_min.value = Math.floor(max_video_duration / 60)
+      max_video_duration_sec.value = max_video_duration % 60
+    }
+
   onMounted(async () => {
+    getCredit()
     const data = await $fetch(`/api/lemon/products`)
     array.starter = data.starter
     array.pro = data.pro
@@ -39,7 +53,7 @@
         </dt>
 
         <dd class="text-3xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
-          Premium
+          {{current_plan}}
         </dd>
       </div>
 
@@ -49,7 +63,7 @@
         </dt>
 
         <dd class="text-4xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
-          24
+          {{ videos_remaining }}
           <span class="text-gray-400 text-2xl"> /100</span> 
         </dd>
       </div>
@@ -61,9 +75,9 @@
         </dt>
 
         <dd class="text-4xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
-          1
+         {{ max_video_duration_min }}
           <span class="text-gray-400 text-2xl">min</span> 
-          <span class="text-primary-foreground text-2xl">30</span>
+          <span class="text-primary-foreground text-2xl">{{max_video_duration_sec}}</span>
         </dd>
       </div>
     </dl>
@@ -71,7 +85,7 @@
 
   <div class="max-w-2xl mx-auto mt-20">
     <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Select an option</label>
-    <select v-model="value" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
+    <select v-model="select" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
       <option selected disabled>Select an option</option>
       <option value="ST">Starter</option>
       <option value="PM">Premium</option>
