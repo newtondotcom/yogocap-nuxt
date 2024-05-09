@@ -45,6 +45,13 @@ export async function assignTasktoVideo(video_id: any, task_id : string) {
 
 export async function setVideoDone(video_id: any, task_id : string, thumbnail : string) {
     try {
+        // mark the task as done
+        await prisma.task.update({
+            where: { id: task_id },
+            data: {
+                done: true
+            }
+        });
         // mark the video as done
         const updatedVideo = await prisma.video.update({
             where: { id: video_id },
@@ -89,7 +96,32 @@ export async function getVideos(user_id: any) {
                 length : true,
                 name_s3 : true,
                 stored : true,
-                thumbnail : true
+                thumbnail : true,
+                done : true,
+                deleted : true,
+            }
+        });
+        return videos;
+    } catch (error : any) {
+        throw new Error(`Error getting videos: ${error.message}`);
+    }
+}
+
+export async function getVideosHistory(user_id: any) {
+    try {
+        const videos = await prisma.video.findMany({
+            where: {
+                user_id
+            },
+            select : {
+                id : true,
+                name : true,
+                aligned : true,
+                emojis : true,
+                music : true,
+                silent : true,
+                length : true,
+                submitted : true,
             }
         });
         return videos;
