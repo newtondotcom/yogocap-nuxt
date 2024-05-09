@@ -71,10 +71,9 @@ async function logout() {
                 <div class="mt-auto p-4">
                     <Card>
                         <CardHeader class="p-2 pt-0 md:p-4">
-                            <CardTitle>Upgrade to Pro</CardTitle>
+                            <CardTitle>Upgrade your plan</CardTitle>
                             <CardDescription>
-                                Unlock all features and get unlimited access to our support
-                                team.
+                                Unlock all features and get longer video processing 📈
                             </CardDescription>
                         </CardHeader>
                         <CardContent class="p-2 pt-0 md:p-4 md:pt-0">
