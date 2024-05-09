@@ -45,7 +45,7 @@ export async function setVideoDone(video_id: any, task_id : string, thumbnail : 
         const addVideoDone = await prisma.account.update({
             where: { user_id: user_id },
             data: {
-                videos_done: {
+                videos_stored: {
                     increment: 1
                 }
             }
@@ -53,5 +53,30 @@ export async function setVideoDone(video_id: any, task_id : string, thumbnail : 
         return user_id;
     } catch (error : any) {
         throw new Error(`Error updating video: ${error.message}`);
+    }
+}
+
+export async function getVideos(user_id: any) {
+    try {
+        const videos = await prisma.video.findMany({
+            where: {
+                user_id
+            },
+            select : {
+                id : true,
+                name : true,
+                aligned : true,
+                emojis : true,
+                music : true,
+                silent : true,
+                length : true,
+                name_s3 : true,
+                stored : true,
+                thumbnail : true
+            }
+        });
+        return videos;
+    } catch (error : any) {
+        throw new Error(`Error getting videos: ${error.message}`);
     }
 }
