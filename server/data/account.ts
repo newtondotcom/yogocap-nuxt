@@ -108,6 +108,7 @@ export async function setNewUser(user_id: any) {
                 onjoin: true
             }
         });
+        console.log(`New user ${user_id} created in db`);
     } catch (error : any) {
         throw new Error(`Error creating account: ${error.message}`);
     }
