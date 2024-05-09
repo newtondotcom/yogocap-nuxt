@@ -186,7 +186,7 @@ async function logout() {
                         </NuxtLink>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>
-                            <div @click="logout">Logout</div>
+                            <div @click="logout">Log out</div>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
