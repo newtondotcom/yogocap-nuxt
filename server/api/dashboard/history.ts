@@ -1,5 +1,5 @@
 import { getTransactions } from '~/server/data/account'
-import { getVideos } from '~/server/data/videos'
+import { getVideosHistory } from '~/server/data/videos'
 
 export default defineEventHandler(async (event) => {
   const user_id = event.context.user_id
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
     }
 ]
 */
-const videos = getVideos(user_id)
+const videos = await getVideosHistory(user_id)
 /*
 const transactions = [
   {
@@ -35,7 +35,7 @@ const transactions = [
   },
 ]
 */
-const transactions = getTransactions(user_id)
+const transactions = await getTransactions(user_id)
 
   return {
       videos,
