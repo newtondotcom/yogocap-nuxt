@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import sendAMQP from "../functions/s3/ampq";
 import { PenLine, AlertCircle } from "lucide-vue-next";
 import { useToast } from '@/components/ui/toast/use-toast'
 const { toast } = useToast()
@@ -13,14 +12,30 @@ let videoValid = ref(true);
 let Success = ref(false);
 let durationInSeconds = ref(0);
 let length = ref(33);
+const videoName = ref('');
+let generatedName = "";
+let presignedUrl = "";
+let canMusic = true;
+let canEmoji = true;
+let videoLength = 2000;
+let videosBalance = 1;
 
-let datas = ref({
-    url: 'https://yogocap.s3.eu-west-3.amazonaws.com/test.mp4',
-    videoLength: 2000,
-    videosBalance: 1,
-    canMusic: true,
-    canEmoji: true,
-});
+async function getPresignedUrl() {
+    const response = await $fetch("/api/s3/upload", {
+        method: "POST",
+        body: JSON.stringify({
+            file: "test.mp4",
+        }),
+    });
+    const {url, objectName, capacity} = response;
+    presignedUrl = url;
+    generatedName = objectName;
+    canMusic = capacity.can_music;
+    canEmoji = capacity.can_emojis;
+    videoLength = capacity.current_duration;
+    videosBalance = capacity.videos_remaining;
+
+}
 
 async function uploadFile(presignedUrl: string, file: File) {
     try {
@@ -33,9 +48,12 @@ async function uploadFile(presignedUrl: string, file: File) {
         });
 
         if (response.ok) {
-            console.log('File uploaded successfully');
+                toast({
+                    title: 'File upload succeeded',
+                    description: 'Your video has been uploaded successfully.'
+                });
         } else {
-            console.error('File upload failed', response.statusText);
+            console.error('File upload failed', response);
         }
         loadingUpload.value = false;
         videoUploaded.value = true;
@@ -48,20 +66,23 @@ async function uploadFile(presignedUrl: string, file: File) {
 }
 
 async function launchAmpq() {
-    await launchVideoProcessing();
-    videoSent.value = true;
-}
-
-async function launchVideoProcessing() {
-    const task: Record<string, any> = {
-        file_bucket_name: 'videos',
-        file_name: 'test.mp4',
-        emoji: true,
-        silence: true,
+    const body = {
+        name: videoName.value, 
+        aligned: true,
+        emojis: videoEmoji.value,
+        music: videoMusic.value,
+        silent: videoCut.value,   
+        length: length.value,  
+        name_s3: generatedName,
+        s3name: "main",
     };
-    //await sendAMQP(task);
+    await $fetch("/api/dashboard/postvideo", {
+        method: "POST",
+        body: JSON.stringify(body),
+    });
     length.value = 100;
     Success.value = true;
+    videoSent.value = true;
 }
 
 async function handleFileChange(event: { target: any; }) {
@@ -72,10 +93,10 @@ async function handleFileChange(event: { target: any; }) {
     if (videoFile) {
         const video = document.createElement('video');
         video.src = URL.createObjectURL(videoFile);
-        video.onloadedmetadata = function () {
+        video.onloadedmetadata = async function () {
             durationInSeconds.value = video.duration;
             durationInSeconds.value = Math.round(durationInSeconds.value);
-            if (durationInSeconds.value > datas.value.videoLength) {
+            if (durationInSeconds.value > videoLength) {
                 videoValid.value = false;
                 loadingUpload.value = false;
                 toast({
@@ -83,7 +104,7 @@ async function handleFileChange(event: { target: any; }) {
                     description: 'Your video length is above the one included in your current plan.',
                     variant: 'destructive',
                 });
-            } else if (datas.value.videosBalance == 0) {
+            } else if (videosBalance == 0) {
                 videoValid.value = false;
                 loadingUpload.value = false;
                 toast({
@@ -95,13 +116,10 @@ async function handleFileChange(event: { target: any; }) {
             else {
                 videoValid.value = true;
                 loadingUpload.value = true;
-                // await uploadFile(datas.value.url, videoFile);
-                //length.value = 66;
-                setTimeout(() => {
-                    length.value = 66;
-                    loadingUpload.value = false;
-                    videoUploaded.value = true;
-                }, 2000);
+                await uploadFile(presignedUrl, videoFile);
+                length.value = 66;
+                loadingUpload.value = false;
+                videoUploaded.value = true;
             }
         };
     } else {
@@ -119,15 +137,14 @@ async function rmUploadedVideo() {
 }
 
 onMounted(() => {
-    /*
-    window.onbeforeunload = async function (e) {
+    getPresignedUrl();
+    window.onbeforeunload = async function (event) {
         event.preventDefault();
         if (!Success.value) {
             await rmUploadedVideo();
         }
         return 'text not printed.';
     };
-    */
 });
 
 </script>
@@ -241,8 +258,8 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <div class="items-top flex gap-x-2 mt-4" :class="`${datas.canMusic ? 'opacity-1' : 'opacity-50'}`">
-                        <Checkbox class="flex" v-model="videoMusic" id="music" v-if="datas.canMusic" />
+                    <div class="items-top flex gap-x-2 mt-4" :class="`${canMusic ? 'opacity-1' : 'opacity-50'}`">
+                        <Checkbox class="flex" v-model="videoMusic" id="music" v-if="canMusic" />
                         <Checkbox class="flex" v-model="videoMusic" id="music" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label for="music"
@@ -252,8 +269,8 @@ onMounted(() => {
                         </div>
                     </div>
 
-                    <div class="items-top flex gap-x-2 mt-4" :class="`${datas.canMusic ? 'opacity-1' : 'opacity-50'}`">
-                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-if="datas.canEmoji" />
+                    <div class="items-top flex gap-x-2 mt-4" :class="`${canEmoji ? 'opacity-1' : 'opacity-50'}`">
+                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-if="canEmoji" />
                         <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label for="emoji"
@@ -267,7 +284,7 @@ onMounted(() => {
 
                 <div class="pt-6">
                     <div class="relative w-full max-w-sm items-center">
-                        <Input id="search" type="text" placeholder="Name your video" class="pl-10" />
+                        <Input id="search" type="text" placeholder="Name your video" v-model="videoName" class="pl-10" />
                         <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
                             <PenLine class="size-6 text-muted-foreground" />
                         </span>
