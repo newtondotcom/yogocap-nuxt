@@ -1,4 +1,3 @@
-import { serverSupabaseUser } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
   const slugStarter = 'plan-starter'
