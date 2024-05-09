@@ -1,14 +1,25 @@
 <script setup lang="ts">
 
-  const transactions = ref([])
+  const transactions = ref([""])
   const videos = ref([])
   const dataFetched = ref(false)
 
   async function getHistory(){
-    const { data } = await useFetch('/api/dashboard/history')
-    transactions.value = data.value.transactions;
-    videos.value = data.value.videos;
+    const data = await $fetch('/api/dashboard/history')
+    transactions.value = data.transactions;
+    transactions.value.map((item) => {
+      item.date = new Date(item.date).toLocaleTimeString() + " on " + new Date(item.date).toLocaleDateString()
+      if (item.plan == "plan-starter") item.value = 5
+      if (item.plan == "plan-premium") item.value = 15
+      if (item.plan == "plan-business") item.value = 30
+    })
+    videos.value = data.videos;
+    videos.value.splice(50);
+    videos.value.map((item) => {
+      item.submitted = new Date(item.submitted).toLocaleTimeString() + " at " + new Date(item.submitted).toLocaleDateString()
+    })
     dataFetched.value = true
+    console.log(data)
   }
 
   onMounted(() => {
@@ -17,6 +28,7 @@
 </script>
 
 <template>
+
 <DashboardSubtitle title="Transactions history" subtitle="Here is the list of your previous transactions ! 💲" />
 
 <div class="overflow-x-auto rounded-lg border border-gray-200 mt-8 mx-4">
@@ -73,9 +85,9 @@
   </table>
 </div>
 
-<DashboardSubtitle title="Videos history" subtitle="Here is the list of your previous subtitled videos ! 📺" />
+<DashboardSubtitle title="Videos history" subtitle="Here is the list of your latest 50 previous subtitled videos ! 📺" />
 
-<div class="overflow-x-auto rounded-lg border border-gray-200 mt-8 mx-4">
+<div class="overflow-x-auto rounded-lg border border-gray-200 mt-8 mx-4 mb-[10%]">
     <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
       <thead class="ltr:text-left rtl:text-right">
         <tr>
@@ -106,12 +118,12 @@
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
-                {{item.date}}
+                {{item.submitted}}
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
-                {{item.lenght}}
+                {{item.length}}
             </div>
         </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
