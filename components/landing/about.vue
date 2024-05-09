@@ -15,7 +15,7 @@
         </div>
   
         <div class="lg:py-24">
-          <h2 class="text-3xl font-bold text-primary sm:text-4xl">Yogocap : High-Quality AI Subtitles at Unbeatable Prices 🌟</h2>
+          <h1 class="text-3xl font-bold text-primary sm:text-4xl">Yogocap : High-Quality AI Subtitles at Unbeatable Prices 🌟</h1>
   
           <p class="mt-4 text-gray-600">
             Discover Yogocap, the most cost-effective AI-powered solution for subtitling your social media videos.
