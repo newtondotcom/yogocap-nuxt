@@ -3,14 +3,15 @@ const user = await useSupabaseUser();
 const userLoggedIn = ref(false);
 userLoggedIn.value = user.value ? true : false;
 
-watch(() => user, async (newUser) => {
-  if (newUser) {
+watch(() => user, async (user) => {
+  if (user.value) {
     userLoggedIn.value = true;
     await $fetch("/api/dashboard/newuser");
   } else {
     userLoggedIn.value = false;
+    console.log("User logged out");
   }
-}); 
+}, { immediate: true }); 
 </script>
 
 <template>

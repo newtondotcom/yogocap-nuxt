@@ -34,6 +34,10 @@ const signInWithGoogle = async () => {
                 redirectTo: redirect,
             },
         });
+        if (error) {
+            console.error('Google Sign-In Error:', error);
+            return;
+        }
     } catch (error) {
         console.error('Google Sign-In Error:', error);
     }

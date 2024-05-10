@@ -8,22 +8,6 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
 })
 import Toaster from '@/components/ui/toast/Toaster.vue'
-
-const user = useSupabaseUser()
-
-watch(() => user.value, async (user) => {
-  if (user){
-    await $fetch('/api/dashboard/newuser', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ user: user })
-    })
-  }
-})
-
-
 </script>
 
 

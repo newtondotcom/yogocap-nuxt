@@ -3,6 +3,7 @@ import { SquarePlus, Captions, CreditCard, FileClock, History, Bell, CircleUser,
 const route = useRoute()
 const supabase = useSupabaseClient()
 const previousVideosCount = useCookie('previousVideosCount')
+
 async function goToCredit() {
     navigateTo('/credit');
 }
