@@ -56,3 +56,13 @@ model Task {
   done_at DateTime?
   done   Boolean @default(false)
 }
+
+model Support {
+  id          String    @id @default(cuid())
+  user_id     String
+  message     String
+  email      String
+  title     String
+  date       DateTime
+  done      Boolean @default(false)
+}
