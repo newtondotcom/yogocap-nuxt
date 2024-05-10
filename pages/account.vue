@@ -62,7 +62,7 @@ const handleLogout = async () => {
     <nav class="flex gap-4">
       <button
         class="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500"
-        @click={ handleLogout }> Logout </button>
+        @click={handleLogout}> Logout </button>
 
     </nav>
   </div>
