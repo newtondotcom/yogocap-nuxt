@@ -19,6 +19,6 @@ export default defineEventHandler(async (event) => {
     await assignTasktoVideo(video_id, task_id);
 
     // Send a msg on the queue
-    const message = JSON.stringify({ "file_name": name, "emoji": emojis, "lsilence": silent,"music":music, "video_aligned": aligned, "key_db": task_id });
+    const message = JSON.stringify({"s3_name" : s3name, "file_name": name_s3, "emoji": emojis, "lsilence": silent,"music":music, "video_aligned": aligned, "key_db": task_id });
     await sendAMQP(message);
 })
