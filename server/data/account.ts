@@ -30,7 +30,8 @@ export async function getTransactions(user_id: any) {
             },
             select : {
                 date : true,
-                plan : true
+                plan : true,
+                onjoin : true
             }
         });
         return transactions;
