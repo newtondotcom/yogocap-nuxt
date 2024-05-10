@@ -136,7 +136,7 @@ export async function createPresignedUrlDownload(video_id: any) {
         accessKey: MINIO_ACCESS_KEY,
         secretKey: MINIO_SECRET_KEY,
     });
-    const objectName = video.name_s3;
+    const objectName = video.name_s3.replace('.mp4','_out.mp4');
     const expiryInSeconds = 3600;
     const url = await minioClient.presignedGetObject(bucketName, objectName, expiryInSeconds);
     return url;
