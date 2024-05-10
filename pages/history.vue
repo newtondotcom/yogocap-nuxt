@@ -19,7 +19,6 @@
       item.submitted = new Date(item.submitted).toLocaleTimeString() + " at " + new Date(item.submitted).toLocaleDateString()
     })
     dataFetched.value = true
-    console.log(data)
   }
 
   onMounted(() => {
