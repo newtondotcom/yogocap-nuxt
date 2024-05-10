@@ -47,4 +47,7 @@ export default defineNuxtConfig({
     ignoredHostnames: ['localhost'],
     apiHost : 'https://plaunwt.duckdns.org'
   },
+  head: {
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.png' }],
+  },
 })
