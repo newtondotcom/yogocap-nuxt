@@ -40,7 +40,7 @@ async function logout() {
         <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
         <AlertDialogDescription>
           This action cannot be undone. This will permanently delete your account. However, due to legal reasons, we will keep your data for 5 years.
-           Note that your decision won't be effective until maximum one week after you confirm it.
+           Note that your decision can be reversed within 30 days by sending us an email.
         </AlertDialogDescription>
       </AlertDialogHeader>
       <AlertDialogFooter>
