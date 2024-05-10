@@ -311,7 +311,7 @@
             </h2>
     
             <p class="mt-2 text-gray-700">
-              Full access to <span class="text-primary">Yogocap</span> features for profesionnal users, including everything maxed 🔥
+              Full access to <span class="text-primary">Yogocap</span> features for profesionnal users, including everything maxed 🔥 and faster video rendering 🏎️ 
             </p>
     
             <p class="mt-2 sm:mt-4">
