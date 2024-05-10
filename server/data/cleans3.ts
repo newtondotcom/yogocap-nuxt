@@ -1,7 +1,7 @@
 import { Client } from 'minio';
 import prisma from './prisma';
 
-const dayBeforeDelete = 1;
+const dayBeforeDelete = 2;
 
 export async function cleanAllS3() {
     try {
