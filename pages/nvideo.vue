@@ -19,21 +19,20 @@ let canMusic = true;
 let canEmoji = true;
 let videoLength = 2000;
 let videosBalance = 1;
+let s3_server_name = "main";
 
 async function getPresignedUrl() {
     const response = await $fetch("/api/s3/upload", {
         method: "POST",
-        body: JSON.stringify({
-            file: "test.mp4",
-        }),
     });
-    const { url, objectName, capacity } = response;
+    const { url, objectName, capacity,s3Name } = response;
     presignedUrl = url;
     generatedName = objectName;
     canMusic = capacity.can_music;
     canEmoji = capacity.can_emojis;
     videoLength = capacity.current_duration;
     videosBalance = capacity.videos_remaining;
+    s3_server_name = s3Name;
 
 }
 
@@ -74,7 +73,7 @@ async function launchAmpq() {
         silent: videoCut.value,
         length: length.value,
         name_s3: generatedName,
-        s3name: "main",
+        s3name : s3_server_name
     };
     await $fetch("/api/dashboard/postvideo", {
         method: "POST",
