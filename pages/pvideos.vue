@@ -64,7 +64,7 @@ const previousVideosCount = useCookie('previousVideosCount')
   <div v-for="video in localvideos" class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
       <img
         :alt="video.name"
-        :src="video.minia"
+        :src="video.thumbnail"
         class="h-20 w-full object-cover"
       />
     

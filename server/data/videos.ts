@@ -105,6 +105,9 @@ export async function getVideos(user_id: any) {
                 submitted: 'desc'
             }
         });
+        videos.forEach((video : any) => {
+            video.thumbnail = "http://144.91.123.186:32771/thumbnails/"+video.name_s3.replace('.mp4', '.jpg');
+        })
         return videos;
     } catch (error : any) {
         throw new Error(`Error getting videos: ${error.message}`);
