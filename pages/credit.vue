@@ -4,6 +4,7 @@
     const videos_remaining = ref(0)
     const max_video_duration_min = ref(0)
     const max_video_duration_sec = ref(0)
+    const max_video_allowed = ref(0)
 
 
     let array = {
@@ -29,6 +30,13 @@
       let max_video_duration = data.account?.current_duration
       max_video_duration_min.value = Math.floor(max_video_duration / 60)
       max_video_duration_sec.value = max_video_duration % 60
+      if (data.current_plan?.plan === 'plan-starter') {
+        max_video_allowed.value = 60
+      } else if (data.current_plan?.plan === 'plan-premium') {
+        max_video_allowed.value = 120
+      } else if (data.current_plan?.plan === 'plan-business') {
+        max_video_allowed.value = 300
+      }
     }
 
   onMounted(async () => {
@@ -64,7 +72,7 @@
 
         <dd class="text-4xl font-extrabold text-primary-foreground md:text-5xl flex-row flex align-middle justify-center">
           {{ videos_remaining }}
-          <span class="text-gray-400 text-2xl"> /100</span> 
+          <span class="text-gray-400 text-2xl"> /{{max_video_allowed}}</span> 
         </dd>
       </div>
 
