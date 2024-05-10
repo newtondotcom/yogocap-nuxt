@@ -88,10 +88,16 @@ export async function getCurrentCreditState(user_id: any) {
 export async function setNewUser(user_id: any) {
     try {
         const test = await prisma.account.findUnique({
-            where: { user_id }
+            where: { user_id },
+            select: {
+                deletion: true
+            }
         });
         if (test) {
-            return;
+            if (test.deletion){
+                return "deleted";
+            }
+            return "exists";
         }
         await prisma.account.create({
             data: {
