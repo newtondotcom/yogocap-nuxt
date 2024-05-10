@@ -62,11 +62,12 @@ const previousVideosCount = useCookie('previousVideosCount')
 <div class="mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
   <SkeletonsPvideosVideos v-if="!dataFetched"/>
   <div v-for="video in localvideos" class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-      <img
+      <img v-if="video.thumbnail"
         :alt="video.name"
         :src="video.thumbnail"
         class="h-20 w-full object-cover"
       />
+      <div v-else class="h-20 w-full bg-gray-200 justify-center align-middle text-center self-center pt-8">Processing ...</div>
     
       <div class="bg-white p-4 sm:p-6">
         <time datetime="2022-10-10" class="block text-xs text-gray-500">
