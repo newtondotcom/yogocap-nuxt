@@ -1,6 +1,11 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
-  modules: ['@nuxtjs/tailwindcss','@nuxtjs/supabase', 'shadcn-nuxt'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/supabase',
+    'shadcn-nuxt',
+    "@nuxtjs/plausible"
+  ],
   supabase: {
     redirect : false,
   },
@@ -32,5 +37,9 @@ export default defineNuxtConfig({
       level: 2
     },
     viewer: false,
-  }
+  },
+  plausible: {
+    ignoredHostnames: ['localhost'],
+    apiHost : 'https://plaunwt.duckdns.org'
+  },
 })
