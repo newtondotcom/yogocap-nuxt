@@ -160,7 +160,7 @@
           <h2 class="mt-4 text-xl font-bold text-white">Customizable and Cost-Effective</h2>
   
           <p class="mt-1 text-sm text-gray-300">
-            Enjoy a range of subtitle customization options without the premium price tag. Yogocap allows you to modify font styles, colors, and placement, ensuring your videos stand out without costing a fortune.
+            Enjoy a range of subtitle customization options without the premium price tag. Yogocap will allow you to modify font styles, colors, and placement, ensuring your videos stand out without costing a fortune.
           </p>
         </button>
   
