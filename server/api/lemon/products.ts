@@ -1,11 +1,12 @@
+const slugStarter = 'plan-starter'
+const slugPro = 'plan-premium'
+const slugBusiness = 'plan-business'
+let urlStater = ''
+let urlPro = ''
+let urlBusiness = ''
 
 export default defineEventHandler(async (event) => {
-  const slugStarter = 'plan-starter'
-  const slugPro = 'plan-premium'
-  const slugBusiness = 'plan-business'
-  let urlStater = ''
-  let urlPro = ''
-  let urlBusiness = ''
+  const user_id = event.context.user_id
   var myHeaders = new Headers()
   myHeaders.append('Accept', 'application/vnd.api+json')
   myHeaders.append('Content-Type', 'application/vnd.api+json')
@@ -17,8 +18,6 @@ export default defineEventHandler(async (event) => {
   }
   const call = await fetch(`https://api.lemonsqueezy.com/v1/products`, requestOptions)
   const resp = await call.json()
-
-  const user_id = '12346'
 
   const product = resp.data
   const productLink = `?checkout[custom][user_id]=${user_id}`
