@@ -9,9 +9,10 @@
     transactions.value = data.transactions;
     transactions.value.map((item) => {
       item.date = new Date(item.date).toLocaleTimeString() + " on " + new Date(item.date).toLocaleDateString()
-      if (item.plan == "plan-starter") item.value = 5
-      if (item.plan == "plan-premium") item.value = 15
-      if (item.plan == "plan-business") item.value = 30
+      item.plan = item.plan.split('-')[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
+      if (item.plan == "Starter") item.value = 5 
+      if (item.plan == "Premium") item.value = 15
+      if (item.plan == "Business") item.value = 30
     })
     videos.value = data.videos;
     videos.value.splice(50);
@@ -56,6 +57,7 @@
         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
           <div class="flex flex-row align-middle justify-center">
               {{item.plan}}
+              <div v-if="item.onjoin" class="bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 ml-2">-gifted-</div>
           </div>
       </td>
         <td class="whitespace-nowrap px-4 py-2 text-gray-700">
