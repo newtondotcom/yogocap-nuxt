@@ -51,6 +51,8 @@ export async function getCapacity(user_id: any) {
                 current_duration: true,
             }
         });
+        account.can_music = false;
+        account.can_emojis = false;
         return account;
     } catch (error : any) {
         throw new Error(`Error getting account: ${error.message}`);
@@ -97,7 +99,7 @@ export async function setNewUser(user_id: any) {
                 videos_remaining: 60,
                 videos_stored: 0,
                 can_emojis: false,
-                can_music: false,
+                can_music: true,
                 current_duration: 180
             }
         });
@@ -112,5 +114,55 @@ export async function setNewUser(user_id: any) {
         console.log(`New user ${user_id} created in db`);
     } catch (error : any) {
         throw new Error(`Error creating account: ${error.message}`);
+    }
+}
+
+export async function setPlanPurchased(user_id:any, plan: string) {
+    try {
+        await prisma.buyings.create({
+            data: {
+                user_id,
+                date: new Date(),
+                plan,
+                onjoin: false
+            }
+        });
+        if (plan == "plan-starter") {
+            await prisma.account.update({
+                where: { user_id },
+                data: {
+                    videos_remaining: {
+                        increment: 60
+                    },
+                    current_duration: 180
+                }
+            });
+        }
+        if (plan == "plan-premium") {
+            await prisma.account.update({
+                where: { user_id },
+                data: {
+                    videos_remaining: {
+                        increment: 120
+                    },
+                    can_emojis: true,
+                    current_duration: 15*60
+                }
+            });
+        }
+        if (plan == "plan-business") {
+            await prisma.account.update({
+                where: { user_id },
+                data: {
+                    videos_remaining: {
+                        increment: 300
+                    },
+                    can_emojis: true,
+                    current_duration: 60*60
+                }
+            });
+        }
+    } catch (error : any) {
+        throw new Error(`Error updating account: ${error.message}`);
     }
 }
