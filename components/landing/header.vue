@@ -6,7 +6,11 @@ userLoggedIn.value = user.value ? true : false;
 watch(() => user, async (user) => {
   if (user.value) {
     userLoggedIn.value = true;
-    await $fetch("/api/dashboard/newuser");
+    const state = await $fetch("/api/dashboard/newuser");
+    if (state == "deleted") {
+      userLoggedIn.value = false;
+      alert("Your account has been deleted");
+    }
   } else {
     userLoggedIn.value = false;
     console.log("User logged out");
