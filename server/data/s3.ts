@@ -1,14 +1,6 @@
 import { Client } from 'minio';
 import prisma from './prisma';
 
-const bucketName = 'videos';
-const config = useRuntimeConfig();
-const MINIO_ENDPOINT = config.MINIO_ENDPOINT;
-const MINIO_PORT = config.MINIO_PORT;
-const MINIO_ACCESS_KEY = config.MINIO_ACCESSKEY;
-const MINIO_SECRET_KEY = config.MINIO_SECRETKEY;
-
-
 export default function generateUniqueName() {
     let date = new Date();
     let timestamp = date.getTime();
@@ -26,19 +18,34 @@ export async function removeVideo(videoId: string) {
             },
             select: {
                 name_s3: true,
-                user_id: true
+                user_id: true,
+                stored: true,
             }
         });
+
+        const s3Name = video?.stored;
+        const config = await prisma.s3.findUnique({
+            where: {
+                name: s3Name,
+            }
+        });
+
+        const MINIO_ENDPOINT = config.endpoint;
+        const MINIO_PORT = config.port;
+        const MINIO_ACCESS_KEY = config.access_key;
+        const MINIO_SECRET_KEY = config.secret_key;
+        const MINIO_SSL = config.ssl;
+        const bucketName = config.bucket;
 
         // remove video object from MinIO
         const minioClient = new Client({
             endPoint: MINIO_ENDPOINT,
             port: parseInt(MINIO_PORT),
-            useSSL: false,
+            useSSL: MINIO_SSL,
             accessKey: MINIO_ACCESS_KEY,
             secretKey: MINIO_SECRET_KEY,
         });
-        const bucketName = 'videos';
+
         const objectName = video.name_s3;
         minioClient.removeObject(bucketName, objectName, (err) => {
             if (err) {
@@ -71,10 +78,24 @@ export async function removeVideo(videoId: string) {
 }
 
 export async function createPresignedUrlUpload(user_id:any){
+    const s3Name = 'main';
+    const config = await prisma.s3.findUnique({
+        where: {
+            name: s3Name,
+        }
+    });
+
+    const MINIO_ENDPOINT = config.endpoint;
+    const MINIO_PORT = config.port;
+    const MINIO_ACCESS_KEY = config.access_key;
+    const MINIO_SECRET_KEY = config.secret_key;
+    const MINIO_SSL = config.ssl;
+    const bucketName = config.bucket;
+
     const minioClient = new Client({
         endPoint: MINIO_ENDPOINT,
         port: parseInt(MINIO_PORT),
-        useSSL: false,
+        useSSL: MINIO_SSL,
         accessKey: MINIO_ACCESS_KEY,
         secretKey: MINIO_SECRET_KEY,
     });
@@ -85,23 +106,52 @@ export async function createPresignedUrlUpload(user_id:any){
 }
 
 export async function createPresignedUrlDownload(video_id: any) {
-    const minioClient = new Client({
-        endPoint: MINIO_ENDPOINT,
-        port: parseInt(MINIO_PORT),
-        useSSL: false,
-        accessKey: MINIO_ACCESS_KEY,
-        secretKey: MINIO_SECRET_KEY,
-    });
     const video = await prisma.video.findUnique({
         where: {
             id: video_id,
         },
         select: {
+            stored: true,
             name_s3: true,
         }
+    });
+    const s3Name = video?.stored;
+    const config = await prisma.s3.findUnique({
+        where: {
+            name: s3Name,
+        }
+    });
+
+    const MINIO_ENDPOINT = config.endpoint;
+    const MINIO_PORT = config.port;
+    const MINIO_ACCESS_KEY = config.access_key;
+    const MINIO_SECRET_KEY = config.secret_key;
+    const MINIO_SSL = config.ssl;
+    const bucketName = config.bucket;
+
+    const minioClient = new Client({
+        endPoint: MINIO_ENDPOINT,
+        port: parseInt(MINIO_PORT),
+        useSSL: MINIO_SSL,
+        accessKey: MINIO_ACCESS_KEY,
+        secretKey: MINIO_SECRET_KEY,
     });
     const objectName = video.name_s3;
     const expiryInSeconds = 3600;
     const url = await minioClient.presignedGetObject(bucketName, objectName, expiryInSeconds);
     return url;
+}
+
+export async function insertS3Server(name:any, endpoint : any, port: any, ssl : Boolean, accessKey:any, secretKey:any, bucketName:any){
+    await prisma.s3.create({
+        data: {
+            name: name,
+            endpoint: endpoint,
+            port: port,
+            access_key: accessKey,
+            secret_key: secretKey,
+            bucket : bucketName,
+            ssl: ssl
+        }
+    });
 }
