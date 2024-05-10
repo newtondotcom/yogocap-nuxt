@@ -24,6 +24,11 @@ export default defineNuxtConfig({
     RABBIT_HOST: process.env.RABBIT_HOST,
     RABBIT_PORT : process.env.RABBIT_PORT,
     DISCORD_WEBHOOK : process.env.DISCORD_WEBHOOK,
+    MAIL_HOST : process.env.MAIL_HOST,
+    MAIL_PORT : process.env.MAIL_PORT,
+    MAIL_SSL : process.env.MAIL_SSL,
+    MAIL_USER : process.env.MAIL_USER,
+    MAIL_PWD : process.env.MAIL_PWD,
   },
   shadcn: {
     prefix: '',
