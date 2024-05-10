@@ -20,6 +20,17 @@ export async function createVideo(user_id: any, name: string, aligned : boolean,
                 id : true
             }
         });
+        const addVideoDone = await prisma.account.update({
+            where: { user_id: user_id },
+            data: {
+                videos_stored: {
+                    increment: 1
+                },
+                videos_remaining: {
+                    decrement: 1
+                }
+            }
+        });
         return newVideo.id;
     } catch (error : any) {
         throw new Error(`Error creating video: ${error.message}`);
@@ -64,17 +75,7 @@ export async function setVideoDone(video_id: any, task_id : string, thumbnail : 
                 user_id : true
             }
         });
-
-        const user_id = updatedVideo.user_id;
-        const addVideoDone = await prisma.account.update({
-            where: { user_id: user_id },
-            data: {
-                videos_stored: {
-                    increment: 1
-                }
-            }
-        });
-        return user_id;
+        return updatedVideo.user_id;
     } catch (error : any) {
         throw new Error(`Error updating video: ${error.message}`);
     }
