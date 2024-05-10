@@ -2,7 +2,7 @@ import prisma from "./prisma";
 
 const config = useRuntimeConfig();
 
-export async function sendWebhook(user_id: any, title: any, message: any, email: any) {
+export async function sendWebhookSupportTicket(user_id: any, title: any, message: any, email: any) {
   const data = {
     "content": `**Nouveau ticket support** ouvert par : ${user_id}`,
     "username": "Yogocap support",
@@ -46,7 +46,7 @@ export async function setSupportTicket(user_id: any, title: any, message: any, e
         date: new Date()
       }
     });
-    await sendWebhook(user_id, title, message, email);
+    await sendWebhookSupportTicket(user_id, title, message, email);
   } catch (error) {
     console.error(error);
   }
