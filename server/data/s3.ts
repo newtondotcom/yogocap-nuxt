@@ -4,7 +4,7 @@ import prisma from './prisma';
 export default function generateUniqueName() {
     let date = new Date();
     let timestamp = date.getTime();
-    let randomString = Math.random().toString(36).substring(2, 8); 
+    let randomString = Math.random().toString(36).substring(2, 8);
     let uniqueName = `${timestamp}_${randomString}`;
     return uniqueName;
 }
@@ -77,7 +77,7 @@ export async function removeVideo(videoId: string) {
     }
 }
 
-export async function createPresignedUrlUpload(user_id:any){
+export async function createPresignedUrlUpload(user_id: any) {
     const s3Name = 'main';
     const config = await prisma.s3.findUnique({
         where: {
@@ -99,10 +99,10 @@ export async function createPresignedUrlUpload(user_id:any){
         accessKey: MINIO_ACCESS_KEY,
         secretKey: MINIO_SECRET_KEY,
     });
-    const objectName = generateUniqueName()+'.mp4';
+    const objectName = generateUniqueName() + '.mp4';
     const expiryInSeconds = 3600;
-    const url =  await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
-    return {url, objectName};
+    const url = await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
+    return { url, objectName };
 }
 
 export async function createPresignedUrlDownload(video_id: any) {
@@ -142,7 +142,7 @@ export async function createPresignedUrlDownload(video_id: any) {
     return url;
 }
 
-export async function insertS3Server(name:any, endpoint : any, port: any, ssl : Boolean, accessKey:any, secretKey:any, bucketName:any){
+export async function insertS3Server(name: any, endpoint: any, port: any, ssl: Boolean, accessKey: any, secretKey: any, bucketName: any) {
     await prisma.s3.create({
         data: {
             name: name,
@@ -150,7 +150,7 @@ export async function insertS3Server(name:any, endpoint : any, port: any, ssl : 
             port: port,
             access_key: accessKey,
             secret_key: secretKey,
-            bucket : bucketName,
+            bucket: bucketName,
             ssl: ssl
         }
     });

@@ -12,14 +12,14 @@ async function saveChanges() {
     await $fetch('/api/dashboard/support', {
         method: 'POST',
         body: JSON.stringify({
-            title : ticketTitle.value,
-            message : ticketMessage.value,
-            email : emailBack.value
+            title: ticketTitle.value,
+            message: ticketMessage.value,
+            email: emailBack.value
         }),
     });
     toast({
-            title: 'Succès',
-            description: 'Les modifications ont été enregistrées avec succès',
+        title: 'Succès',
+        description: 'Les modifications ont été enregistrées avec succès',
     });
     loading.value = false;
 }

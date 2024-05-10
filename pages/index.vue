@@ -7,19 +7,19 @@ import { toast } from 'vue-sonner'
 
 onMounted(() => {
     toast('At registration, you are gifted with a free Starter Plan', {
-            description: 'Enjoy it now ! 🎉',
-            /*
-            action: {
-            label: 'Ok',
-            onClick: () => navigateTo('/auth/login'),
-            },
-            */
-            action: {
+        description: 'Enjoy it now ! 🎉',
+        /*
+        action: {
+        label: 'Ok',
+        onClick: () => navigateTo('/auth/login'),
+        },
+        */
+        action: {
             label: 'Got it',
-            onClick: () => {},
-            },
-        })
+            onClick: () => { },
+        },
     })
+})
 </script>
 
 <template>

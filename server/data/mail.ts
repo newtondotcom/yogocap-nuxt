@@ -17,14 +17,14 @@ const transporter = nodemailer.createTransport({
     pass: MAIL_PWD,
   },
   tls: {
-      rejectUnauthorized: false
+    rejectUnauthorized: false
   }
 });
 
-export async function sendEmailOnVideoDone(user_id: any,video_id: any) {
+export async function sendEmailOnVideoDone(user_id: any, video_id: any) {
   try {
     console.log("Sending email to user: ", user_id, " for video: ", video_id);
-  } catch (error : any) {
+  } catch (error: any) {
     throw new Error(`Error sending email: ${error.message}`);
   }
 }

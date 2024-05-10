@@ -1,6 +1,6 @@
 import prisma from "~/server/data/prisma";
 
-export async function createTask(video_id: any, aligned : boolean, emojis : boolean, music : boolean, silent : boolean) {
+export async function createTask(video_id: any, aligned: boolean, emojis: boolean, music: boolean, silent: boolean) {
     try {
         const newTask = await prisma.task.create({
             data: {
@@ -10,12 +10,12 @@ export async function createTask(video_id: any, aligned : boolean, emojis : bool
                 music,
                 silent
             },
-            select : {
-                id : true
+            select: {
+                id: true
             }
         });
         return newTask.id;
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error creating task: ${error.message}`);
     }
 }
@@ -30,12 +30,12 @@ export async function updateTask(task_id: any, time_transcription: any, time_ali
                 time_encoding,
                 done_at
             },
-            select : {
-                video_id : true
+            select: {
+                video_id: true
             }
         });
         return updatedTask.video_id;
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error updating task: ${error.message}`);
     }
 }

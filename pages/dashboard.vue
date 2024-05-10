@@ -5,7 +5,7 @@ function goToNvideo() {
 </script>
 
 <template>
-<div class="mt-8 ml-10">
+  <div class="mt-8 ml-10">
     <h1 class="text-2xl font-bold text-gray-900 sm:text-4xl ml-6 mt-24">
       Welcome to <span class="">Yogocap</span>
     </h1>

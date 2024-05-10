@@ -17,7 +17,7 @@ export async function updateAccountAfterVideoDone(user_id: any) {
                 }
             }
         });
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error updating account: ${error.message}`);
     }
 }
@@ -28,14 +28,14 @@ export async function getTransactions(user_id: any) {
             where: {
                 user_id
             },
-            select : {
-                date : true,
-                plan : true,
-                onjoin : true
+            select: {
+                date: true,
+                plan: true,
+                onjoin: true
             }
         });
         return transactions;
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error getting transactions: ${error.message}`);
     }
 }
@@ -54,7 +54,7 @@ export async function getCapacity(user_id: any) {
         account.can_music = false;
         account.can_emojis = false;
         return account;
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error getting account: ${error.message}`);
     }
 }
@@ -79,8 +79,8 @@ export async function getCurrentCreditState(user_id: any) {
                 date: 'desc'
             }
         });
-        return {account,current_plan};
-    } catch (error : any) {
+        return { account, current_plan };
+    } catch (error: any) {
         throw new Error(`Error getting account: ${error.message}`);
     }
 }
@@ -112,12 +112,12 @@ export async function setNewUser(user_id: any) {
             }
         });
         console.log(`New user ${user_id} created in db`);
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error creating account: ${error.message}`);
     }
 }
 
-export async function setPlanPurchased(user_id:any, plan: string) {
+export async function setPlanPurchased(user_id: any, plan: string) {
     try {
         await prisma.buyings.create({
             data: {
@@ -146,7 +146,7 @@ export async function setPlanPurchased(user_id:any, plan: string) {
                         increment: 120
                     },
                     can_emojis: true,
-                    current_duration: 15*60
+                    current_duration: 15 * 60
                 }
             });
         }
@@ -158,11 +158,11 @@ export async function setPlanPurchased(user_id:any, plan: string) {
                         increment: 300
                     },
                     can_emojis: true,
-                    current_duration: 60*60
+                    current_duration: 60 * 60
                 }
             });
         }
-    } catch (error : any) {
+    } catch (error: any) {
         throw new Error(`Error updating account: ${error.message}`);
     }
 }

@@ -27,7 +27,7 @@ async function getPresignedUrl() {
             file: "test.mp4",
         }),
     });
-    const {url, objectName, capacity} = response;
+    const { url, objectName, capacity } = response;
     presignedUrl = url;
     generatedName = objectName;
     canMusic = capacity.can_music;
@@ -48,10 +48,10 @@ async function uploadFile(presignedUrl: string, file: File) {
         });
 
         if (response.ok) {
-                toast({
-                    title: 'File upload succeeded',
-                    description: 'Your video has been uploaded successfully.'
-                });
+            toast({
+                title: 'File upload succeeded',
+                description: 'Your video has been uploaded successfully.'
+            });
         } else {
             console.error('File upload failed', response);
         }
@@ -67,12 +67,12 @@ async function uploadFile(presignedUrl: string, file: File) {
 
 async function launchAmpq() {
     const body = {
-        name: videoName.value, 
+        name: videoName.value,
         aligned: true,
         emojis: videoEmoji.value,
         music: videoMusic.value,
-        silent: videoCut.value,   
-        length: length.value,  
+        silent: videoCut.value,
+        length: length.value,
         name_s3: generatedName,
         s3name: "main",
     };
@@ -227,11 +227,8 @@ onMounted(() => {
                 </div>
             </div>
 
-            <Separator 
-            orientation="vertical" 
-            class="h-[20vh]" 
-            v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)"
-            />
+            <Separator orientation="vertical" class="h-[20vh]"
+                v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)" />
 
             <div v-if="length == 100 && Success" class="flex flex-col w-1/2 h-[30vh] pl-10">
                 <div class="flex items-center justify-between mb-6">
@@ -247,8 +244,8 @@ onMounted(() => {
             </div>
             <div class="flex flex-col w-1/2 h-[30vh] pl-10"
                 v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)">
-                <div class="flex flex-col" >
-                    <div class="items-top flex gap-x-2 mt-2" >
+                <div class="flex flex-col">
+                    <div class="items-top flex gap-x-2 mt-2">
                         <Checkbox class="flex" v-model="videoCut" id="silence" />
                         <div class="grid gap-1.5 leading-none">
                             <label for="silence"
@@ -284,7 +281,8 @@ onMounted(() => {
 
                 <div class="pt-6">
                     <div class="relative w-full max-w-sm items-center">
-                        <Input id="search" type="text" placeholder="Name your video" v-model="videoName" class="pl-10" />
+                        <Input id="search" type="text" placeholder="Name your video" v-model="videoName"
+                            class="pl-10" />
                         <span class="absolute start-0 inset-y-0 flex items-center justify-center px-2">
                             <PenLine class="size-6 text-muted-foreground" />
                         </span>

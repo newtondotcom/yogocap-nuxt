@@ -5,19 +5,19 @@ const dayBeforeDelete = 1;
 
 export async function cleanAllS3() {
     try {
-    const s3s = await prisma.s3.findMany({
-        where: {
-          NOT: {
-            name: "thumbnails"
-          }
-        }
-      });
-    s3s.forEach(async (s3) => {
-        await cleanS3(s3)
-    })
-} catch (err) {
-    console.log(err)
-}
+        const s3s = await prisma.s3.findMany({
+            where: {
+                NOT: {
+                    name: "thumbnails"
+                }
+            }
+        });
+        s3s.forEach(async (s3) => {
+            await cleanS3(s3)
+        })
+    } catch (err) {
+        console.log(err)
+    }
     return 'Done'
 }
 

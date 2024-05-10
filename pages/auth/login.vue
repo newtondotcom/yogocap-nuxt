@@ -30,7 +30,7 @@ const signInWithGoogle = async () => {
     try {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
-            options: { 
+            options: {
                 redirectTo: redirect,
             },
         });
@@ -54,8 +54,8 @@ const signInWithGoogle = async () => {
                 <CardDescription>
                     Use one of the following methods to log in or sign up : <br />
                     <span class="text-xs">
-                    (we won't collect any of your data, don't worry ! You can check, this is open source 😊)
-                </span>
+                        (we won't collect any of your data, don't worry ! You can check, this is open source 😊)
+                    </span>
                 </CardDescription>
             </CardHeader>
             <CardContent>
