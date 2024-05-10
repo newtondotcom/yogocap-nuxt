@@ -102,7 +102,7 @@ export async function createPresignedUrlUpload(user_id: any) {
     const objectName = generateUniqueName() + '.mp4';
     const expiryInSeconds = 3600;
     const url = await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
-    return { url, objectName };
+    return { url, objectName, s3Name};
 }
 
 export async function createPresignedUrlDownload(video_id: any) {
