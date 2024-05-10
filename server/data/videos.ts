@@ -100,6 +100,9 @@ export async function getVideos(user_id: any) {
                 thumbnail : true,
                 done : true,
                 deleted : true,
+            },
+            orderBy: {
+                submitted: 'desc'
             }
         });
         return videos;
