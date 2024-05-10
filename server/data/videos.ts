@@ -95,11 +95,11 @@ export async function getVideos(user_id: any) {
                 music: true,
                 silent: true,
                 length: true,
-                name_s3: true,
-                stored: true,
                 thumbnail: true,
                 done: true,
                 deleted: true,
+                submitted: true,
+                name_s3: true,
             },
             orderBy: {
                 submitted: 'desc'
