@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import RawBody from 'raw-body';
 import { IncomingMessage } from 'http';
+import { setPlanPurchased } from '~/server/data/account';
 
 // Assuming useRuntimeConfig() is defined elsewhere to fetch runtime configuration
 // and that config.LS_SECRET contains the secret key for HMAC verification.
@@ -43,6 +44,8 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
   switch (event_name) {
     case 'order_created':
       console.log('Order created for user:', user_id, 'Product:', product_name);
+      const plan = product_name === 'Plan Starter' ? 'plan-starter' : product_name === 'Plan Premium' ? 'plan-premium' : 'plan-business';
+      await setPlanPurchased(user_id, plan);
       break;
     case 'order_refunded':
       console.log('Order refunded for user:', user_id);
