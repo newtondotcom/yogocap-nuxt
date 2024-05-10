@@ -33,6 +33,7 @@ model Account {
   current_duration Int
   can_emojis Boolean
   can_music Boolean
+  deletion Boolean @default(false)
 }
 
 model Buyings {
