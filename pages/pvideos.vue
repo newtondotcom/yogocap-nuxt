@@ -20,6 +20,7 @@ onMounted(async () => {
     } else {
       video.type = 'pending';
     }
+    video.submitted = new Date(video.submitted).toLocaleDateString();
   });
   localvideos.value = videos.value.slice(0, length);
   dataFetched.value = true;
@@ -62,19 +63,18 @@ async function downloadVideo(video_id: string) {
   <div class="mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     <SkeletonsPvideosVideos v-if="!dataFetched" />
     <div v-for="video in localvideos" class="overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-      <img v-if="video.thumbnail" :alt="video.name" :src="video.thumbnail" class="h-20 w-full object-cover" />
+      <img v-if="video.thumbnail" :alt="video.name" :src="video.thumbnail" class="h-24 w-full object-cover" />
       <div v-else class="h-20 w-full bg-gray-200 justify-center align-middle text-center self-center pt-8">Processing
         ...</div>
 
-      <div class="bg-white p-4 sm:p-6">
-        <time datetime="2022-10-10" class="block text-xs text-gray-500">
-          {{ video.date }}
+      <div class="bg-white p-2">
+        <time class="block text-xs text-gray-500">
+          {{ video.submitted }}
         </time>
 
         <button class="flex flex-row align-middle justify-center">
           <h3 class="ml-3 mt-0.5 text-lg text-gray-900">
             {{ video.name }}
-            {{ video.duration }}
           </h3>
         </button>
 
