@@ -1,10 +1,12 @@
 import nodemailer from "nodemailer";
 
-const MAIL_HOST = "smtp.gmail.com";
-const MAIL_PORT = 465;
-const MAIL_SSL = true;
-const MAIL_USER = "";
-const MAIL_PWD = "password";
+const config = useRuntimeConfig();
+
+const MAIL_HOST = config.MAIL_HOST;
+const MAIL_PORT = config.MAIL_PORT;
+const MAIL_SSL = config.MAIL_SSL;
+const MAIL_USER = config.MAIL_USER;
+const MAIL_PWD = config.MAIL_PWD;
 
 const transporter = nodemailer.createTransport({
   host: MAIL_HOST,
