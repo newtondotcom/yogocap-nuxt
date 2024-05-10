@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     MINIO_SECRETKEY : process.env.MINIO_SECRETKEY,
     RABBIT_HOST: process.env.RABBIT_HOST,
     RABBIT_PORT : process.env.RABBIT_PORT,
+    DISCORD_WEBHOOK : process.env.DISCORD_WEBHOOK,
   },
   shadcn: {
     prefix: '',
