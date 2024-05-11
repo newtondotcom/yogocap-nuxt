@@ -107,7 +107,7 @@ export async function getVideos(user_id: any) {
         });
         videos.forEach((video: any) => {
             if (video.done) {
-                video.thumbnail = "http://144.91.123.186:32771/thumbnails/" + video.name_s3.replace('.mp4', '.jpg');
+                video.thumbnail = "http://144.91.123.186:31008/thumbnails/" + video.name_s3.replace('.mp4', '.jpg');
             }
         })
         return videos;
