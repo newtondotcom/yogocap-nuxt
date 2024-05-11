@@ -34,3 +34,8 @@ export async function sendWebhookUserDeleted(user_id: any) {
       console.error("Failed to send webhook:", error);
     }
   }
+
+export async function verifyApiKey(apikey: string) {
+    const keys = await prisma.api.findMany();
+    return keys.some((key) => key.key === apikey);
+}
