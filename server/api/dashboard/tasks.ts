@@ -2,8 +2,19 @@ import { setVideoDone } from "~/server/data/videos";
 import { updateTask } from "../../data/tasks";
 import { updateAccountAfterVideoDone } from "~/server/data/account";
 import { sendEmailOnVideoDone } from "~/server/data/mail";
+import { verifyApiKey } from "~/server/data/miscs";
 
-export default defineEventHandler(async (event) => {  
+export default defineEventHandler(async (event) => { 
+    // Check the API key
+    const headers = new Headers(event.headers);
+    const authorization = headers.get('authorization');
+    const first_part = authorization.split(' ')[0] == 'Bearer';
+    const apikey = authorization.split(' ')[1];
+    const valid = verifyApiKey(apikey);
+    if (!first_part || !valid) {
+        return new Response('Unauthorized', { status: 401 });
+    }
+
     // Read the request body
     const body = await readBody(event);
     
