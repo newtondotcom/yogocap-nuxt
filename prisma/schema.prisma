@@ -77,3 +77,8 @@ model S3 {
   bucket      String
   name        String @id @default(cuid())
 }
+
+model Api {
+  id          String    @id @default(cuid())
+  key         String
+}
