@@ -74,13 +74,20 @@
       </div>
     </div>
     <div class="text-center">
-      <NuxtLink to="/pricing">
-      <Button
+      <Button 
+      @click="process"
         class="h-12 px-6 transition duration-200"
       >
         Get Started
       </Button>
-      </NuxtLink>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import processSignIn from '@/lib/signin'
+
+async function process(){
+    await processSignIn()
+}
+</script>

@@ -194,7 +194,7 @@
       </div>
   
       <div class="mt-12 text-center">
-        <Button
+        <Button @click="process"
           class="px-12 py-3"
         >
           Get Started Today
@@ -203,3 +203,10 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import processSignIn from '@/lib/signin'
+async function process(){
+  await processSignIn()
+}
+</script>
