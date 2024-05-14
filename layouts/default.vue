@@ -24,7 +24,7 @@ async function logout() {
                 <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
                     <NuxtLink to="/dashboard" class="flex items-center gap-2 font-semibold">
                         <Captions class="h-6 w-6" />
-                        <span class="">Yogocap</span>
+                        <div class="text-primary font-bold text-xl underline">Yogocap</div>
                     </NuxtLink>
                     <!--
           <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
