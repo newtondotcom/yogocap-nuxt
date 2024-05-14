@@ -6,6 +6,8 @@ import processSignIn from '@/lib/signin'
 import { Toaster } from '@/components/ui/sonner'
 import { toast } from 'vue-sonner'
 
+let text="Get Started"
+
 onMounted(() => {
     toast('At registration, you are gifted with a free Starter Plan', {
         description: 'Enjoy it now ! 🎉',
@@ -32,7 +34,6 @@ async function actionPricing(plan : string){
     <Toaster />
     <LandingHeader />
     <LandingAbout />
-    <LandingPricing :action="actionPricing" />
     <LandingFeatures />
     <LandingHow />
     <!--<LandingStats />-->

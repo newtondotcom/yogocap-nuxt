@@ -6,6 +6,8 @@ const max_video_duration_min = ref(0)
 const max_video_duration_sec = ref(0)
 const max_video_allowed = ref(0)
 
+let text = "Select"
+
 
 let array = {
   starter: '',
@@ -40,6 +42,7 @@ async function getCredit() {
 }
 
 onMounted(async () => {
+  select.value = 'ST'
   getCredit()
   const data = await $fetch(`/api/lemon/products`)
   array.starter = data.starter
@@ -122,5 +125,5 @@ function actionPricing(plan : string){
     <Button @click="submit">Top up</Button>
   </div>
 
-  <LandingPricing :action="actionPricing" />
+  <LandingPricing :action="actionPricing" :text />
 </template>
