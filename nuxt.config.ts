@@ -46,8 +46,5 @@ export default defineNuxtConfig({
   plausible: {
     ignoredHostnames: ['localhost'],
     apiHost : 'https://plaunwt.duckdns.org'
-  },
-  head: {
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/logo.png' }],
-  },
+  }
 })
