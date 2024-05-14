@@ -47,6 +47,9 @@ onMounted(async () => {
   array.business = data.business
 });
 
+// QUAND ON CLIQUE SUR UN PLAN, CA SELECTIoNNE L OPTION DANS LE MENU SELECT
+// POUR CELA, IL FAUT DEBUNK LE COMPOSANT PRICING
+
 </script>
 
 <template>

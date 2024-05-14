@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PenLine, AlertCircle } from "lucide-vue-next";
+import { PenLine} from "lucide-vue-next";
 import { useToast } from '@/components/ui/toast/use-toast'
 const { toast } = useToast()
 let videoUploaded = ref(false);
