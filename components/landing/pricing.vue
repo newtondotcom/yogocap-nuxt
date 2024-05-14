@@ -4,6 +4,10 @@ defineProps({
     type: Function,
     required: true,
   },
+  text : {
+    type: String,
+    required: true
+  }
 });
 </script>
 
@@ -34,7 +38,7 @@ defineProps({
             </p>
     
             <Button @click="action('starter')" class="mt-4">
-              Get Started
+              {{text}}
           </Button>
           </div>
     
@@ -183,7 +187,7 @@ defineProps({
             </p>
     
             <Button @click="action('premium')" class="mt-4">
-              Get Started
+              {{text}}
           </Button>
           </div>
     
@@ -332,7 +336,7 @@ defineProps({
             </p>
     
           <Button @click="action('business')" class="mt-4">
-              Get Started
+              {{text}}
           </Button>
           </div>
     
