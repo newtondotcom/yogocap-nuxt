@@ -1,3 +1,12 @@
+<script lang="ts" setup>
+defineProps({
+  action: {
+    type: Function,
+    required: true,
+  },
+});
+</script>
+
 <template>
   <section id="pricing" class="flex flex-col justify-center max-w-screen-xl mx-auto px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
       <div
@@ -24,7 +33,7 @@
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-            <Button class="mt-4">
+            <Button @click="action('starter')" class="mt-4">
               Get Started
           </Button>
           </div>
@@ -173,7 +182,7 @@
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-            <Button class="mt-4">
+            <Button @click="action('premium')" class="mt-4">
               Get Started
           </Button>
           </div>
@@ -322,7 +331,7 @@
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-          <Button class="mt-4">
+          <Button @click="action('business')" class="mt-4">
               Get Started
           </Button>
           </div>
