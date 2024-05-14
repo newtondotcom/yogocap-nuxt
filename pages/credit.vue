@@ -47,6 +47,16 @@ onMounted(async () => {
   array.business = data.business
 });
 
+function actionPricing(plan : string){
+  if (plan === 'starter') {
+    select.value = 'ST'
+  } else if (plan === 'premium') {
+    select.value = 'PM'
+  } else if (plan === 'business') {
+    select.value = 'BS'
+  }
+}
+
 // QUAND ON CLIQUE SUR UN PLAN, CA SELECTIoNNE L OPTION DANS LE MENU SELECT
 // POUR CELA, IL FAUT DEBUNK LE COMPOSANT PRICING
 
@@ -112,5 +122,5 @@ onMounted(async () => {
     <Button @click="submit">Top up</Button>
   </div>
 
-  <LandingPricing />
+  <LandingPricing :action="actionPricing" />
 </template>
