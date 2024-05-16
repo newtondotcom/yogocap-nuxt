@@ -12,6 +12,7 @@ let videoValid = ref(true);
 let Success = ref(false);
 let durationInSeconds = ref(0);
 let length = ref(33);
+let position = ref('center');
 const videoName = ref('');
 let generatedName = "";
 let presignedUrl = "";
@@ -73,7 +74,8 @@ async function launchAmpq() {
         silent: videoCut.value,
         length: length.value,
         name_s3: generatedName,
-        s3name : s3_server_name
+        s3name : s3_server_name,
+        position: position.value,
     };
     await $fetch("/api/dashboard/postvideo", {
         method: "POST",
@@ -245,15 +247,16 @@ onMounted(() => {
                 v-if="((length == 66) || (length == 33)) && (loadingUpload || videoUploaded)">
                 <div class="flex flex-col">
                     <div class="items-top flex gap-x-2 mt-2">
-                        <Checkbox class="flex" v-model="videoCut" id="silence" />
                         <div class="grid gap-1.5 leading-none">
                             <label for="silence"
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Do you want us to cut silent parts of the video ?
                             </label>
                         </div>
+                        <Checkbox class="flex" v-model="videoCut" id="silence" />
                     </div>
 
+                    <!--
                     <div class="items-top flex gap-x-2 mt-4" :class="`${canMusic ? 'opacity-1' : 'opacity-50'}`">
                         <Checkbox class="flex" v-model="videoMusic" id="music" v-if="canMusic" />
                         <Checkbox class="flex" v-model="videoMusic" id="music" v-else disabled />
@@ -275,6 +278,33 @@ onMounted(() => {
                             </label>
                         </div>
                     </div>
+                    -->
+
+                    <div class="items-top flex gap-x-2 mt-4">
+    <div class="grid gap-1.5 leading-none justify-center align-middle">
+        <label for="position"
+            class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center">
+            Subtitles position :
+        </label>
+    </div>
+    <Select :model-value="position" id="position">
+        <SelectTrigger class="w-[180px]">
+            <SelectValue placeholder="Select a position" />
+        </SelectTrigger>
+        <SelectContent>
+            <SelectGroup>
+                <SelectLabel>Position</SelectLabel>
+                <SelectItem value="center">
+                    Center
+                </SelectItem>
+                <SelectItem value="bottomcenter">
+                    Bottom Center
+                </SelectItem>
+            </SelectGroup>
+        </SelectContent>
+    </Select>
+</div>
+
                 </div>
 
 
