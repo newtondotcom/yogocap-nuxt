@@ -2,6 +2,9 @@ import crypto from 'crypto';
 import RawBody from 'raw-body';
 import { IncomingMessage } from 'http';
 import { setPlanPurchased } from '~/server/data/account';
+import { assert } from '@vueuse/core';
+import constants from '~/lib/constants';
+import type { WebhookEvent } from '~/types/types';
 
 // Assuming useRuntimeConfig() is defined elsewhere to fetch runtime configuration
 // and that config.LS_SECRET contains the secret key for HMAC verification.
@@ -44,7 +47,9 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
   switch (event_name) {
     case 'order_created':
       console.log('Order created for user:', user_id, 'Product:', product_name);
-      const plan = product_name === 'Plan Starter' ? 'plan-starter' : product_name === 'Plan Premium' ? 'plan-premium' : 'plan-business';
+      //const plan = product_name === 'Plan Starter' ? 'plan-starter' : product_name === 'Plan Premium' ? 'plan-premium' : 'plan-business';
+      const plan = product_name.split(' ')[1];
+      assert(plan == constants.NAME_PLAN_SLOW || plan == constants.NAME_PLAN_MEDIUM || plan == constants.NAME_PLAN_FAST);
       await setPlanPurchased(user_id, plan);
       break;
     case 'order_refunded':
