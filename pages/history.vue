@@ -1,6 +1,6 @@
 <script setup lang="ts">
-
-const transactions = ref([""])
+import constants from '~/lib/constants';
+const transactions = ref([])
 const videos = ref([])
 const dataFetched = ref(false)
 
@@ -10,9 +10,9 @@ async function getHistory() {
   transactions.value.map((item) => {
     item.date = new Date(item.date).toLocaleTimeString() + " on " + new Date(item.date).toLocaleDateString()
     item.plan = item.plan.split('-')[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
-    if (item.plan == "Starter") item.value = 5
-    if (item.plan == "Premium") item.value = 15
-    if (item.plan == "Business") item.value = 30
+    if (item.plan == constants.NAME_PLAN_SLOW) item.value = 5
+    if (item.plan == constants.NAME_PLAN_MEDIUM) item.value = 15
+    if (item.plan == constants.CAN_EMOJIS_FAST) item.value = 30
   })
   videos.value = data.videos;
   videos.value.splice(50);
@@ -106,9 +106,11 @@ onMounted(() => {
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             Silent parts cut
           </th>
+          <!--
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
 
           </th>
+          -->
         </tr>
       </thead>
 
@@ -134,9 +136,11 @@ onMounted(() => {
               yes
             </div>
           </td>
+          <!--
           <td class="whitespace-nowrap px-4 py-2">
             <Button>View</Button>
           </td>
+        -->
         </tr>
         <SkeletonsHistoryVideos v-if="!dataFetched" />
         <tr v-if="videos.length == 0 && dataFetched">
