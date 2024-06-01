@@ -9,6 +9,7 @@ defineProps({
     required: true
   }
 });
+import constants from '~/lib/constants';
 </script>
 
 <template>
@@ -31,7 +32,7 @@ defineProps({
     
             <p class="mt-2 sm:mt-4">
               <strong class="text-3xl font-bold text-gray-900 sm:text-4xl">
-                5€
+                {{constants.PRICE_SLOW}}€
               </strong>
     
               <span class="text-sm font-medium text-gray-700">one time</span>
@@ -121,7 +122,7 @@ defineProps({
                   />
                 </svg>
     
-                <span class="text-gray-700"> Auto cut silent video parts</span>
+                <span class="text-gray-700"> Auto cut silent video parts (<span class="text-sm">experimental</span>)</span>
               </li>
     
               <li class="flex items-center gap-1">
@@ -180,7 +181,7 @@ defineProps({
     
             <p class="mt-2 sm:mt-4">
               <strong class="text-3xl font-bold text-gray-900 sm:text-4xl">
-                15€
+                {{constants.PRICE_MEDIUM}}€
               </strong>
     
               <span class="text-sm font-medium text-gray-700">one time</span>
@@ -270,7 +271,7 @@ defineProps({
                   />
                 </svg>
     
-                <span class="text-gray-700"> Auto cut silent video parts</span>
+                <span class="text-gray-700"> Auto cut silent video  (<span class="text-sm">experimental</span>)</span>
               </li>
     
               <li class="flex items-center gap-1">
@@ -329,7 +330,7 @@ defineProps({
     
             <p class="mt-2 sm:mt-4">
               <strong class="text-3xl font-bold text-gray-900 sm:text-4xl">
-                30€
+                {{constants.PRICE_FAST}}€
               </strong>
     
               <span class="text-sm font-medium text-gray-700">one time</span>
@@ -419,7 +420,7 @@ defineProps({
                   />
                 </svg>
     
-                <span class="text-gray-700"> Auto cut silent video parts</span>
+                <span class="text-gray-700"> Auto cut silent video  (<span class="text-sm">experimental</span>)</span>
               </li>
     
               <li class="flex items-center gap-1">
