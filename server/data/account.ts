@@ -1,8 +1,5 @@
 import prisma from "./prisma";
-
-const plan_starter = "plan-starter";
-const plan_premium = "plan-premium";
-const plan_business = "plan-business";
+import constants from "~/lib/constants";
 
 export async function updateAccountAfterVideoDone(user_id: any) {
     try {
@@ -113,7 +110,7 @@ export async function setNewUser(user_id: any) {
             data: {
                 user_id,
                 date: new Date(),
-                plan: plan_starter,
+                plan: constants.NAME_PLAN_SLOW,
                 onjoin: true
             }
         });
@@ -133,38 +130,39 @@ export async function setPlanPurchased(user_id: any, plan: string) {
                 onjoin: false
             }
         });
-        if (plan == "plan-starter") {
+        if (plan == constants.NAME_PLAN_SLOW){
             await prisma.account.update({
                 where: { user_id },
                 data: {
                     videos_remaining: {
-                        increment: 60
+                        increment: constants.NB_VIDEOS_SLOW
                     },
-                    current_duration: 180
+                    current_duration: constants.DURATION_SLOW,
+                    can_emojis : constants.CAN_EMOJIS_SLOW,
                 }
             });
         }
-        if (plan == "plan-premium") {
+        if (plan == constants.NAME_PLAN_MEDIUM) {
             await prisma.account.update({
                 where: { user_id },
                 data: {
                     videos_remaining: {
-                        increment: 120
+                        increment: constants.NB_VIDEOS_MEDIUM
                     },
-                    can_emojis: true,
-                    current_duration: 15 * 60
+                    can_emojis: constants.CAN_EMOJIS_MEDIUM,
+                    current_duration: constants.DURATION_MEDIUM
                 }
             });
         }
-        if (plan == "plan-business") {
+        if (plan == constants.NAME_PLAN_FAST) {
             await prisma.account.update({
                 where: { user_id },
                 data: {
                     videos_remaining: {
-                        increment: 300
+                        increment: constants.NB_VIDEOS_FAST
                     },
-                    can_emojis: true,
-                    current_duration: 60 * 60
+                    can_emojis: constants.CAN_EMOJIS_FAST,
+                    current_duration: constants.DURATION_FAST
                 }
             });
         }
