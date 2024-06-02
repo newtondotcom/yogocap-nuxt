@@ -154,7 +154,7 @@ onMounted(() => {
           </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
-              No videos yet
+              No video yet
             </div>
           </td>
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
