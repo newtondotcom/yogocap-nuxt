@@ -3,7 +3,7 @@ const user = await useSupabaseUser();
 const userLoggedIn = ref(false);
 userLoggedIn.value = user.value ? true : false;
 
-watch(() => user, async (user) => {
+watch(() => user.value, async (user) => {
   if (user.value) {
     userLoggedIn.value = true;
     const state = await $fetch("/api/dashboard/newuser");

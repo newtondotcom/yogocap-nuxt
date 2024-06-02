@@ -7,7 +7,10 @@ export default defineNuxtConfig({
     "@nuxtjs/plausible"
   ],
   supabase: {
-    redirect : false,
+    redirect : true,
+    redirectOptions :{
+      login : '/auth/login',
+    }
   },
   ssr: false,
   runtimeConfig: {
