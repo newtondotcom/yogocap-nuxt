@@ -143,12 +143,12 @@ async function downloadVideo(video_id: string) {
         </div>
       </div>
     </div>
-    <div v-if="dataFetched && localvideos.length == 0">
+    <div v-if="dataFetched && localvideos.length == 0" class="p-4">
       <Alert>
         <Terminal class="h-4 w-4" />
-        <AlertTitle>Heads up!</AlertTitle>
+        <AlertTitle>Hey, its looks like ...</AlertTitle>
         <AlertDescription>
-          You haven't asked us to subtitle any video yet.
+          you haven't asked us to subtitle any video yet.
         </AlertDescription>
       </Alert>
     </div>
