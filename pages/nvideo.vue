@@ -114,6 +114,15 @@ async function handleFileChange(event: { target: any; }) {
                     variant: 'destructive'
                 });
             }
+            if (format !== 'mp4') {
+                videoValid.value = false;
+                loadingUpload.value = false;
+                toast({
+                    title: 'File upload failed',
+                    description: 'Your video format is not supported (mp4 is required).',
+                    variant: 'destructive'
+                });
+            }
             else {
                 videoValid.value = true;
                 loadingUpload.value = true;
