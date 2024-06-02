@@ -139,6 +139,7 @@ async function rmUploadedVideo() {
 
 onMounted(() => {
     getPresignedUrl();
+    /*
     window.onbeforeunload = async function (event) {
         event.preventDefault();
         if (!Success.value) {
@@ -146,6 +147,7 @@ onMounted(() => {
         }
         return 'text not printed.';
     };
+    */
 });
 
 </script>
@@ -287,7 +289,7 @@ onMounted(() => {
             Subtitles position :
         </label>
     </div>
-    <Select :model-value="position" id="position">
+    <Select v-model="position" id="position">
         <SelectTrigger class="w-[180px]">
             <SelectValue placeholder="Select a position" />
         </SelectTrigger>
