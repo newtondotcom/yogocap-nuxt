@@ -25,10 +25,7 @@ export async function createVideo(user_id: any, name: string, aligned: boolean, 
             data: {
                 videos_stored: {
                     increment: 1
-                },
-                videos_remaining: {
-                    decrement: 1
-                }
+                } 
             }
         });
         return newVideo.id;

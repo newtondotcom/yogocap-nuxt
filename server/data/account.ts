@@ -9,9 +9,7 @@ export async function updateAccountAfterVideoDone(user_id: any) {
                 videos_remaining: {
                     decrement: 1
                 },
-                videos_stored: {
-                    increment: 1
-                }
+                // videos stored is incremented when the video is submitted
             }
         });
     } catch (error: any) {
