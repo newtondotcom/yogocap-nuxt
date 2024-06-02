@@ -18,7 +18,11 @@ const constants = {
     NB_VIDEOS_FAST : 300,
     CAN_EMOJIS_FAST : true,
     DURATION_FAST : 360,
-    PRICE_FAST : 30
+    PRICE_FAST : 30,
+
+
+    URL_APP : 'https://app.yogocap.com',
+    URL_LANDING : 'https://yogocap.com',
 }
 
 export default constants;
