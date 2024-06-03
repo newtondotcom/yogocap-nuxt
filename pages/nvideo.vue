@@ -114,6 +114,7 @@ async function handleFileChange(event: { target: any; }) {
                     variant: 'destructive'
                 });
             }
+            const format = videoFile.name.split('.').pop();
             if (format !== 'mp4') {
                 videoValid.value = false;
                 loadingUpload.value = false;
