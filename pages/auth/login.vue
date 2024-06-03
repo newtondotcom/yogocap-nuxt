@@ -166,6 +166,10 @@ const signInWithDiscord = async () => {
                     Login with Discord
                 </Button>
             </div>
+            <div class="mt-4 text-center text-sm">
+                By signing in, you agree to our <NuxtLink class="text-gray-500 underline" to="/terms">Terms of Service</NuxtLink> 
+                <!-- and <NuxtLink to="/privacy" class="text-gray-500 underline">Privacy Policy</NuxtLink> -->
+            </div>
             <!--
                 <div class="mt-4 text-center text-sm">
                     Don't have an account?
