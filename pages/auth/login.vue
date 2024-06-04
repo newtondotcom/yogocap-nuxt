@@ -3,13 +3,17 @@ definePageMeta({
     layout: false,
 })
 
+const config = useRuntimeConfig();
 const supabase = useSupabaseClient();
 
 let email = ref('');
 let password = ref('');
 let success = ref < boolean | undefined > (undefined);
 let loading = ref(false);
-let redirect = "/dashboard";
+let redirect = "/invalidonpurpose";
+if (config.public.NODE_ENV === 'development') {
+    redirect = "http://localhost:3000";
+}
 
 const login = async () => {
     loading.value = true;
