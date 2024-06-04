@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import constants from '~/lib/constants';
+
 const select = ref('')
 const current_plan = ref('')
 const videos_remaining = ref(0)
@@ -27,17 +29,18 @@ function submit() {
 
 async function getCredit() {
   const data = await $fetch('/api/dashboard/credit')
-  current_plan.value = data.current_plan?.plan.split('-')[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
+  console.log(data)
+  current_plan.value = data.current_plan.plan?.split("-")[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
   videos_remaining.value = data.account?.videos_remaining
   let max_video_duration = data.account?.current_duration
   max_video_duration_min.value = Math.floor(max_video_duration / 60)
   max_video_duration_sec.value = max_video_duration % 60
-  if (data.current_plan?.plan === 'plan-starter') {
-    max_video_allowed.value = 60
-  } else if (data.current_plan?.plan === 'plan-premium') {
-    max_video_allowed.value = 120
-  } else if (data.current_plan?.plan === 'plan-business') {
-    max_video_allowed.value = 300
+  if (data.current_plan?.plan === constants.SLUG_PLAN_SLOW) {
+    max_video_allowed.value = constants.NB_VIDEOS_SLOW
+  } else if (data.current_plan?.plan === SLUG_PLAN_MEDIUM) {
+    max_video_allowed.value = constants.NB_VIDEOS_MEDIUM
+  } else if (data.current_plan?.plan === SLUG_PLAN_FAST) {
+    max_video_allowed.value = constants.NB_VIDEOS_FAST
   }
 }
 
