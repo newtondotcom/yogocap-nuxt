@@ -108,7 +108,7 @@ export async function setNewUser(user_id: any) {
             data: {
                 user_id,
                 date: new Date(),
-                plan: constants.NAME_PLAN_SLOW,
+                plan: constants.SLUG_PLAN_SLOW,
                 onjoin: true
             }
         });
