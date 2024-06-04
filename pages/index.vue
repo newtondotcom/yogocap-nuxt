@@ -2,6 +2,17 @@
 function goToNvideo() {
   navigateTo("/nvideo");
 }
+
+const user = await useSupabaseUser();
+if (user.value) {
+  console.log("User logged in");
+  const state = await $fetch("/api/dashboard/newuser");
+  if (state == "deleted") {
+    alert("Your account has been deleted");
+  }
+} else {
+  console.log("User logged out");
+}
 </script>
 
 <template>
