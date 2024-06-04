@@ -19,6 +19,10 @@ async function logout() {
 <template>
 <DashboardSubtitle title="Settings" subtitle="Here is your settings page ! 🚀" />
 <div class="p-8">
+<div class="flex justify-center mb-4">
+You can monitor the status of our services on our <a href="https://status.yogocap.com/status/infra" class="text-primary ml-1 font-bold">status page</a>.
+</div>
+
 <Alert variant="destructive">
     <AlertCircle class="w-4 h-4" />
     <AlertTitle>Reminder</AlertTitle>
