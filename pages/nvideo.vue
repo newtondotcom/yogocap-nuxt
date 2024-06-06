@@ -29,6 +29,7 @@ async function getPresignedUrl() {
     const { url, objectName, capacity,s3Name } = response;
     presignedUrl = url;
     generatedName = objectName;
+    console.log(capacity);
     canMusic = capacity.can_music;
     canEmoji = capacity.can_emojis;
     videoLength = capacity.current_duration;
