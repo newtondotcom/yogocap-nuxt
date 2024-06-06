@@ -38,7 +38,7 @@ import constants from '~/lib/constants';
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-            <Button @click="action('starter')" class="mt-4">
+            <Button @click="action(constants.SLUG_PLAN_SLOW)" class="mt-4">
               {{text}}
           </Button>
           </div>
@@ -187,7 +187,7 @@ import constants from '~/lib/constants';
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-            <Button @click="action('premium')" class="mt-4">
+            <Button @click="action(constants.SLUG_PLAN_MEDIUM)" class="mt-4">
               {{text}}
           </Button>
           </div>
@@ -336,7 +336,7 @@ import constants from '~/lib/constants';
               <span class="text-sm font-medium text-gray-700">one time</span>
             </p>
     
-          <Button @click="action('business')" class="mt-4">
+          <Button @click="action(constants.SLUG_PLAN_FAST)" class="mt-4">
               {{text}}
           </Button>
           </div>
