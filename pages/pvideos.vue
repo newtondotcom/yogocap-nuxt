@@ -58,7 +58,7 @@ async function downloadVideo(video_id: string) {
 
 <template>
 
-  <DashboardSubtitle title="Your last video" subtitle="From here, you can find you latest video ! 🚀" />
+  <DashboardSubtitle title="Your lastest videos" subtitle="From here, you can find you latest videos ! 🚀" />
 
   <div class="mx-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     <SkeletonsPvideosVideos v-if="!dataFetched" />
@@ -144,7 +144,7 @@ async function downloadVideo(video_id: string) {
       </div>
     </div>
     <div v-if="dataFetched && localvideos.length == 0" class="p-4">
-      <Alert>
+      <Alert class="w-full">
         <Terminal class="h-4 w-4" />
         <AlertTitle>Hey, its looks like ...</AlertTitle>
         <AlertDescription>
