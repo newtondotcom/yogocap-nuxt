@@ -11,7 +11,7 @@ let password = ref('');
 let success = ref < boolean | undefined > (undefined);
 let loading = ref(false);
 let redirect = "/invalidonpurpose";
-if (config.public.NODE_ENV === 'development') {
+if (window.location.hostname === 'localhost') {
     redirect = "http://localhost:3000";
 }
 

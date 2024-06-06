@@ -32,9 +32,6 @@ export default defineNuxtConfig({
     MAIL_SSL : process.env.MAIL_SSL,
     MAIL_USER : process.env.MAIL_USER,
     MAIL_PWD : process.env.MAIL_PWD,
-    public :
-    {NODE_ENV : process.env.NODE_ENV || "production"}
-    ,
   },
   shadcn: {
     prefix: '',
