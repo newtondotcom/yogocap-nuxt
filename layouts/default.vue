@@ -4,6 +4,8 @@ const route = useRoute()
 const supabase = useSupabaseClient()
 const previousVideosCount = useCookie('previousVideosCount')
 
+const devmode = ref(false)
+
 async function goToCredit() {
     navigateTo('/credit');
 }
@@ -13,8 +15,14 @@ async function logout() {
     if (error) {
         console.error('Error logging out:', error.message)
     }
-    navigateTo('/')
+    window.location.href = '/'
 }
+
+onMounted(() => {
+    if (window.location.hostname === 'localhost') {
+        devmode.value = true
+    }
+})
 </script>
 
 <template>
@@ -23,7 +31,7 @@ async function logout() {
             <div class="flex h-full max-h-screen flex-col gap-2">
                 <div class="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
                     <NuxtLink to="/" class="flex items-center gap-2 font-semibold">
-                        <Captions class="h-6 w-6" />
+                        <Captions class="text-primary pt-1 h-6 w-6" />
                         <div class="text-primary font-bold text-xl underline">Yogocap</div>
                     </NuxtLink>
                     <!--
@@ -165,6 +173,7 @@ async function logout() {
           -->
                     Welcome to <span class="text-primary font-bold">Yogocap</span>
                 </div>
+                  <Badge>DEV</Badge>
                 <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                         <Button variant="secondary" size="icon" class="rounded-full">
