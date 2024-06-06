@@ -20,6 +20,13 @@ const constants = {
     DURATION_FAST : 360,
     PRICE_FAST : 30,
 
+    NAME_PLAN_JOIN : 'Trial',
+    SLUG_PLAN_JOIN : 'plan-trial',
+    NB_VIDEOS_JOIN : 5,
+    CAN_EMOJIS_JOIN : false,
+    DURATION_JOIN : 60,
+    PRICE_JOIN : 0,
+
 
     URL_APP : 'https://app.yogocap.com',
     URL_LANDING : 'https://yogocap.com',
