@@ -10,9 +10,10 @@ async function getHistory() {
   transactions.value.map((item) => {
     item.date = new Date(item.date).toLocaleTimeString() + " on " + new Date(item.date).toLocaleDateString()
     item.plan = item.plan.split('-')[1].toLowerCase().replace(/^\w/, c => c.toUpperCase());
-    if (item.plan == constants.NAME_PLAN_SLOW) item.value = 5
-    if (item.plan == constants.NAME_PLAN_MEDIUM) item.value = 15
-    if (item.plan == constants.CAN_EMOJIS_FAST) item.value = 30
+    if (item.plan == constants.NAME_PLAN_SLOW) item.value = constants.PRICE_SLOW
+    if (item.plan == constants.NAME_PLAN_MEDIUM) item.value = constants.PRICE_MEDIUM
+    if (item.plan == constants.NAME_PLAN_FAST) item.value = constants.PRICE_FAST
+    if (item.plan == constants.NAME_PLAN_JOIN) item.value = constants.PRICE_JOIN    
   })
   videos.value = data.videos;
   videos.value.splice(50);
