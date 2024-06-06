@@ -56,6 +56,7 @@ const signInWithGoogle = async () => {
 </script>
 
 <template>
+<!-- 
     <div class="flex items-center justify-center h-screen ">
         <Card class="mx-auto max-w-sm">
             <CardHeader>
@@ -135,4 +136,5 @@ const signInWithGoogle = async () => {
             </CardContent>
         </Card>
     </div>
+-->
 </template>

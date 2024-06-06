@@ -27,6 +27,7 @@ const sendEmail = async () => {
 
 
 <template>
+<!-- 
     <div class="flex items-center justify-center h-screen ">
         <Card class="mx-auto max-w-sm">
             <CardHeader>
@@ -77,5 +78,5 @@ const sendEmail = async () => {
             </CardContent>
         </Card>
     </div>
-
+-->
 </template>
