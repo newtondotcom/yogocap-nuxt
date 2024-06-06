@@ -104,13 +104,10 @@ const signInWithDiscord = async () => {
     <Card class="mx-auto max-w-sm">
         <CardHeader>
             <CardTitle class="text-2xl">
-                Login
+                Connect with us
             </CardTitle>
             <CardDescription>
-                Use one of the following methods to log in or sign up : <br />
-                <span class="text-xs">
-                    (we won't collect any of your data, don't worry ! You can check, this is open source 😊)
-                </span>
+                Use one of the following methods to log in or register
             </CardDescription>
         </CardHeader>
         <CardContent>
@@ -171,8 +168,12 @@ const signInWithDiscord = async () => {
                 </Button>
             </div>
             <div class="mt-4 text-center text-sm">
-                By signing in, you agree to our <NuxtLink class="text-gray-500 underline" to="/terms">Terms of Service</NuxtLink> 
-                <!-- and <NuxtLink to="/privacy" class="text-gray-500 underline">Privacy Policy</NuxtLink> -->
+                By signing in, you agree to our <NuxtLink class="text-gray-500 underline" to="https://yogocap.com/tos">Terms of Service</NuxtLink> 
+                and <NuxtLink to="https://yogocap.com/privacy" class="text-gray-500 underline">Privacy Policy</NuxtLink> <br/>
+
+                <span class="text-xs">
+                    we won't collect any of your data or send you promotional email, don't worry ! You can check, this is open source 😊
+                </span>
             </div>
             <!--
                 <div class="mt-4 text-center text-sm">
