@@ -37,10 +37,12 @@ async function getCredit() {
   max_video_duration_sec.value = max_video_duration % 60
   if (data.current_plan?.plan === constants.SLUG_PLAN_SLOW) {
     max_video_allowed.value = constants.NB_VIDEOS_SLOW
-  } else if (data.current_plan?.plan === SLUG_PLAN_MEDIUM) {
+  } else if (data.current_plan?.plan === constants.SLUG_PLAN_MEDIUM) {
     max_video_allowed.value = constants.NB_VIDEOS_MEDIUM
-  } else if (data.current_plan?.plan === SLUG_PLAN_FAST) {
+  } else if (data.current_plan?.plan === constants.SLUG_PLAN_FAST) {
     max_video_allowed.value = constants.NB_VIDEOS_FAST
+  } else {
+    max_video_allowed.value = constants.NB_VIDEOS_JOIN
   }
 }
 
@@ -54,11 +56,11 @@ onMounted(async () => {
 });
 
 function actionPricing(plan : string){
-  if (plan === 'starter') {
+  if (plan === constants.SLUG_PLAN_SLOW) {
     select.value = 'ST'
-  } else if (plan === 'premium') {
+  } else if (plan === constants.SLUG_PLAN_MEDIUM) {
     select.value = 'PM'
-  } else if (plan === 'business') {
+  } else if (plan === constants.SLUG_PLAN_FAST) {
     select.value = 'BS'
   }
 }
