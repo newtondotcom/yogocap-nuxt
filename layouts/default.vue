@@ -1,12 +1,4 @@
 <script setup lang="ts">
-useSeoMeta({
-    title: 'Yogocap',
-    ogTitle: 'Yogocap App',
-    description: 'Discover Yogocap, the most cost-effective AI-powered solution for subtitling your social media videos. Ensure your message reaches everyone with our unbeatable prices and high-quality subtitles.',
-    ogDescription: 'Discover Yogocap, the most cost-effective AI-powered solution for subtitling your social media videos. Ensure your message reaches everyone with our unbeatable prices and high-quality subtitles.',
-    ogImage: 'https://app.yogocap.com/og-image.png',
-    twitterCard: 'summary_large_image',
-})
 import { SquarePlus, Captions, CreditCard, FileClock, History, Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next';
 const route = useRoute()
 const supabase = useSupabaseClient()
@@ -200,9 +192,11 @@ async function logout() {
                     </DropdownMenuContent>
                 </DropdownMenu>
             </header>
+            
             <main class="flex flex-1 flex-col p-4 lg:p-6">
                 <NuxtPage />
             </main>
+
         </div>
     </div>
 </template>
