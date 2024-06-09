@@ -7,12 +7,12 @@ let urlBusiness = ''
 
 export default defineEventHandler(async (event) => {
   const user_id = event.context.user_id
-  var myHeaders = new Headers()
+  const myHeaders = new Headers()
   myHeaders.append('Accept', 'application/vnd.api+json')
   myHeaders.append('Content-Type', 'application/vnd.api+json')
   const config = useRuntimeConfig()
   myHeaders.append('Authorization', config.AUTH_HEADER)
-  var requestOptions = {
+  const requestOptions = {
     method: 'GET',
     headers: myHeaders,
   }

@@ -3,10 +3,10 @@ import prisma from './prisma';
 import constants from '~/lib/constants';
 
 export default function generateUniqueName() {
-    let date = new Date();
-    let timestamp = date.getTime();
-    let randomString = Math.random().toString(36).substring(2, 8);
-    let uniqueName = `${timestamp}_${randomString}`;
+    const date = new Date();
+    const timestamp = date.getTime();
+    const randomString = Math.random().toString(36).substring(2, 8);
+    const uniqueName = `${timestamp}_${randomString}`;
     return uniqueName;
 }
 
@@ -153,7 +153,7 @@ export async function createPresignedUrlDownload(video_id: any) {
     return url;
 }
 
-export async function insertS3Server(name: any, endpoint: any, port: any, ssl: Boolean, accessKey: any, secretKey: any, bucketName: any) {
+export async function insertS3Server(name: any, endpoint: any, port: any, ssl: boolean, accessKey: any, secretKey: any, bucketName: any) {
     await prisma.s3.create({
         data: {
             name: name,
