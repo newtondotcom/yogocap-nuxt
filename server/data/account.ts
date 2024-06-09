@@ -3,15 +3,15 @@ import constants from "~/lib/constants";
 
 export async function updateAccountAfterVideoDone(user_id: any) {
     try {
-        const updatedAccount = await prisma.account.update({
-            where: { user_id: user_id },
-            data: {
-                videos_remaining: {
-                    decrement: 1
-                },
-                // videos stored is incremented when the video is submitted
+        await prisma.account.update({
+            where: { user_id },
+            data : {
+                videos_stored : {
+                    increment : 1
+                }
             }
         });
+        // videos remaining is decremented when the video is submitted
     } catch (error: any) {
         throw new Error(`Error updating account: ${error.message}`);
     }
