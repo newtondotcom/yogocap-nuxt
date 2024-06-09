@@ -12,7 +12,7 @@ let videos = ref<Video[]>([]);
 const dataFetched = ref(false);
 
 onMounted(async () => {
-  const { data } = await useFetch('/api/dashboard/pvideos')
+  const { data } = await $fetch('/api/dashboard/pvideos')
   videos.value = data.value?.pvideos;
   videos.value.forEach((video) => {
     if (video.done) {
