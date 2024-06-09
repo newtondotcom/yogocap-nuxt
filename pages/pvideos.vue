@@ -14,6 +14,9 @@ const dataFetched = ref(false);
 onMounted(async () => {
   const data = await $fetch('/api/dashboard/pvideos')
   videos.value = data.value?.pvideos;
+  if (videos.value.length == 0) {
+    dataFetched.value = true;
+  } else {
   videos.value.forEach((video) => {
     if (video.done) {
       video.type = 'success';
@@ -23,6 +26,7 @@ onMounted(async () => {
     video.submitted = new Date(video.submitted).toLocaleDateString();
   });
   localvideos.value = videos.value.slice(0, length);
+  }
   dataFetched.value = true;
   previousVideosCount.value = videos.value.length.toString();
 });
