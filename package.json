@@ -7,9 +7,12 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
+    "@nuxt/eslint": "^0.3.13",
     "@nuxtjs/plausible": "^1.0.0",
     "@vueuse/core": "^10.9.0",
     "amqplib": "^0.10.4",
@@ -33,8 +36,12 @@
     "@prisma/client": "5.13.0",
     "@types/amqplib": "^0.10.5",
     "@types/nodemailer": "^6.4.14",
+    "eslint": "9.x",
+    "eslint-plugin-vue": "^9.26.0",
+    "globals": "^15.4.0",
     "prisma": "^5.13.0",
     "shadcn-nuxt": "^0.10.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.12.0"
   }
 }

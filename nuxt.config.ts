@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase',
     'shadcn-nuxt',
-    "@nuxtjs/plausible"
+    "@nuxtjs/plausible",
+    "@nuxt/eslint"
   ],
   supabase: {
     redirect : true,
