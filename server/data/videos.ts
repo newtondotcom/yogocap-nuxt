@@ -1,3 +1,4 @@
+import constants from "~/lib/constants";
 import prisma from "./prisma";
 
 export async function createVideo(user_id: any, name: string, aligned: boolean, emojis: boolean, music: boolean, silent: boolean, length: number, name_s3: string, s3name: string) {
@@ -102,6 +103,18 @@ export async function getVideos(user_id: any) {
                 submitted: 'desc'
             }
         });
+        const s3_thumbnails = await prisma.s3.findUnique({
+            where: {
+                name: constants.NAME_S3_THUMBNAILS
+            },
+            select : {
+                endpoint: true,
+                port: true,
+                ssl: true,
+                bucket: true
+            }
+        });
+        const baselink = `${s3_thumbnails?.ssl ? 'https' : 'http'}://${s3_thumbnails?.endpoint}:${s3_thumbnails?.port}/${s3_thumbnails?.bucket}/`;
         videos.forEach((video: any) => {
             if (video.done) {
                 video.thumbnail = "http://144.91.123.186:31008/thumbnails/" + video.name_s3.replace('.mp4', '.jpg');
