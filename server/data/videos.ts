@@ -117,7 +117,7 @@ export async function getVideos(user_id: any) {
         const baselink = `${s3_thumbnails?.ssl ? 'https' : 'http'}://${s3_thumbnails?.endpoint}:${s3_thumbnails?.port}/${s3_thumbnails?.bucket}/`;
         videos.forEach((video: any) => {
             if (video.done) {
-                video.thumbnail = "http://144.91.123.186:31008/thumbnails/" + video.name_s3.replace('.mp4', '.jpg');
+                video.thumbnail = baselink + video.name_s3.replace('.mp4', '.jpg');
             }
         })
         return videos;
