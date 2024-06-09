@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import getMailTemplate from "~/lib/mails/videoready";
+import prisma from "./prisma";
 
 const config = useRuntimeConfig();
 
@@ -23,7 +25,32 @@ const transporter = nodemailer.createTransport({
 
 export async function sendEmailOnVideoDone(user_id: any, video_id: any) {
   try {
+    const video_name = await prisma.video.findUnique({
+      where: {
+        id: video_id
+      },
+      select: {
+        name: true
+      }
+    });
+    const emailO = await prisma.account.findUnique({
+      where: {
+        user_id: user_id
+      },
+      select: {
+        email: true
+      }
+    });
+    const email = emailO?.email;
+    const { body, subject } = getMailTemplate(video_id, "https://app.yogocap.com/pvideos");
     console.log("Sending email to user: ", user_id, " for video: ", video_id);
+    const info = await transporter.sendMail({
+      from: '"Robin from Yogocap 👻" <robin@yogocap.com>',
+      to: email,
+      subject: subject,
+      html: body,
+    });
+    console.log("Message sent: %s", info.messageId);
   } catch (error: any) {
     throw new Error(`Error sending email: ${error.message}`);
   }
