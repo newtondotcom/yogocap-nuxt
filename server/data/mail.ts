@@ -42,7 +42,7 @@ export async function sendEmailOnVideoDone(user_id: any, video_id: any) {
       }
     });
     const email = emailO?.email;
-    const { body, subject } = getMailTemplate(video_id, "https://app.yogocap.com/pvideos");
+    const { body, subject } = getMailTemplate(video_name?.name, "https://app.yogocap.com/pvideos");
     console.log("Sending email to user: ", user_id, " for video: ", video_id);
     const info = await transporter.sendMail({
       from: '"Robin from Yogocap 👻" <robin@yogocap.com>',
