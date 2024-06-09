@@ -15,8 +15,8 @@ export default defineNuxtConfig({
   ssr: false,
   runtimeConfig: {
     AUTH_HEADER: process.env.LEMON_SQUEEZY,
-    LS_SHOP: process.env.LS_SHOP,
-    LS_SECRET: process.env.LS_SECRET,
+    LEMON_SQUEEZY_SHOP: process.env.LEMON_SQUEEZY_SHOP,
+    LEMON_SQUEEZY_SECRET: process.env.LEMON_SQUEEZY_SECRET,
     LEMON_SQUEEZY : process.env.LEMON_SQUEEZY,
     MINIO_ENDPOINT : process.env.MINIO_ENDPOINT,
     MINIO_PORT : process.env.MINIO_PORT,
