@@ -26,9 +26,11 @@ export default function getMailTemplate(name : string, link : string) {
             .around {
                 text-align: center;
                 margin-bottom: 20px;
+                text-color: white;
             }
             a {
                 text-decoration: none;
+                text-decoration: underline;
             }
         </style>
     </head>
