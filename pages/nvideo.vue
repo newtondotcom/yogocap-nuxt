@@ -18,8 +18,8 @@ let generatedName = "";
 let presignedUrl = "";
 let canMusic = true;
 let canEmoji = true;
-let videoLength = 2000;
-let videosBalance = 1;
+let videoLength = ref(0);
+let videosBalance = ref(0);
 let s3_server_name = "main";
 
 async function getPresignedUrl() {
@@ -32,8 +32,8 @@ async function getPresignedUrl() {
     console.log(capacity);
     canMusic = capacity.can_music;
     canEmoji = capacity.can_emojis;
-    videoLength = capacity.current_duration;
-    videosBalance = capacity.videos_remaining;
+    videoLength.value = capacity.current_duration;
+    videosBalance.value = capacity.videos_remaining;
     s3_server_name = s3Name;
 
 }
@@ -111,7 +111,7 @@ async function handleFileChange(event: { target: any; }) {
         video.onloadedmetadata = async function () {
             durationInSeconds.value = video.duration;
             durationInSeconds.value = Math.round(durationInSeconds.value);
-            if (durationInSeconds.value > videoLength) {
+            if (durationInSeconds.value > videoLength.value) {
                 videoValid.value = false;
                 loadingUpload.value = false;
                 toast({
@@ -119,7 +119,8 @@ async function handleFileChange(event: { target: any; }) {
                     description: 'Your video length is above the one included in your current plan.',
                     variant: 'destructive',
                 });
-            } else if (videosBalance == 0) {
+                return;
+            } else if (videosBalance.value < 1) {
                 videoValid.value = false;
                 loadingUpload.value = false;
                 toast({
@@ -127,7 +128,9 @@ async function handleFileChange(event: { target: any; }) {
                     description: 'You have no more videos left in your current balance.',
                     variant: 'destructive'
                 });
+                return;
             }
+            console.log(videosBalance.value );
             const format = videoFile.name.split('.').pop();
             if (format !== 'mp4') {
                 videoValid.value = false;
@@ -137,6 +140,7 @@ async function handleFileChange(event: { target: any; }) {
                     description: 'Your video format is not supported (mp4 is required).',
                     variant: 'destructive'
                 });
+                return;
             }
             else {
                 videoValid.value = true;
