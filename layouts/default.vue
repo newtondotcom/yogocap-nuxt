@@ -21,6 +21,7 @@ async function logout() {
 onMounted(() => {
     if (window.location.hostname === 'localhost') {
         devmode.value = true
+        console.log('Running in dev mode : ', window.location.hostname)
     }
 })
 </script>
