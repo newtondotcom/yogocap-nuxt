@@ -24,9 +24,9 @@ export async function createVideo(user_id: any, name: string, aligned: boolean, 
         const addVideoDone = await prisma.account.update({
             where: { user_id: user_id },
             data: {
-                videos_stored: {
-                    increment: 1
-                } 
+                videos_remaining: {
+                    decrement: 1
+                }
             }
         });
         return newVideo.id;
