@@ -7,9 +7,9 @@ import constants from '~/lib/constants';
 import type { WebhookEvent } from '~/types/types';
 
 // Assuming useRuntimeConfig() is defined elsewhere to fetch runtime configuration
-// and that config.LS_SECRET contains the secret key for HMAC verification.
+// and that config.LEMON_SQUEEZY_SECRET contains the secret key for HMAC verification.
 const config = useRuntimeConfig();
-const secret: string = config.LS_SECRET;
+const secret: string = config.LEMON_SQUEEZY_SECRET;
 
 // Function to verify the signature
 const verifySignature = (rawBody: Buffer, signature: string, secret: string): boolean => {
