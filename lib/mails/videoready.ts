@@ -27,6 +27,9 @@ export default function getMailTemplate(name : string, link : string) {
                 text-align: center;
                 margin-bottom: 20px;
             }
+            a {
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
