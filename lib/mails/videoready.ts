@@ -31,7 +31,7 @@ export default function getMailTemplate(name : string, link : string) {
     </head>
     <body>
         <h1>Hey there! 🎉</h1>
-        <p>I'm Robin, and I'm super excited to let you know that your <span class="accent">Yogocap video</span> named "<span class="accent">${name}</span>" is now ready for download! 📹✨</p>
+        <p>I'm Robin, and I'm super excited to let you know that your <span class="accent">Yogocap</span> video named "<span class="accent">${name}</span>" is now ready for download! 📹✨</p>
         <p>Thank you for submitting it, and I can't wait for you to see the final result. To get started, just click the button below:</p>
         <div class="around">
             <a href="${link}" class="button">Download Your Video</a>
