@@ -1,5 +1,6 @@
 import { Client } from 'minio';
 import prisma from './prisma';
+import constants from '~/lib/constants';
 
 export default function generateUniqueName() {
     let date = new Date();
@@ -78,7 +79,7 @@ export async function removeVideo(videoId: string) {
 }
 
 export async function createPresignedUrlUpload(user_id: any) {
-    const s3Name = 'main';
+    const s3Name = constants.NAME_S3_VIDEOS;
     const config = await prisma.s3.findUnique({
         where: {
             name: s3Name,
