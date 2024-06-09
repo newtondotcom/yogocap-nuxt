@@ -80,7 +80,7 @@ export async function getCurrentCreditState(user_id: any) {
     }
 }
 
-export async function setNewUser(user_id: any) {
+export async function setNewUser(user_id: any , email : any) {
     try {
         const test = await prisma.account.findUnique({
             where: { user_id },
@@ -102,6 +102,7 @@ export async function setNewUser(user_id: any) {
                 can_emojis: false,
                 can_music: false,
                 current_duration: constants.DURATION_JOIN,
+                email : email
             }
         });
         await prisma.buyings.create({
