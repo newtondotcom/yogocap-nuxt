@@ -50,11 +50,16 @@ async function uploadFile(presignedUrl: string, file: File) {
 
         if (response.ok) {
             toast({
-                title: 'File upload succeeded',
+                title: 'File upload succeeded 🎯',
                 description: 'Your video has been uploaded successfully.'
             });
         } else {
             console.error('File upload failed', response);
+            toast({
+                title: 'File upload failed 💢',
+                description: 'An error occurred while uploading your video. If it fails again, please contact us.',
+                variant: 'destructive',
+            });
         }
         loadingUpload.value = false;
         videoUploaded.value = true;
@@ -67,6 +72,14 @@ async function uploadFile(presignedUrl: string, file: File) {
 }
 
 async function launchAmpq() {
+    if (videoName.value == "") {
+        toast({
+            title: 'Error ⚠️',
+            description: 'Please name your video before processing it.',
+            variant: 'destructive',
+        });
+        return;
+    }
     const body = {
         name: videoName.value,
         aligned: true,
