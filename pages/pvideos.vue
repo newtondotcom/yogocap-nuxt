@@ -13,7 +13,7 @@ const dataFetched = ref(false);
 
 onMounted(async () => {
   const data = await $fetch('/api/dashboard/pvideos')
-  videos.value = data.value?.pvideos;
+  videos.value = data.pvideos;
   if (videos.value == null) {
     dataFetched.value = true;
   } else {
