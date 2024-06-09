@@ -24,7 +24,8 @@ export async function removeVideo(videoId: string) {
             }
         });
 
-        const s3Name = video?.stored;
+        //const s3Name = video?.stored;
+        const s3Name = constants.NAME_S3_DOWNLOADS;
         const config = await prisma.s3.findUnique({
             where: {
                 name: s3Name,
@@ -79,7 +80,7 @@ export async function removeVideo(videoId: string) {
 }
 
 export async function createPresignedUrlUpload(user_id: any) {
-    const s3Name = constants.NAME_S3_VIDEOS;
+    const s3Name = constants.NAME_S3_UPLOADS;
     const config = await prisma.s3.findUnique({
         where: {
             name: s3Name,
@@ -116,10 +117,19 @@ export async function createPresignedUrlDownload(video_id: any) {
             name_s3: true,
         }
     });
-    const s3Name = video?.stored;
+    // const s3Name = video?.stored;
+    const s3Name = constants.NAME_S3_DOWNLOADS;
     const config = await prisma.s3.findUnique({
         where: {
             name: s3Name,
+        },
+        select: {
+            endpoint: true,
+            port: true,
+            ssl: true,
+            access_key: true,
+            secret_key: true,
+            bucket: true,
         }
     });
 
