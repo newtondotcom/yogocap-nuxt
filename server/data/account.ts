@@ -121,11 +121,12 @@ export async function setNewUser(user_id: any , email : any) {
 
 export async function setPlanPurchased(user_id: any, plan: string) {
     try {
+        const slug_plan = plan === constants.NAME_PLAN_SLOW ? constants.SLUG_PLAN_SLOW : plan === constants.NAME_PLAN_MEDIUM ? constants.SLUG_PLAN_MEDIUM : constants.SLUG_PLAN_FAST;
         await prisma.buyings.create({
             data: {
                 user_id,
                 date: new Date(),
-                plan,
+                plan : slug_plan,
                 onjoin: false
             }
         });
