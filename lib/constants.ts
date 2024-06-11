@@ -34,6 +34,8 @@ const constants = {
     NAME_S3_UPLOADS : 'uploads',
     NAME_S3_DOWNLOADS : 'downloads',
     NAME_S3_THUMBNAILS : 'thumbnails2',
+
+    NB_DAYS_DELETE : 2,
 }
 
 export default constants;
