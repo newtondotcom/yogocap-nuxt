@@ -1,7 +1,7 @@
 const constants = {
     NAME_PLAN_SLOW : 'Starter',
     SLUG_PLAN_SLOW : 'plan-starter',
-    NB_VIDEOS_SLOW : 60,
+    NB_VIDEOS_SLOW : 30,
     CAN_EMOJIS_SLOW : false,
     DURATION_SLOW : 60,
     PRICE_SLOW : 5,
