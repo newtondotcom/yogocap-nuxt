@@ -164,7 +164,7 @@ onMounted(() => {
                         </div>
                     </SheetContent>
                 </Sheet>
-                <div class="w-full flex-1">
+                <div class="w-full flex-1 cursor-default">
                     <!--
           <form>
             <div class="relative">
