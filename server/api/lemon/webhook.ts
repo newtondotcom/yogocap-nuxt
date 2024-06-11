@@ -12,12 +12,8 @@ const secret: string = config.LEMON_SQUEEZY_SECRET;
 
 // Function to verify the signature
 const verifySignature = (rawBody: Buffer, signature: string, secret: string): boolean => {
-  console.log(secret);
   const hmac = crypto.createHmac('sha256', secret);
   const digest = hmac.update(rawBody).digest('hex');
-
-  console.log('Expected signature:', digest);
-  console.log('Received signature:', signature);
 
   const expectedBuffer = Buffer.from(digest, 'utf8');
   const receivedBuffer = Buffer.from(signature, 'utf8');
