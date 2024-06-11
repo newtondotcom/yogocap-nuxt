@@ -5,6 +5,7 @@ import { setPlanPurchased } from '~/server/data/account';
 import { assert } from '@vueuse/core';
 import constants from '~/lib/constants';
 import type { WebhookEvent } from '~/types/types';
+import { sendEmailOnBuyingMade } from '~/server/data/mail';
 
 // Assuming useRuntimeConfig() is defined elsewhere to fetch runtime configuration
 // and that config.LEMON_SQUEEZY_SECRET contains the secret key for HMAC verification.
@@ -51,6 +52,7 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
       const plan = product_name.split(' ')[1];
       assert(plan == constants.NAME_PLAN_SLOW || plan == constants.NAME_PLAN_MEDIUM || plan == constants.NAME_PLAN_FAST);
       await setPlanPurchased(user_id, plan);
+      await sendEmailOnBuyingMade(user_id);
       break;
     case 'order_refunded':
       console.log('Order refunded for user:', user_id);
