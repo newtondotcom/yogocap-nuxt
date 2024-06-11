@@ -7,8 +7,6 @@ import constants from '~/lib/constants';
 import type { WebhookEvent } from '~/types/types';
 import { sendEmailOnBuyingMade } from '~/server/data/mail';
 
-// Assuming useRuntimeConfig() is defined elsewhere to fetch runtime configuration
-// and that config.LEMON_SQUEEZY_SECRET contains the secret key for HMAC verification.
 const config = useRuntimeConfig();
 const secret: string = config.LEMON_SQUEEZY_SECRET;
 
@@ -17,11 +15,12 @@ const verifySignature = (rawBody: Buffer, signature: string, secret: string): bo
   const hmac = crypto.createHmac('sha256', secret);
   const digest = hmac.update(rawBody).digest('hex');
 
-  // Ensure both digests are in Buffer format for comparison
+  console.log('Expected signature:', digest);
+  console.log('Received signature:', signature);
+  
   const expectedBuffer = Buffer.from(digest, 'utf8');
   const receivedBuffer = Buffer.from(signature, 'utf8');
 
-  // Use timingSafeEqual to compare digests securely
   return crypto.timingSafeEqual(expectedBuffer, receivedBuffer);
 };
 
