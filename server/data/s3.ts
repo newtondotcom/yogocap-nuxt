@@ -110,7 +110,7 @@ export async function createPresignedUrlUpload(user_id: any) {
     return { url, objectName, s3Name};
 }
 
-export async function createPresignedUrlDownload(video_id: any) {
+export async function createPresignedUrlDownload(user_id:any,video_id: any) {
     const video = await prisma.video.findUnique({
         where: {
             id: video_id,
@@ -118,8 +118,10 @@ export async function createPresignedUrlDownload(video_id: any) {
         select: {
             stored: true,
             name_s3: true,
+            user_id: true,
         }
     });
+    assert(video?.user_id == user_id);
     // const s3Name = video?.stored;
     const s3Name = constants.NAME_S3_DOWNLOADS;
     const config = await prisma.s3.findUnique({
