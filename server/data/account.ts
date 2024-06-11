@@ -27,6 +27,9 @@ export async function getTransactions(user_id: any) {
                 date: true,
                 plan: true,
                 onjoin: true
+            },
+            orderBy: {
+                date: 'desc'
             }
         });
         return transactions;
