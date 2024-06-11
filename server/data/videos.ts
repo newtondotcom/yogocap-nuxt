@@ -83,7 +83,8 @@ export async function getVideos(user_id: any) {
     try {
         const videos = await prisma.video.findMany({
             where: {
-                user_id
+                user_id,
+                deleted: false
             },
             select: {
                 id: true,
@@ -98,11 +99,44 @@ export async function getVideos(user_id: any) {
                 deleted: true,
                 submitted: true,
                 name_s3: true,
+                task_id: true
             },
             orderBy: {
                 submitted: 'desc'
             }
         });
+        // filter videos which tasks are done for more than x days
+        const days_before_delete = constants.NB_DAYS_DELETE;
+        for (let i = 0; i < videos.length; i++) {
+            const video = videos[i];
+            if (video.done && !video.deleted) {
+                const task_id = video.task_id;
+                const task = await prisma.task.findUnique({
+                    where: {
+                        id : task_id
+                    },
+                    select: {
+                        done_at: true
+                    }
+                });
+                const now = new Date();
+                const diff = now.getTime() - task.done_at?.getTime();
+                const days = diff / (1000 * 3600 * 24);
+                if (days >= days_before_delete) {
+                    console.log(`Video ${video.id} is deleted since ${days} days`);
+                    const deletedVideo = await prisma.video.update({
+                        where: {
+                            id: video.id
+                        },
+                        data: {
+                            deleted: true
+                        }
+                    });
+                    videos[i].deleted = true;
+                    console.log(`Video ${video.id} is now aged of ${days} days`);
+                }
+            }
+        }
         const s3_thumbnails = await prisma.s3.findUnique({
             where: {
                 name: constants.NAME_S3_THUMBNAILS
