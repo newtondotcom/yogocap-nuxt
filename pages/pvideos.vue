@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { Terminal } from 'lucide-vue-next';
 import type { Video } from '~/types/types';
+import constants from "~/lib/constants";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
 
 
 const previousVideosCount = useCookie('previousVideosCount')
+const days_before_delete = constants.NB_DAYS_DELETE;
 
 let currentpage = ref(1);
 let length = 8;
@@ -24,6 +32,14 @@ onMounted(async () => {
       video.type = 'pending';
     }
     video.submitted = new Date(video.submitted).toLocaleDateString();
+    const today = new Date();
+    const diff = today.getTime() - new Date(video.submitted).getTime();
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (days > days_before_delete) {
+      video.perimee = true;
+    } else {
+      video.perimee = false;
+    }
   });
   localvideos.value = videos.value.slice(0, length);
   previousVideosCount.value = videos.value.length.toString();
@@ -131,7 +147,32 @@ async function downloadVideo(video_id: string) {
             </AlertDialogContent>
           </AlertDialog>
 
-          <Button @click="downloadVideo(video.id)" :disabled="video.deleted || !video.done">
+          <TooltipProvider v-if="video.perimee">
+            <Tooltip>
+              <TooltipTrigger as-child>          
+              <Button class="opacity-50">
+                    <div class="mr-1">
+                      <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path d="M12 3V16M12 16L16 11.625M12 16L8 11.625" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                          <path
+                            d="M15 21H9C6.17157 21 4.75736 21 3.87868 20.1213C3 19.2426 3 17.8284 3 15M21 15C21 17.8284 21 19.2426 20.1213 20.1213C19.8215 20.4211 19.4594 20.6186 19 20.7487"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                      </svg>
+                    </div>
+                    <div>Download</div>
+                  </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Older than 2 days</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
+          <Button v-else  @click="downloadVideo(video.id)" :disabled="video.deleted || !video.done">
             <div class="mr-1">
               <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -146,6 +187,7 @@ async function downloadVideo(video_id: string) {
             </div>
             <div>Download</div>
           </Button>
+
         </div>
       </div>
     </div>
