@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { AlertCircle } from 'lucide-vue-next';
+import constants from '~/lib/constants';
 const supabase = useSupabaseClient()
 
 async function accountClosing() {
@@ -27,7 +28,7 @@ You can monitor the status of our services on our <a href="https://status.yogoca
     <AlertCircle class="w-4 h-4" />
     <AlertTitle>Reminder</AlertTitle>
     <AlertDescription>
-        The subtitled videos are stored on the server for 2 days. After that, they are automatically deleted.
+        The subtitled videos are stored on the server for {{constants.NB_DAYS_DELETE}} days. After that, they are automatically deleted.
     </AlertDescription>
   </Alert>
 
