@@ -48,6 +48,8 @@ async function deleteVideo(video_id: string) {
     }
     return video;
   });
+  videos.value = videos.value.filter((video) => video.id !== video_id);
+  localvideos.value = videos.value.slice(0, length);
 }
 
 async function downloadVideo(video_id: string) {
