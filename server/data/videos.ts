@@ -105,6 +105,7 @@ export async function getVideos(user_id: any) {
                 submitted: 'desc'
             }
         });
+        /*
         // filter videos which tasks are done for more than x days
         const days_before_delete = constants.NB_DAYS_DELETE;
         for (let i = 0; i < videos.length; i++) {
@@ -137,6 +138,7 @@ export async function getVideos(user_id: any) {
                 }
             }
         }
+        */
         const s3_thumbnails = await prisma.s3.findUnique({
             where: {
                 name: constants.NAME_S3_THUMBNAILS
