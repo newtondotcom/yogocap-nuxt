@@ -1,6 +1,7 @@
 import { Client } from 'minio';
 import prisma from './prisma';
 import constants from '~/lib/constants';
+import { assert } from '@vueuse/core';
 
 export default function generateUniqueName() {
     const date = new Date();
@@ -10,7 +11,7 @@ export default function generateUniqueName() {
     return uniqueName;
 }
 
-export async function removeVideo(videoId: string) {
+export async function removeVideo(user_id : string, videoId: string) {
     try {
         // get video object from database
         const video = await prisma.video.findUnique({
@@ -23,6 +24,8 @@ export async function removeVideo(videoId: string) {
                 stored: true,
             }
         });
+
+        assert(video?.user_id == user_id);
 
         //const s3Name = video?.stored;
         const s3Name = constants.NAME_S3_DOWNLOADS;
