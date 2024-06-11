@@ -104,9 +104,11 @@ onMounted(() => {
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             Lenght
           </th>
+          <!-- 
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
             Silent parts cut
           </th>
+          -->
           <!--
           <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
 
@@ -132,11 +134,13 @@ onMounted(() => {
               {{ item.length }}
             </div>
           </td>
+          <!-- 
           <td class="whitespace-nowrap px-4 py-2 text-gray-700">
             <div class="flex flex-row align-middle justify-center">
               yes
             </div>
           </td>
+          -->
           <!--
           <td class="whitespace-nowrap px-4 py-2">
             <Button>View</Button>
