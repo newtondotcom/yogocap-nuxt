@@ -1,30 +1,19 @@
 <script setup lang="ts">
 import constants from '~/lib/constants';
 
-const select = ref('')
 const current_plan = ref('')
 const videos_remaining = ref(0)
 const max_video_duration_min = ref(0)
 const max_video_duration_sec = ref(0)
 const max_video_allowed = ref(0)
 
-let text = "Select"
+let text = "Buy now"
 
 
 let array = {
   starter: '',
   pro: '',
   business: ''
-}
-
-function submit() {
-  if (select.value === 'ST') {
-    window.location.href = array.starter
-  } else if (select.value === 'PM') {
-    window.location.href = array.pro
-  } else if (select.value === 'BS') {
-    window.location.href = array.business
-  }
 }
 
 async function getCredit() {
@@ -47,7 +36,6 @@ async function getCredit() {
 }
 
 onMounted(async () => {
-  select.value = 'ST'
   getCredit()
   const data = await $fetch(`/api/lemon/products`)
   array.starter = data.starter
@@ -57,11 +45,11 @@ onMounted(async () => {
 
 function actionPricing(plan : string){
   if (plan === constants.SLUG_PLAN_SLOW) {
-    select.value = 'ST'
+    window.location.href = array.starter
   } else if (plan === constants.SLUG_PLAN_MEDIUM) {
-    select.value = 'PM'
+    window.location.href = array.pro
   } else if (plan === constants.SLUG_PLAN_FAST) {
-    select.value = 'BS'
+    window.location.href = array.business
   }
 }
 
@@ -71,9 +59,10 @@ function actionPricing(plan : string){
 </script>
 
 <template>
+
   <DashboardSubtitle title="Credit" subtitle="Here is your credit page ! ⏳" />
 
-  <div class="mt-8 sm:mt-12 flex-column flex align-middle justify-center">
+  <div class="my-8 sm:mt-12 flex-column flex align-middle justify-center">
     <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
       <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
@@ -115,20 +104,9 @@ function actionPricing(plan : string){
     </dl>
   </div>
 
-  <div class="max-w-2xl mx-auto mt-20">
-    <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Select an option</label>
-    <select v-model="select"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5">
-      <option selected disabled>Select an option</option>
-      <option value="ST">Starter</option>
-      <option value="PM">Premium</option>
-      <option value="BS">Business</option>
-    </select>
-  </div>
 
-  <div class="flex flex-row align-middle justify-center mt-8">
-    <Button @click="submit">Top up</Button>
-  </div>
+  <DashboardSubtitle title="Top up" subtitle="Top up your account ! ⛽" />
 
   <LandingPricing :action="actionPricing" :text />
+
 </template>
