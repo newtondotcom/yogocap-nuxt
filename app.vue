@@ -13,6 +13,7 @@ import Toaster from '@/components/ui/toast/Toaster.vue'
 
 <template>
   <Toaster />
+  <NuxtLoadingIndicator />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
