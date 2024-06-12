@@ -273,7 +273,7 @@ onMounted(() => {
                     </svg>
                 </div>
                 <p class="text-gray-600">
-                    Thanks, you video is now being processed. You can check <a href="pvideos" class="text-primary">here</a> to check and you will receive an email when it's done !
+                    Thanks, you video is now being processed. You can check <Nuxtlink href="pvideos" class="text-primary">here</Nuxtlink> to check and you will receive an email when it's done !
                 </p>
             </div>
             <div class="flex flex-col w-1/2 h-[30vh] pl-10"
