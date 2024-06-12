@@ -1,6 +1,4 @@
-const slugStarter = 'plan-starter'
-const slugPro = 'plan-premium'
-const slugBusiness = 'plan-business'
+import constants from "~/lib/constants"
 let urlStater = ''
 let urlPro = ''
 let urlBusiness = ''
@@ -11,7 +9,8 @@ export default defineEventHandler(async (event) => {
   myHeaders.append('Accept', 'application/vnd.api+json')
   myHeaders.append('Content-Type', 'application/vnd.api+json')
   const config = useRuntimeConfig()
-  myHeaders.append('Authorization', config.AUTH_HEADER)
+  const key = config.LEMON_SQUEEZY_PROD ;
+  myHeaders.append('Authorization', key)
   const requestOptions = {
     method: 'GET',
     headers: myHeaders,
@@ -23,11 +22,11 @@ export default defineEventHandler(async (event) => {
   const productLink = `?checkout[custom][user_id]=${user_id}`
 
   for (let i = 0; i < product.length; i++) {
-    if (product[i].attributes.slug === slugStarter) {
+    if (product[i].attributes.name.includes(constants.NAME_PLAN_SLOW)) {
       urlStater = product[i].attributes.buy_now_url + productLink
-    } else if (product[i].attributes.slug === slugPro) {
+    } else if (product[i].attributes.name.includes(constants.NAME_PLAN_MEDIUM)) {
       urlPro = product[i].attributes.buy_now_url + productLink
-    } else if (product[i].attributes.slug === slugBusiness) {
+    } else if (product[i].attributes.name.includes(constants.NAME_PLAN_FAST)) {
       urlBusiness = product[i].attributes.buy_now_url + productLink
     }
   }
