@@ -39,9 +39,9 @@ export default function getMailTemplateReady(name : string, link : string) {
         <p>I'm Robin, and I'm super excited to let you know that your <span class="accent">Yogocap</span> video named "<span class="accent">${name}</span>" is now ready for download! 📹✨</p>
         <p>Thank you for submitting it, and I can't wait for you to see the final result. To get started, just click the button below:</p>
         <div class="around">
-            < Nuxtlink href="${link}" class="button">Download Your Video</Nuxtlink>
+            <a href="${link}" class="button">Download Your Video</a>
         </div>
-        <p>If you have any questions or need further assistance, feel free to write to < Nuxtlink href="mailto:support@yogocap.com">this email</Nuxtlink>. I'm here to help! 😊</p>
+        <p>If you have any questions or need further assistance, feel free to write to <a href="mailto:support@yogocap.com">this email</a>. I'm here to help! 😊</p>
         <p>Best regards,<br><strong>Robin</strong> from <span class="accent">Yogocap</span></p>
     </body>
     </html>

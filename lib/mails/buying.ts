@@ -40,9 +40,9 @@ export default function getMailTemplateBuying(name: string, link: string) {
     <p>Firstly, I wanted to personnally thank you.</p>
     <p>Secondly, you can enjoy it right now ✨ Have fun ! </p>
     <div class="around">
-        < Nuxtlink href="${link}" class="button">Enjoy it</Nuxtlink>
+        <a href="${link}" class="button">Enjoy it</a>
     </div>
-    <p>If you have any questions or need further assistance, feel free to write to < Nuxtlink href="mailto:support@yogocap.com">this email</Nuxtlink>. I'm here to help! 😊</p>
+    <p>If you have any questions or need further assistance, feel free to write to <a href="mailto:support@yogocap.com">this email</a>. I'm here to help! 😊</p>
     <p> Thank you so much for your trust 🫂 </p>
     <p>Best regards,<br><strong>Robin</strong> from <span class="accent">Yogocap</span></p>  
     </body>
