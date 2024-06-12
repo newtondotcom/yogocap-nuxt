@@ -8,7 +8,7 @@ import type { WebhookEvent } from '~/types/types';
 import { sendEmailOnBuyingMade } from '~/server/data/mail';
 
 const config = useRuntimeConfig();
-const secret: string = config.LEMON_SQUEEZY_SECRET;
+let secret: string;
 
 // Function to verify the signature
 const verifySignature = (rawBody: Buffer, signature: string, secret: string): boolean => {
@@ -40,6 +40,12 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
   const event_name: string = meta.event_name;
   const user_id: string = meta.custom_data.user_id;
   const product_name: string = data.attributes.first_order_item.product_name;
+  const testmode: boolean = data.attributes.test_mode;
+  if (testmode) {
+    secret = config.LEMON_SQUEEZY_SECRET;
+  } else {
+    secret = config.LEMON_SQUEEZY_SECRET_LIVE;
+  }
 
   switch (event_name) {
     case 'order_created':
