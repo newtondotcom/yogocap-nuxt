@@ -22,7 +22,7 @@ const constants = {
 
     NAME_PLAN_JOIN : 'Trial',
     SLUG_PLAN_JOIN : 'plan-trial',
-    NB_VIDEOS_JOIN : 5,
+    NB_VIDEOS_JOIN : 3,
     CAN_EMOJIS_JOIN : false,
     DURATION_JOIN : 60,
     PRICE_JOIN : 0,
