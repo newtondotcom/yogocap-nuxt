@@ -3,7 +3,8 @@
 
 
         <div class="p-[100px] bg-black">
-                <div class="text-primary font-bold text-6xl">Made w/</div>
+                <div class="text-primary font-bold text-6xl">Subtitles</div>
+                <div class="text-primary font-bold text-6xl">made w/</div>
                 <div class="text-primary font-bold text-6xl underline cursor-pointer">Yogocap</div>
         </div>
 </template>
