@@ -26,14 +26,8 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
   try {
   const req: IncomingMessage = levent.node.req;
   const rawBody: Buffer = await RawBody(req);
-  const signature: string = req.headers['x-signature'] as string;
-
-  if (!verifySignature(rawBody, signature, secret)) {
-    throw new Error('Invalid signature.');
-  } else {
-    console.log('Signature verified');
-  }
-
+  const signature: string = req.headers['x-signature'] as string;  
+    
   const parsedBody: WebhookEvent = JSON.parse(rawBody.toString());
   const { meta, data } = parsedBody;
 
@@ -45,6 +39,12 @@ export default defineEventHandler(async (levent: { node: { req: IncomingMessage;
     secret = config.LEMON_SQUEEZY_SECRET;
   } else {
     secret = config.LEMON_SQUEEZY_SECRET_LIVE;
+  }
+
+  if (!verifySignature(rawBody, signature, secret)) {
+    throw new Error('Invalid signature.');
+  } else {
+    console.log('Signature verified');
   }
 
   switch (event_name) {
