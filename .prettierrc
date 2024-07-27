@@ -1,0 +1,16 @@
+{
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 100,
+    "tabWidth": 4,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "vueIndentScriptAndStyle": true,
+    "overrides": [
+        {
+            "files": "*.vue",
+            "options": {
+                "htmlWhitespaceSensitivity": "ignore"
+            }
+        }
+    ]
+}

@@ -26,3 +26,6 @@ logs
 pages/mails/*.vue
 
 server/api/test.ts
+
+
+bun.lockb
