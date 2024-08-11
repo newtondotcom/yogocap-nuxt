@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { SquarePlus, Captions, CreditCard, FileClock, History, Bell, CircleUser, Home, LineChart, Menu, Package, Package2, Search, ShoppingCart, Users } from 'lucide-vue-next';
+import SheetClose from '~/components/ui/sheet/SheetClose.vue';
 const route = useRoute()
 const supabase = useSupabaseClient()
 const previousVideosCount = useCookie('previousVideosCount')
@@ -34,12 +35,6 @@ onMounted(() => {
                         <Captions class="text-primary pt-1 h-6 w-6" />
                         <div class="text-primary font-bold text-xl underline">Yogocap</div>
                     </NuxtLink>
-                    <!--
-          <Button variant="outline" size="icon" class="ml-auto h-8 w-8">
-            <Bell class="h-4 w-4" />
-            <span class="sr-only">Toggle notifications</span>
-          </Button>
-          -->
                 </div>
                 <div class="flex-1">
                     <nav class="grid items-start px-2 text-sm font-medium lg:px-4">
@@ -107,18 +102,25 @@ onMounted(() => {
                     </SheetTrigger>
                     <SheetContent side="left" class="flex flex-col">
                         <nav class="grid gap-2 text-lg font-medium">
+                        <SheetClose>
                             <NuxtLink to="#" class="flex items-center gap-2 text-lg font-semibold">
                                 <Captions class="text-primary pt-1 h-6 w-6" />
                                 <span class="sr-only">Yogocap</span>
 
                             </NuxtLink>
-                                                    <NuxtLink to="/nvideo" :class="{
+                        </SheetClose>
+
+                        <SheetClose>
+                        <NuxtLink to="/nvideo" :class="{
                             'text-primary bg-muted': $route.name === 'nvideo',
                             'text-muted-foreground': $route.name !== 'nvideo'
                         }" class="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary">
                             <SquarePlus class="h-4 w-4" />
                             New Video
                         </NuxtLink>
+                        </SheetClose>
+
+                        <SheetClose>
                         <NuxtLink :to="{ name: 'pvideos' }" :class="{
                             'text-primary bg-muted': $route.name === 'pvideos',
                             'text-muted-foreground': $route.name !== 'pvideos'
@@ -129,7 +131,9 @@ onMounted(() => {
                                 {{previousVideosCount}}
                             </Badge>
                         </NuxtLink>
+                        </SheetClose>
 
+                        <SheetClose>
                         <NuxtLink to="/credit" :class="{
                             'text-primary bg-muted': route.name === 'credit',
                             'text-muted-foreground': route.name !== 'credit',
@@ -137,6 +141,9 @@ onMounted(() => {
                             <CreditCard class="h-4 w-4" />
                             Balance
                         </NuxtLink>
+                        </SheetClose>
+
+                        <SheetClose>
                         <NuxtLink to="/history" :class="{
                             'text-primary bg-muted': route.name === 'history',
                             'text-muted-foreground': route.name !== 'history',
@@ -144,6 +151,7 @@ onMounted(() => {
                             <FileClock class="h-4 w-4" />
                             History
                         </NuxtLink>
+                        </SheetClose>
                         </nav>
                         <div class="mt-auto">
                             <Card>
