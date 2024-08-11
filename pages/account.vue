@@ -1,11 +1,9 @@
 <script setup lang="ts">
+import { useToast } from '@/components/ui/toast/use-toast'
+const { toast } = useToast()
 const supabase = useSupabaseClient();
 
 let storageMessage = false;
-
-const ackStorageMessage = () => {
-  storageMessage = true;
-};
 
 const handleLogout = async () => {
   const { error } = await supabase.auth.signOut()
@@ -15,6 +13,14 @@ const handleLogout = async () => {
     .catch((error) => {
       console.log(error);
     });
+
+  if (error){
+    toast({
+      title : "Error",
+      description : "Something unexpected happened",
+      variant : "destructive"
+    })
+  }
 };
 </script>
 
