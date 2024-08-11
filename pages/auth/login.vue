@@ -1,39 +1,12 @@
 <script setup lang="ts">
-definePageMeta({
-    layout: false,
-})
+definePageMeta({layout: false})
 
-const config = useRuntimeConfig();
 const supabase = useSupabaseClient();
 
-let email = ref('');
-let password = ref('');
-let success = ref < boolean | undefined > (undefined);
-let loading = ref(false);
 let redirect = "/invalidonpurpose";
 if (window.location.hostname === 'localhost') {
     redirect = "http://localhost:3000";
 }
-
-const login = async () => {
-    loading.value = true;
-    const {
-        data,
-        error
-    } = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value
-    })
-    if (!error) {
-        navigateTo(redirect);
-    } else {
-        success.value = false;
-        loading.value = false;
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-    }
-};
 
 const signInWithGoogle = async () => {
     console.log('signing in with google');
@@ -112,37 +85,6 @@ const signInWithDiscord = async () => {
         </CardHeader>
         <CardContent>
             <div class="grid gap-4">
-                <!--
-                    <div class="grid gap-2">
-                        <Label for="email">Email</Label>
-                        <Input id="email" type="email" placeholder="m@example.com" required v-model="email" />
-                    </div>
-                    <div class="grid gap-2">
-                        <div class="flex items-center">
-                            <Label for="password">Password</Label>
-                            <NuxtLink to="/auth/reset" class="ml-auto inline-block text-sm underline">
-                                Forgot your password?
-                            </NuxtLink>
-                        </div>
-                        <Input id="password" type="password" required v-model="password" />
-                    </div>
-                    <Button type="submit" class="w-full" @click="login">
-                        <div v-if="loading" aria-label="Loading..." role="status"
-                            class="align-middle justify-center flex">
-                            <svg class="animate-spin w-6 h-6 fill-slate-800" viewBox="3 3 18 18">
-                                <path class="opacity-20"
-                                    d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z">
-                                </path>
-                                <path
-                                    d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z">
-                                </path>
-                            </svg>
-                        </div>
-                        <div v-else>
-                            Login
-                        </div>
-                    </Button>
-                    -->
                 <Button variant="outline" class="w-full" @click="signInWithGoogle">
                     <svg class="w-6 h-6 mx-2" viewBox="0 0 40 40">
                         <path d="M36.3425 16.7358H35V16.6667H20V23.3333H29.4192C28.045 27.2142 24.3525 30 20 30C14.4775 30 10 25.5225 10 20C10 14.4775 14.4775 9.99999 20 9.99999C22.5492 9.99999 24.8683 10.9617 26.6342 12.5325L31.3483 7.81833C28.3717 5.04416 24.39 3.33333 20 3.33333C10.7958 3.33333 3.33335 10.7958 3.33335 20C3.33335 29.2042 10.7958 36.6667 20 36.6667C29.2042 36.6667 36.6667 29.2042 36.6667 20C36.6667 18.8825 36.5517 17.7917 36.3425 16.7358Z" fill="#FFC107" />
