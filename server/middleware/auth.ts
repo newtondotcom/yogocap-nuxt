@@ -1,11 +1,12 @@
 import { serverSupabaseUser } from '#supabase/server';
 
 export default defineEventHandler(async (event) => {
-    const path = event.path.split('/');
+    const path = event.path;
     if (
-        path?.includes('auth') ||
-        path?.includes('wakeup') ||
-        (path[0] == '' && path[1].includes('code'))
+        (path === '/auth/login') ||
+        path.includes('/?code=') ||
+        (path === '/api/wakeup') ||
+        (path === "/api/s3/list")
     ) {
         return;
     } else {
@@ -18,7 +19,6 @@ export default defineEventHandler(async (event) => {
             console.error('Route fetched : ' + event.path);
             console.error('Error in auth middleware:', error);
             await sendRedirect(event, '/auth/login', 302);
-            throw new Error('Unauthorized');
         }
     }
 });
