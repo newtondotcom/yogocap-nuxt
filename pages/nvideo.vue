@@ -189,7 +189,7 @@ onMounted(() => {
 
     <div class="rounded-lg border border-dashed shadow-sm">
         <div class="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-8">
-            <div class="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+            <div class="max-w-xl mb-4 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                 <div>
                     <p
                         class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-primary-foreground uppercase rounded-full bg-teal-accent-400">
@@ -197,7 +197,7 @@ onMounted(() => {
                     </p>
                 </div>
                 <h2
-                    class="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                    class="max-w-lg my-2 font-sans font-bold leading-none tracking-tight text-gray-900 text-4xl md:mx-auto md:my-6">
                     <span class="relative inline-block">
                         <svg viewBox="0 0 52 24" fill="currentColor"
                             class="absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
@@ -222,7 +222,7 @@ onMounted(() => {
         <Progress v-model="length" class="mb-[50px] w-4/5 mx-auto rounded-md self-center" />
 
         <div class="flex flex-row items-center justify-center">
-            <div class="flex w-1/3 h-[30vh] flex-row items-center justify-center" v-if="!Success">
+            <div class="flex w-full md:w-1/3 h-[30vh] flex-row items-center justify-center" v-if="!Success">
                 <div v-if="videoUploaded"
                     class="flex flex-row items-center justify-center mt-2 text-green-400 font-bold">
                     <Badge class="bg-green-500 px-4 py-2 text-primary-foreground">Uploaded !</Badge>
@@ -249,15 +249,6 @@ onMounted(() => {
                             </div>
                         </Badge>
                     </div>
-                    <!--
-                <Alert class="my-2" variant="destructive" v-if="!videoValid">
-                    <AlertCircle class="w-4 h-4" />
-                    <AlertTitle>Error</AlertTitle>
-                    <AlertDescription>
-                        Your video length is above the one included in your current plan.
-                    </AlertDescription>
-                </Alert>
-                -->
                 </div>
             </div>
 
