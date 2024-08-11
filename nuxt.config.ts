@@ -5,15 +5,12 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         '@nuxtjs/supabase',
         'shadcn-nuxt',
-        '@nuxtjs/plausible',
-        '@nuxt/eslint',
+        //'@nuxtjs/plausible',
+        //'@nuxt/eslint',
     ],
 
     supabase: {
-        redirect: true,
-        redirectOptions: {
-            login: '/auth/login',
-        },
+        redirect: false,
     },
 
     ssr: false,
@@ -57,10 +54,12 @@ export default defineNuxtConfig({
         viewer: false,
     },
 
+    /*
     plausible: {
         ignoredHostnames: ['localhost'],
         apiHost: 'https://plaunwt.duckdns.org',
     },
+    */
 
     compatibilityDate: '2024-08-02',
 });
