@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         '@nuxtjs/supabase',
         'shadcn-nuxt',
         //'@nuxtjs/plausible',
-        //'@nuxt/eslint',
+        '@nuxt/eslint',
     ],
 
     supabase: {
