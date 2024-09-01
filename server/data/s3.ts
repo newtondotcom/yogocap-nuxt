@@ -1,7 +1,6 @@
 import { Client } from 'minio';
 import prisma from './prisma';
 import constants from '~/lib/constants';
-import { assert } from '@vueuse/core';
 
 export default function generateUniqueName() {
     const date = new Date();
@@ -11,7 +10,7 @@ export default function generateUniqueName() {
     return uniqueName;
 }
 
-export async function removeVideo(user_id : string, videoId: string) {
+export async function removeVideo(user_id: string, videoId: string) {
     try {
         // get video object from database
         const video = await prisma.video.findUnique({
@@ -22,17 +21,19 @@ export async function removeVideo(user_id : string, videoId: string) {
                 name_s3: true,
                 user_id: true,
                 stored: true,
-            }
+            },
         });
 
-        assert(video?.user_id == user_id);
+        if (video?.user_id !== user_id) {
+            return;
+        }
 
         //const s3Name = video?.stored;
         const s3Name = constants.NAME_S3_DOWNLOADS;
         const config = await prisma.s3.findUnique({
             where: {
                 name: s3Name,
-            }
+            },
         });
 
         const MINIO_ENDPOINT = config.endpoint;
@@ -45,7 +46,7 @@ export async function removeVideo(user_id : string, videoId: string) {
         // remove video object from MinIO
         const minioClient = new Client({
             endPoint: MINIO_ENDPOINT,
-            port: parseInt(MINIO_PORT),
+            port: MINIO_PORT,
             useSSL: MINIO_SSL,
             accessKey: MINIO_ACCESS_KEY,
             secretKey: MINIO_SECRET_KEY,
@@ -65,7 +66,7 @@ export async function removeVideo(user_id : string, videoId: string) {
             where: { user_id: video.user_id },
             data: {
                 videos_stored: {
-                    decrement: 1
+                    decrement: 1,
                 },
             },
         });
@@ -87,7 +88,7 @@ export async function createPresignedUrlUpload(user_id: any) {
     const config = await prisma.s3.findUnique({
         where: {
             name: s3Name,
-        }
+        },
     });
 
     const MINIO_ENDPOINT = config.endpoint;
@@ -99,7 +100,7 @@ export async function createPresignedUrlUpload(user_id: any) {
 
     const minioClient = new Client({
         endPoint: MINIO_ENDPOINT,
-        port: parseInt(MINIO_PORT),
+        port: MINIO_PORT,
         useSSL: MINIO_SSL,
         accessKey: MINIO_ACCESS_KEY,
         secretKey: MINIO_SECRET_KEY,
@@ -107,10 +108,10 @@ export async function createPresignedUrlUpload(user_id: any) {
     const objectName = generateUniqueName() + '.mp4';
     const expiryInSeconds = 3600;
     const url = await minioClient.presignedPutObject(bucketName, objectName, expiryInSeconds);
-    return { url, objectName, s3Name};
+    return { url, objectName, s3Name };
 }
 
-export async function createPresignedUrlDownload(user_id:any,video_id: any) {
+export async function createPresignedUrlDownload(user_id: any, video_id: any) {
     const video = await prisma.video.findUnique({
         where: {
             id: video_id,
@@ -119,9 +120,11 @@ export async function createPresignedUrlDownload(user_id:any,video_id: any) {
             stored: true,
             name_s3: true,
             user_id: true,
-        }
+        },
     });
-    assert(video?.user_id == user_id);
+    if (video?.user_id !== user_id) {
+        return;
+    }
     // const s3Name = video?.stored;
     const s3Name = constants.NAME_S3_DOWNLOADS;
     const config = await prisma.s3.findUnique({
@@ -135,7 +138,7 @@ export async function createPresignedUrlDownload(user_id:any,video_id: any) {
             access_key: true,
             secret_key: true,
             bucket: true,
-        }
+        },
     });
 
     const MINIO_ENDPOINT = config.endpoint;
@@ -147,18 +150,26 @@ export async function createPresignedUrlDownload(user_id:any,video_id: any) {
 
     const minioClient = new Client({
         endPoint: MINIO_ENDPOINT,
-        port: parseInt(MINIO_PORT),
+        port: MINIO_PORT,
         useSSL: MINIO_SSL,
         accessKey: MINIO_ACCESS_KEY,
         secretKey: MINIO_SECRET_KEY,
     });
-    const objectName = video.name_s3.replace('.mp4','_out.mp4');
+    const objectName = video.name_s3.replace('.mp4', '_out.mp4');
     const expiryInSeconds = 3600;
     const url = await minioClient.presignedGetObject(bucketName, objectName, expiryInSeconds);
     return url;
 }
 
-export async function insertS3Server(name: any, endpoint: any, port: any, ssl: boolean, accessKey: any, secretKey: any, bucketName: any) {
+export async function insertS3Server(
+    name: any,
+    endpoint: any,
+    port: any,
+    ssl: boolean,
+    accessKey: any,
+    secretKey: any,
+    bucketName: any,
+) {
     await prisma.s3.create({
         data: {
             name: name,
@@ -167,7 +178,7 @@ export async function insertS3Server(name: any, endpoint: any, port: any, ssl: b
             access_key: accessKey,
             secret_key: secretKey,
             bucket: bucketName,
-            ssl: ssl
-        }
+            ssl: ssl,
+        },
     });
 }
