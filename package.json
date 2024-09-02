@@ -20,6 +20,7 @@
         "amqplib": "^0.10.4",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.1",
+        "date-fns": "^3.6.0",
         "lucide-vue-next": "^0.368.0",
         "minio": "^7.1.4",
         "nodemailer": "^6.9.14",

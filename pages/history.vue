@@ -1,5 +1,7 @@
 <script setup lang="ts">
     import constants from '~/lib/constants';
+    import { formatDistanceToNow } from 'date-fns';
+    import { enUS } from 'date-fns/locale';
 
     const transactions = ref([]);
     const videos = ref([]);
@@ -9,10 +11,6 @@
         const data = await $fetch('/api/dashboard/history');
         transactions.value = data.transactions;
         transactions.value.map((item) => {
-            item.date =
-                new Date(item.date).toLocaleTimeString() +
-                ' on ' +
-                new Date(item.date).toLocaleDateString();
             item.plan = item.plan
                 .split('-')[1]
                 .toLowerCase()
@@ -24,12 +22,6 @@
         });
         videos.value = data.videos;
         videos.value.splice(50);
-        videos.value.map((item) => {
-            item.submitted =
-                new Date(item.submitted).toLocaleTimeString() +
-                ' at ' +
-                new Date(item.submitted).toLocaleDateString();
-        });
         dataFetched.value = true;
     }
 
@@ -98,22 +90,42 @@
         </table>
     </div>
 
-    <div class="w-full h-full md:hidden">
+    <div class="md:hidden w-full h-full flex flex-col space-y-2">
         <SkeletonsHistoryMobile v-if="!dataFetched" />
-        <div v-for="transaction in transactions" class="flex flex-col">
-            <div class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 flex flex-row">
-                <div class="">
-                    {{ transaction.date }}
-                </div>
-                <div class="">{{ transaction.value }} €</div>
+        <div
+            v-for="transaction in transactions"
+            class="flex flex-col bg-secondary rounded-lg justify-center items-center"
+        >
+            <div class="whitespace-nowrap font-medium text-gray-900 flex flex-row">
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <Button variant="ghost">
+                                {{
+                                    formatDistanceToNow(new Date(transaction.date), {
+                                        locale: enUS,
+                                    })
+                                }}
+                                ago
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{{ new Date(transaction.date).toLocaleDateString() }}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </div>
-            <div class="flex flex-row align-middle justify-center">
-                {{ transaction.plan }}
-                <div
-                    v-if="transaction.onjoin"
-                    class="bg-clip-text bg-gradient-to-r from-yellow-400 to-green-600 ml-2"
-                >
-                    -gifted-
+            <div class="flex flex-row align-middle justify-center pb-2">
+                Plan {{ transaction.plan }}
+                <div class="mx-1">({{ transaction.value }} €)</div>
+                <div v-if="transaction.onjoin" class="mx-2">
+                    🌟
+                    <span
+                        class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-green-600"
+                    >
+                        gifted
+                    </span>
+                    🎁
                 </div>
             </div>
         </div>
@@ -145,7 +157,7 @@
                 <tr v-for="video in videos">
                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                         <div class="flex flex-row align-middle justify-center">
-                            {{ itvideoem.name }}
+                            {{ video.name }}
                         </div>
                     </td>
                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
@@ -179,17 +191,32 @@
         </table>
     </div>
 
-    <div class="w-full h-full md:hidden">
+    <div class="md:hidden w-full h-full flex flex-col space-y-2">
         <SkeletonsHistoryMobile v-if="!dataFetched" />
-        <div v-for="video in videos" class="flex flex-col">
-            <div class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 flex flex-row">
-                <div class="">
-                    {{ video.name }}
-                </div>
-                <div class="">{{ video.submitted }} €</div>
+        <div
+            v-for="video in videos"
+            class="flex flex-col bg-secondary rounded-lg justify-center items-center"
+        >
+            <div class="whitespace-nowrap font-medium text-gray-900 flex flex-row">
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger as-child>
+                            <Button variant="ghost">
+                                {{
+                                    formatDistanceToNow(new Date(video.submitted), { locale: enUS })
+                                }}
+                                ago
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{{ new Date(video.submitted).toLocaleDateString() }}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
             </div>
-            <div class="flex flex-row align-middle justify-center">
-                {{ video.length }}
+            <div class="flex flex-row align-middle justify-center space-x-2 pb-2">
+                <div class="">{{ video.length }}-second long video named</div>
+                <div class="font-semibold">"{{ video.name }}"</div>
             </div>
         </div>
         <div v-if="dataFetched && transactions.length == 0">
