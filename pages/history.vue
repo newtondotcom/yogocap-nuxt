@@ -20,8 +20,10 @@
             if (item.plan == constants.NAME_PLAN_FAST) item.value = constants.PRICE_FAST;
             if (item.plan == constants.NAME_PLAN_JOIN) item.value = constants.PRICE_JOIN;
         });
+        transactions.value = data.transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
         videos.value = data.videos;
-        videos.value.splice(50);
+        videos.value = data.videos.sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
+        videos.value.splice(20);
         dataFetched.value = true;
     }
 
@@ -136,7 +138,7 @@
 
     <DashboardSubtitle
         title="Videos history"
-        subtitle="Here is the list of your latest 50 previous subtitled videos ! 📺"
+        subtitle="Here is the list of your latest 20 previous subtitled videos ! 📺"
     />
 
     <div
