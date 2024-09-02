@@ -1,6 +1,7 @@
 <script setup lang="ts">
-    import { AlertCircle } from 'lucide-vue-next';
     import constants from '~/lib/constants';
+    import { AlertCircle } from 'lucide-vue-next';
+
     const supabase = useSupabaseClient();
 
     async function accountClosing() {

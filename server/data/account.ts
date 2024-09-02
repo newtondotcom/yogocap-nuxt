@@ -1,5 +1,6 @@
-import prisma from './prisma';
 import constants from '~/lib/constants';
+
+import prisma from './prisma';
 
 export async function updateAccountAfterVideoDone(user_id: any) {
     try {

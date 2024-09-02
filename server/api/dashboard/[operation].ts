@@ -1,3 +1,4 @@
+import { serverSupabaseUser } from '#supabase/server';
 import {
     getCurrentCreditState,
     getTransactions,
@@ -15,7 +16,6 @@ import {
     getVideosHistory,
     setVideoDone,
 } from '~/server/data/videos';
-import { serverSupabaseUser } from '#supabase/server';
 import { H3Event } from 'h3';
 
 export default defineEventHandler(async (event: H3Event) => {

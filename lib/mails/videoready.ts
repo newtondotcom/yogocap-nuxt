@@ -1,4 +1,4 @@
-export default function getMailTemplateReady(name : string, link : string) {
+export default function getMailTemplateReady(name: string, link: string) {
     const body = `
     <html>
     <head>

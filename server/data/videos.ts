@@ -1,7 +1,18 @@
-import constants from "~/lib/constants";
-import prisma from "./prisma";
+import constants from '~/lib/constants';
 
-export async function createVideo(user_id: any, name: string, aligned: boolean, emojis: boolean, music: boolean, silent: boolean, length: number, name_s3: string, s3name: string) {
+import prisma from './prisma';
+
+export async function createVideo(
+    user_id: any,
+    name: string,
+    aligned: boolean,
+    emojis: boolean,
+    music: boolean,
+    silent: boolean,
+    length: number,
+    name_s3: string,
+    s3name: string,
+) {
     try {
         const newVideo = await prisma.video.create({
             data: {
@@ -18,16 +29,16 @@ export async function createVideo(user_id: any, name: string, aligned: boolean, 
                 deleted: false,
             },
             select: {
-                id: true
-            }
+                id: true,
+            },
         });
         const addVideoDone = await prisma.account.update({
             where: { user_id: user_id },
             data: {
                 videos_remaining: {
-                    decrement: 1
-                }
-            }
+                    decrement: 1,
+                },
+            },
         });
         return newVideo.id;
     } catch (error: any) {
@@ -40,11 +51,11 @@ export async function assignTasktoVideo(video_id: any, task_id: string) {
         const updatedVideo = await prisma.video.update({
             where: { id: video_id },
             data: {
-                task_id
+                task_id,
             },
             select: {
-                user_id: true
-            }
+                user_id: true,
+            },
         });
         return updatedVideo.user_id;
     } catch (error: any) {
@@ -58,8 +69,8 @@ export async function setVideoDone(video_id: any, task_id: string, thumbnail: st
         await prisma.task.update({
             where: { id: task_id },
             data: {
-                done: true
-            }
+                done: true,
+            },
         });
         // mark the video as done
         const updatedVideo = await prisma.video.update({
@@ -67,11 +78,11 @@ export async function setVideoDone(video_id: any, task_id: string, thumbnail: st
             data: {
                 task_id,
                 done: true,
-                thumbnail
+                thumbnail,
             },
             select: {
-                user_id: true
-            }
+                user_id: true,
+            },
         });
         return updatedVideo.user_id;
     } catch (error: any) {
@@ -84,7 +95,7 @@ export async function getVideos(user_id: any) {
         const videos = await prisma.video.findMany({
             where: {
                 user_id,
-                deleted: false
+                deleted: false,
             },
             select: {
                 id: true,
@@ -99,11 +110,11 @@ export async function getVideos(user_id: any) {
                 deleted: true,
                 submitted: true,
                 name_s3: true,
-                task_id: true
+                task_id: true,
             },
             orderBy: {
-                submitted: 'desc'
-            }
+                submitted: 'desc',
+            },
         });
         /*
         // filter videos which tasks are done for more than x days
@@ -141,21 +152,21 @@ export async function getVideos(user_id: any) {
         */
         const s3_thumbnails = await prisma.s3.findUnique({
             where: {
-                name: constants.NAME_S3_THUMBNAILS
+                name: constants.NAME_S3_THUMBNAILS,
             },
-            select : {
+            select: {
                 endpoint: true,
                 port: true,
                 ssl: true,
-                bucket: true
-            }
+                bucket: true,
+            },
         });
         const baselink = `${s3_thumbnails?.ssl ? 'https' : 'http'}://${s3_thumbnails?.endpoint}:${s3_thumbnails?.port}/${s3_thumbnails?.bucket}/`;
         videos.forEach((video: any) => {
             if (video.done) {
                 video.thumbnail = baselink + video.name_s3.replace('.mp4', '.jpg');
             }
-        })
+        });
         return videos;
     } catch (error: any) {
         throw new Error(`Error getting videos: ${error.message}`);
@@ -166,7 +177,7 @@ export async function getVideosHistory(user_id: any) {
     try {
         const videos = await prisma.video.findMany({
             where: {
-                user_id
+                user_id,
             },
             select: {
                 id: true,
@@ -177,7 +188,7 @@ export async function getVideosHistory(user_id: any) {
                 silent: true,
                 length: true,
                 submitted: true,
-            }
+            },
         });
         return videos;
     } catch (error: any) {

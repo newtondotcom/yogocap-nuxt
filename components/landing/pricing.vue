@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+    import constants from '~/lib/constants';
+
     defineProps({
         action: {
             type: Function,
@@ -9,7 +11,6 @@
             required: true,
         },
     });
-    import constants from '~/lib/constants';
 </script>
 
 <template>

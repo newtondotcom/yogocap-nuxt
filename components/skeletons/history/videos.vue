@@ -20,7 +20,6 @@
                 <Skeleton class="h-4 w-[50px]" />
             </div>
         </td>
-        <td class="whitespace-nowrap px-4 py-2">
-        </td>
+        <td class="whitespace-nowrap px-4 py-2"></td>
     </tr>
 </template>

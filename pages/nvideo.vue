@@ -1,6 +1,7 @@
 <script setup lang="ts">
-    import { PenLine } from 'lucide-vue-next';
     import { useToast } from '@/components/ui/toast/use-toast';
+    import { PenLine } from 'lucide-vue-next';
+
     const { toast } = useToast();
     let videoUploaded = ref(false);
     let loadingUpload = ref(false);

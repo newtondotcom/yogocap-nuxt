@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import constants from '~/lib/constants';
-    import { Check, Ban } from 'lucide-vue-next';
+    import { Ban, Check } from 'lucide-vue-next';
 
     const current_plan = ref('');
     const videos_remaining = ref(0);
