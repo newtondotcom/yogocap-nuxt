@@ -68,7 +68,7 @@
     <div class="flex-column my-8 flex justify-center align-middle sm:mt-12">
         <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
             <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
-                <dt class="order-last text-lg font-medium text-gray-400">Current Plan</dt>
+                <dt class="order-last text-lg font-medium text-gray-400">current Plan</dt>
 
                 <dd
                     class="flex flex-row justify-center align-middle text-3xl font-extrabold text-primary-foreground md:text-5xl"
@@ -89,7 +89,7 @@
             </div>
 
             <div class="flex flex-col rounded-lg bg-primary px-4 py-8 text-center">
-                <dt class="order-last text-lg font-medium text-gray-400">Max video duration</dt>
+                <dt class="order-last text-lg font-medium text-gray-400">max duration per video</dt>
 
                 <dd
                     class="flex flex-row justify-center align-middle text-4xl font-extrabold text-primary-foreground md:text-5xl"
