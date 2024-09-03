@@ -7,6 +7,7 @@ import {
 } from '~/server/data/account';
 import sendAMQP from '~/server/data/ampq';
 import { sendEmailOnVideoDone } from '~/server/data/mail';
+import { verifyApiKey } from '~/server/data/miscs';
 import { setSupportTicket } from '~/server/data/support';
 import { createTask, updateTask } from '~/server/data/tasks';
 import {
