@@ -89,7 +89,7 @@
             emojis: videoEmoji.value,
             music: videoMusic.value,
             silent: videoCut.value,
-            length: length.value,
+            length: videoLength.value,
             name_s3: generatedName,
             s3name: s3_server_name,
             position: position.value,
@@ -331,18 +331,17 @@
                                 Do you want us to cut silent parts of the video ?
                             </label>
                         </div>
-                        <Checkbox class="flex" v-model="videoCut" id="silence" />
+                        <Checkbox class="flex" v-model:checked="videoCut" id="silence" />
                     </div>
 
                     <!--
                     <div class="items-top flex gap-x-2 mt-4" :class="`${canMusic ? 'opacity-1' : 'opacity-50'}`">
-                        <Checkbox class="flex" v-model="videoMusic" id="music" v-if="canMusic" />
-                        <Checkbox class="flex" v-model="videoMusic" id="music" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label for="music"
                                 class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                                 Do you want us to add a dynamic music to the video ?
                             </label>
+                        <Checkbox class="flex" v-model:checked="videoMusic" id="music" :disabled="!canMusic" />
                         </div>
                     </div>
                     -->
@@ -351,8 +350,6 @@
                         class="items-top mt-4 flex gap-x-2"
                         :class="`${canEmoji ? 'opacity-1' : 'opacity-50'}`"
                     >
-                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-if="canEmoji" />
-                        <Checkbox class="flex" v-model="videoEmoji" id="emoji" v-else disabled />
                         <div class="grid gap-1.5 leading-none">
                             <label
                                 for="emoji"
@@ -361,6 +358,12 @@
                                 Do you want us to add emojis to the video ?
                             </label>
                         </div>
+                        <Checkbox
+                            class="flex"
+                            v-model:checked="videoEmoji"
+                            id="emoji"
+                            :disabled="!canEmoji"
+                        />
                     </div>
 
                     <div class="items-top mt-4 flex gap-x-2">
