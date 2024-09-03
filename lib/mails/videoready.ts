@@ -31,6 +31,7 @@ export default function getMailTemplateReady(name: string, link: string) {
             a {
                 text-decoration: none;
                 text-decoration: underline;
+                text-color: white;
             }
         </style>
     </head>
