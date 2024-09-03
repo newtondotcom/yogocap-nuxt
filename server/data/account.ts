@@ -51,7 +51,6 @@ export async function getCapacity(user_id: any) {
             },
         });
         account.can_music = false;
-        account.can_emojis = false;
         return account;
     } catch (error: any) {
         throw new Error(`Error getting account: ${error.message}`);
