@@ -110,9 +110,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Cutting video silent parts (
-                                <span class="text-sm">experimental</span>
-                                )
+                                Cutting video silent parts
+                                <span class="text-sm">(experimental)</span>
                             </span>
                         </li>
 
@@ -133,9 +132,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Free copyright song (
-                                <span class="text-sm">coming soon</span>
-                                )
+                                Free copyright song
+                                <span class="text-sm">(coming soon)</span>
                             </span>
                         </li>
 
@@ -174,7 +172,10 @@
                                 />
                             </svg>
 
-                            <span class="text-gray-700">3x faster video rendering (with GPU)</span>
+                            <span class="text-gray-700">
+                                3x faster video rendering
+                                <span class="text-sm">(with GPU)</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -269,9 +270,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Cutting video silent parts (
-                                <span class="text-sm">experimental</span>
-                                )
+                                Cutting video silent parts
+                                <span class="text-sm">(experimental)</span>
                             </span>
                         </li>
 
@@ -292,9 +292,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Free copyright song (
-                                <span class="text-sm">coming soon</span>
-                                )
+                                Free copyright song
+                                <span class="text-sm">(coming soon)</span>
                             </span>
                         </li>
 
@@ -333,7 +332,10 @@
                                 />
                             </svg>
 
-                            <span class="text-gray-700">3x faster video rendering (with GPU)</span>
+                            <span class="text-gray-700">
+                                3x faster video rendering
+                                <span class="text-sm">(with GPU)</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
@@ -429,9 +431,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Cutting video silent parts (
-                                <span class="text-sm">experimental</span>
-                                )
+                                Cutting video silent parts
+                                <span class="text-sm">(experimental)</span>
                             </span>
                         </li>
 
@@ -452,9 +453,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                Free copyright song (
-                                <span class="text-sm">coming soon</span>
-                                )
+                                Free copyright song
+                                <span class="text-sm">(coming soon)</span>
                             </span>
                         </li>
 
@@ -493,7 +493,10 @@
                                 />
                             </svg>
 
-                            <span class="text-gray-700">3x faster video rendering (with GPU)</span>
+                            <span class="text-gray-700">
+                                3x faster video rendering
+                                <span class="text-sm">(with GPU)</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
