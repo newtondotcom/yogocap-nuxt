@@ -66,7 +66,10 @@
                                 />
                             </svg>
 
-                            <span class="text-gray-700">{{ constants.NB_VIDEOS_SLOW }} videos</span>
+                            <span class="text-gray-700">
+                                <strong>{{ constants.NB_VIDEOS_SLOW }}</strong>
+                                videos
+                            </span>
                         </li>
 
                         <li class="flex items-center gap-1">
@@ -223,7 +226,8 @@
                             </svg>
 
                             <span class="text-gray-700">
-                                {{ constants.NB_VIDEOS_MEDIUM }} videos
+                                <strong>{{ constants.NB_VIDEOS_MEDIUM }}</strong>
+                                videos
                             </span>
                         </li>
 
@@ -381,7 +385,10 @@
                                 />
                             </svg>
 
-                            <span class="text-gray-700">{{ constants.NB_VIDEOS_FAST }} videos</span>
+                            <span class="text-gray-700">
+                                <strong>{{ constants.NB_VIDEOS_FAST }}</strong>
+                                videos
+                            </span>
                         </li>
 
                         <li class="flex items-center gap-1">
