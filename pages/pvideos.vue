@@ -6,7 +6,9 @@
         TooltipTrigger,
     } from '@/components/ui/tooltip';
     import constants from '~/lib/constants';
-    import { Terminal } from 'lucide-vue-next';
+    import { formatDistanceToNow } from 'date-fns';
+    import { enUS } from 'date-fns/locale';
+    import { ChevronLeft, ChevronRight, Download, Terminal, Trash } from 'lucide-vue-next';
     import type { Video } from '~/types/types';
 
     const previousVideosCount = useCookie('previousVideosCount');
@@ -103,7 +105,13 @@
 
             <div class="bg-white p-2">
                 <time class="block text-xs text-gray-500">
-                    {{ video.submitted }}
+                    {{ video.submitted }} -
+                    {{
+                        formatDistanceToNow(new Date(video.submitted), {
+                            locale: enUS,
+                        })
+                    }}
+                    ago
                 </time>
 
                 <button class="flex flex-row align-middle justify-center">
@@ -119,55 +127,11 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row justify-center gap-1">
+                <div class="flex flex-row justify-center space-x-1">
                     <AlertDialog>
                         <AlertDialogTrigger>
                             <Button :disabled="video.deleted || !video.done" variant="destructive">
-                                <div class="mr-1">
-                                    <svg
-                                        class="w-5 h-5"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g
-                                            id="SVGRepo_tracerCarrier"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></g>
-                                        <g id="SVGRepo_iconCarrier">
-                                            <path
-                                                d="M3 6.98996C8.81444 4.87965 15.1856 4.87965 21 6.98996"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            ></path>
-                                            <path
-                                                d="M8.00977 5.71997C8.00977 4.6591 8.43119 3.64175 9.18134 2.8916C9.93148 2.14146 10.9489 1.71997 12.0098 1.71997C13.0706 1.71997 14.0881 2.14146 14.8382 2.8916C15.5883 3.64175 16.0098 4.6591 16.0098 5.71997"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            ></path>
-                                            <path
-                                                d="M12 13V18"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            ></path>
-                                            <path
-                                                d="M19 9.98999L18.33 17.99C18.2225 19.071 17.7225 20.0751 16.9246 20.8123C16.1266 21.5494 15.0861 21.9684 14 21.99H10C8.91389 21.9684 7.87336 21.5494 7.07541 20.8123C6.27745 20.0751 5.77745 19.071 5.67001 17.99L5 9.98999"
-                                                stroke="currentColor"
-                                                stroke-width="1.5"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            ></path>
-                                        </g>
-                                    </svg>
-                                </div>
+                                <Trash class="w-4 h-4 mr-1" />
                                 <div>Delete</div>
                             </Button>
                         </AlertDialogTrigger>
@@ -193,42 +157,10 @@
                     <TooltipProvider v-if="video.perimee">
                         <Tooltip>
                             <TooltipTrigger as-child>
-                                <Button class="opacity-50">
-                                    <div class="mr-1">
-                                        <svg
-                                            viewBox="0 0 24 24"
-                                            class="w-5 h-5"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <g
-                                                id="SVGRepo_tracerCarrier"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                            ></g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <path
-                                                    d="M12 3V16M12 16L16 11.625M12 16L8 11.625"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                ></path>
-                                                <path
-                                                    d="M15 21H9C6.17157 21 4.75736 21 3.87868 20.1213C3 19.2426 3 17.8284 3 15M21 15C21 17.8284 21 19.2426 20.1213 20.1213C19.8215 20.4211 19.4594 20.6186 19 20.7487"
-                                                    stroke="currentColor"
-                                                    stroke-width="1.5"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                ></path>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div>Download</div>
-                                </Button>
+                                <Button disabled>Auto deleted</Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <p>Older than 2 days</p>
+                                <p>This video was older than 2 days</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -238,36 +170,7 @@
                         @click="downloadVideo(video.id)"
                         :disabled="video.deleted || !video.done"
                     >
-                        <div class="mr-1">
-                            <svg
-                                viewBox="0 0 24 24"
-                                class="w-5 h-5"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg"
-                            >
-                                <g
-                                    id="SVGRepo_tracerCarrier"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                ></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M12 3V16M12 16L16 11.625M12 16L8 11.625"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    ></path>
-                                    <path
-                                        d="M15 21H9C6.17157 21 4.75736 21 3.87868 20.1213C3 19.2426 3 17.8284 3 15M21 15C21 17.8284 21 19.2426 20.1213 20.1213C19.8215 20.4211 19.4594 20.6186 19 20.7487"
-                                        stroke="currentColor"
-                                        stroke-width="1.5"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                    ></path>
-                                </g>
-                            </svg>
-                        </div>
+                        <Download class="w-4 h-4 mr-1" />
                         <div>Download</div>
                     </Button>
                 </div>
@@ -284,59 +187,13 @@
     <div v-if="dataFetched && localvideos.length !== 0" class="flex flex-row justify-center mt-4">
         <div class="flex flex-row gap-2">
             <Button :disabled="currentpage == 1" @click="currentpage--">
-                <div class="mr-1">
-                    <svg
-                        viewBox="0 0 24 24"
-                        class="w-5 h-5"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g
-                            id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M15 18L9 12L15 6"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            ></path>
-                        </g>
-                    </svg>
-                </div>
+                <ChevronLeft class="w-4 h-4 ml-1" />
             </Button>
             <Button class="cursor-default">
                 {{ currentpage }} / {{ Math.ceil(videos.length / length) }}
             </Button>
             <Button :disabled="currentpage * length >= videos.length" @click="currentpage++">
-                <div class="ml-1">
-                    <svg
-                        viewBox="0 0 24 24"
-                        class="w-5 h-5"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                    >
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g
-                            id="SVGRepo_tracerCarrier"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M9 6L15 12L9 18"
-                                stroke="currentColor"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                            ></path>
-                        </g>
-                    </svg>
-                </div>
+                <ChevronRight class="w-4 h-4 ml-1" />
             </Button>
         </div>
     </div>
