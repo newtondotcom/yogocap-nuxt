@@ -65,7 +65,12 @@
             }
             return video;
         });
-        videos.value = videos.value.filter((video) => video.id !== video_id);
+        videos.value = videos.value.map((video) => {
+            if (video.deleted) {
+                video.deleted = true;
+            }
+            return video;
+        });
         localvideos.value = videos.value.slice(0, length);
     }
 
