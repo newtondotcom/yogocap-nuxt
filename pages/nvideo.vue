@@ -358,8 +358,12 @@
                                 Do you want us to add emojis to the video ?
                             </label>
                         </div>
-                        <!-- :disabled="!canEmoji" -->
-                        <Checkbox class="flex" v-model:checked="videoEmoji" id="emoji" disabled />
+                        <Checkbox
+                            class="flex"
+                            v-model:checked="videoEmoji"
+                            id="emoji"
+                            :disabled="!canEmoji"
+                        />
                     </div>
 
                     <div class="items-top mt-4 flex gap-x-2">
