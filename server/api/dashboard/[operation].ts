@@ -2,6 +2,7 @@ import { serverSupabaseUser } from '#supabase/server';
 import {
     getCurrentCreditState,
     getTransactions,
+    redeemCode,
     setNewUser,
     updateAccountAfterVideoDone,
 } from '~/server/data/account';
@@ -37,6 +38,8 @@ export default defineEventHandler(async (event: H3Event) => {
                 return support(event);
             case 'tasks':
                 return tasks(event);
+            case 'redeem':
+                return redeem(event);
             default:
                 setResponseStatus(event, 404, 'Not Found');
                 return 'Not Found';
@@ -168,4 +171,12 @@ async function tasks(event: H3Event) {
     await updateAccountAfterVideoDone(user_id);
     // Send an email to the user
     await sendEmailOnVideoDone(user_id, video_id);
+}
+
+async function redeem(event: H3Event) {
+    const user_id = event.context.user_id;
+    const body = await readBody(event);
+    const code = body.code;
+    const redeemed = await redeemCode(user_id, code);
+    return redeemed;
 }

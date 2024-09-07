@@ -179,3 +179,34 @@ export async function setPlanPurchased(user_id: any, plan: string) {
         throw new Error(`Error updating account: ${error.message}`);
     }
 }
+
+export async function redeemCode(user_id: string, code: string) {
+    try {
+        const code_db = await prisma.code.findUnique({
+            where: {
+                code: code.toUpperCase(),
+            },
+        });
+        if (!code_db) {
+            return 'invalid';
+        }
+        if (code_db.used) {
+            return 'used';
+        }
+        await prisma.code.update({
+            where: {
+                code: code.toUpperCase(),
+            },
+            data: {
+                used: true,
+                used_at: new Date(),
+                used_by: user_id,
+            },
+        });
+        const plan = code_db.plan;
+        await setPlanPurchased(user_id, plan);
+        return 'ok';
+    } catch (error: any) {
+        throw new Error(`Error redeeming code: ${error.message}`);
+    }
+}
