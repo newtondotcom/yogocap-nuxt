@@ -3,7 +3,7 @@ import { serverSupabaseUser } from '#supabase/server';
 export default defineEventHandler(async (event) => {
     const path = event.path;
     if (
-        path === '/auth/login' ||
+        path.startsWith('/auth/login') ||
         path.startsWith('/?code=') ||
         path === '/api/wakeup' ||
         path === '/api/s3/list' ||

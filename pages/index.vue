@@ -13,6 +13,13 @@
     } else {
         console.log('User logged out');
     }
+
+    onMounted(() => {
+        if (localStorage.getItem('redirectTo')) {
+            navigateTo(localStorage.getItem('redirectTo'));
+            localStorage.removeItem('redirectTo');
+        }
+    });
 </script>
 
 <template>

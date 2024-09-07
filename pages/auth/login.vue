@@ -61,6 +61,14 @@
             console.error('Discord Sign-In Error:', error);
         }
     };
+
+    onMounted(() => {
+        const route = useRoute();
+        const redirectTo = route.query.redirectTo || '';
+        if (redirectTo) {
+            localStorage.setItem('redirectTo', redirectTo);
+        }
+    });
 </script>
 
 <template>
