@@ -1,6 +1,9 @@
 <script setup lang="ts">
+    import { useToast } from '@/components/ui/toast/use-toast';
     import constants from '~/lib/constants';
     import { Ban, Check } from 'lucide-vue-next';
+
+    const { toast } = useToast();
 
     const current_plan = ref('');
     const videos_remaining = ref(0);
@@ -8,6 +11,8 @@
     const max_video_duration_sec = ref(0);
     const max_video_allowed = ref(0);
     const can_emojis = ref(false);
+    const redeem_loading = ref(false);
+    const code_to_redeem = ref('');
 
     let text = 'Buy now';
 
@@ -58,8 +63,43 @@
         }
     }
 
-    // QUAND ON CLIQUE SUR UN PLAN, CA SELECTIoNNE L OPTION DANS LE MENU SELECT
-    // POUR CELA, IL FAUT DEBUNK LE COMPOSANT PRICING
+    async function redeemCode() {
+        redeem_loading.value = true;
+        try {
+            const data = await $fetch(`/api/dashboard/redeem`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: { code: code_to_redeem.value },
+            });
+            if (data == 'ok') {
+                getCredit();
+                code_to_redeem.value = '';
+                toast({
+                    title: 'Code redeemed',
+                    description: 'Your code has been redeemed successfully',
+                    status: 'success',
+                });
+            } else {
+                toast({
+                    title: 'Code not redeemed',
+                    description: 'Your code has not been redeemed successfully',
+                    status: 'error',
+                });
+                console.error(data);
+            }
+        } catch (error) {
+            toast({
+                title: 'Code not redeemed',
+                description: 'Your code has not been redeemed successfully',
+                status: 'error',
+            });
+            console.error(error);
+        } finally {
+            redeem_loading.value = false;
+        }
+    }
 </script>
 
 <template>
@@ -116,6 +156,40 @@
     </div>
 
     <DashboardSubtitle title="Top up" subtitle="Top up your account ! ⛽" />
+
+    <div class="flex flex-row justify-center items-center space-x-4">
+        <div class="">Redeem a code</div>
+        <Input id="email" type="text" v-model="code_to_redeem" placeholder="Code" class="w-40" />
+        <Button @click="redeemCode">
+            <div v-if="!redeem_loading">Redeem</div>
+            <div v-else>
+                <svg
+                    class="m-1 h-4 w-4 animate-spin"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                >
+                    <circle
+                        class="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        stroke-width="4"
+                    ></circle>
+                    <path
+                        class="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    ></path>
+                </svg>
+            </div>
+        </Button>
+    </div>
+
+    <div class="flex flex-row justify-center items-center mt-4">
+        <Separator class="w-[60%] items-center" label="Or" />
+    </div>
 
     <LandingPricing :action="actionPricing" :text />
 </template>
