@@ -81,6 +81,13 @@
                     description: 'Your code has been redeemed successfully',
                     status: 'success',
                 });
+            }
+            if (date == 'used') {
+                toast({
+                    title: 'Code already used',
+                    description: 'Your code has already been used',
+                    status: 'error',
+                });
             } else {
                 toast({
                     title: 'Code not redeemed',
