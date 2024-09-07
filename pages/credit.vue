@@ -82,7 +82,7 @@
                     status: 'success',
                 });
             }
-            if (date == 'used') {
+            if (data == 'used') {
                 toast({
                     title: 'Code already used',
                     description: 'Your code has already been used',
