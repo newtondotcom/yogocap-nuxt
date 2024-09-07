@@ -83,3 +83,11 @@ model Api {
   id          String    @id @default(cuid())
   key         String
 }
+
+model Code {
+  code        String @id
+  plan       String
+  used      Boolean @default(false)
+  used_by    String?
+  used_at DateTime?
+}
