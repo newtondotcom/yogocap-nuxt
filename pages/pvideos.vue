@@ -114,9 +114,9 @@
                     {{
                         formatDistanceToNow(new Date(video.submitted), {
                             locale: enUS,
+                            addSuffix: true,
                         })
                     }}
-                    ago
                 </time>
 
                 <button class="flex flex-row align-middle justify-center">
