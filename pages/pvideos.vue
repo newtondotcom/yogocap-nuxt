@@ -32,7 +32,7 @@
                 } else {
                     video.type = 'pending';
                 }
-                video.submitted = new Date(video.submitted).toLocaleDateString();
+                video.submitted = new Date(video.submitted);
                 const today = new Date();
                 const diff = today.getTime() - new Date(video.submitted).getTime();
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -55,7 +55,7 @@
     });
 
     async function deleteVideo(video_id: string) {
-        const data = await $fetch('/api/s3/remove', {
+        await $fetch('/api/s3/remove', {
             method: 'POST',
             body: JSON.stringify({ video_id }),
         });
@@ -110,7 +110,7 @@
 
             <div class="bg-white p-2">
                 <time class="block text-xs text-gray-500">
-                    {{ video.submitted }} -
+                    {{ video.submitted.toLocaleDateString() }} -
                     {{
                         formatDistanceToNow(new Date(video.submitted), {
                             locale: enUS,
