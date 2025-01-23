@@ -88,7 +88,7 @@
             aligned: true,
             emojis: videoEmoji.value,
             music: videoMusic.value,
-            silent: videoCut.value,
+            silent: false, // videoCut.value
             length: videoLength.value,
             name_s3: generatedName,
             s3name: s3_server_name,
@@ -331,7 +331,7 @@
                                 Do you want us to cut silent parts of the video ?
                             </label>
                         </div>
-                        <Checkbox class="flex" v-model:checked="videoCut" id="silence" />
+                        <Checkbox class="flex" v-model:checked="videoCut" id="silence" disabled/>
                     </div>
 
                     <!--
